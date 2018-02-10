@@ -15,7 +15,8 @@ declare(strict_types = 1);
 namespace Modules\HumanResourceTimeRecording\Admin;
 
 use phpOMS\DataStorage\Database\DatabasePool;
-use phpOMS\Module\UninstallAbstract;
+use phpOMS\Module\UpdaterAbstract;
+use phpOMS\System\File\Directory;
 use phpOMS\Module\InfoManager;
 
 /**
@@ -26,14 +27,16 @@ use phpOMS\Module\InfoManager;
  * @link       http://website.orange-management.de
  * @since      1.0.0
  */
-class Uninstall extends UninstallAbstract
+class Updater extends UpdaterAbstract
 {
 
     /**
      * {@inheritdoc}
      */
-    public static function uninstall(DatabasePool $dbPool, InfoManager $info)
+    public static function update(DatabasePool $dbPool, InfoManager $info)
     {
-        parent::uninstall($dbPool, $info);
+        Directory::deletePath(__DIR__ . '/Update');
+        mkdir('Update');
+        parent::update($dbPool, $info);
     }
 }

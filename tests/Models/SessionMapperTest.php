@@ -12,7 +12,7 @@
  */
 declare(strict_types=1);
 
-namespace Modules\tests\HumanResourceTimeRecording\Models;
+namespace Modules\HumanResourceTimeRecording\tests\Models;
 
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\HumanResourceTimeRecording\Models\Session;

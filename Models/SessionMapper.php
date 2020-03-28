@@ -116,13 +116,13 @@ final class SessionMapper extends DataMapperAbstract
             ->from(self::$table)
             ->groupBy(self::$table . '.hr_timerecording_session_employee');
 
-        $query = new Builder(self::$db);
-        $query->select('*')->fromAs(self::$table, 't')
-            ->innerJoin($join, 'tm')
-            ->on('t.hr_timerecording_session_employee', '=', 'tm.hr_timerecording_session_employee')
-            ->andOn('t.hr_timerecording_session_start', '=', 'tm.maxDate');
+        $depth = 3;
+        $query = self::getQuery();
+        $query->innerJoin($join, 'tm')
+            ->on(self::$table . '_' . $depth . '.hr_timerecording_session_employee', '=', 'tm.hr_timerecording_session_employee')
+            ->andOn(self::$table . '_' . $depth . '.hr_timerecording_session_start', '=', 'tm.maxDate');
 
-        return self::getAllByQuery($query, RelationType::ALL, 6);
+        return self::getAllByQuery($query, RelationType::ALL, $depth);
     }
 
     /**
@@ -143,14 +143,15 @@ final class SessionMapper extends DataMapperAbstract
         $dt = new SmartDateTime('now');
         $dt->smartModify(0, 0, -32);
 
+        $depth = 3;
         $query = self::getQuery();
-        $query->where(self::$table.'.hr_timerecording_session_employee', '=', $employee)
-            ->andWhere(self::$table.'.hr_timerecording_session_start', '>', $dt)
-            ->orderBy(self::$table.'.hr_timerecording_session_start', 'DESC')
+        $query->where(self::$table . '_' . $depth . '.hr_timerecording_session_employee', '=', $employee)
+            ->andWhere(self::$table . '_' . $depth . '.hr_timerecording_session_start', '>', $dt)
+            ->orderBy(self::$table . '_' . $depth . '.hr_timerecording_session_start', 'DESC')
             ->limit(1);
 
         /** @var Session[] $sessions */
-        $sessions = self::getAllByQuery($query, RelationType::ALL, 6);
+        $sessions = self::getAllByQuery($query, RelationType::ALL, $depth);
 
         if (empty($sessions)) {
             return null;
@@ -177,11 +178,12 @@ final class SessionMapper extends DataMapperAbstract
      */
     public static function getSessionListForEmployee(int $employee, \DateTime $start, int $offset = 0, int $limit = 50) : array
     {
+        $depth = 3;
         $query = new Builder(self::$db);
         $query = self::getQuery($query)
-            ->where(self::$table . '.hr_timerecording_session_employee', '=', $employee)
-            ->andWhere(self::$table . '.' . self::$createdAt, '<=', $start->format('Y-m-d H:i:s'))
-            ->orderBy(self::$table . '.' . self::$createdAt, 'DESC')
+            ->where(self::$table . '_' . $depth . '.hr_timerecording_session_employee', '=', $employee)
+            ->andWhere(self::$table . '_' . $depth . '.' . self::$createdAt, '<=', $start->format('Y-m-d H:i:s'))
+            ->orderBy(self::$table . '_' . $depth . '.' . self::$createdAt, 'DESC')
             ->offset($offset)
             ->limit($limit);
 

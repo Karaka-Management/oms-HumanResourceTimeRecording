@@ -1,7 +1,7 @@
-# Table of Contents
+# User Content
 
-* [Login]({%}&page=login)
-* [Recording]({%}&page=recording)
-* [Employee Dashboard]({%}&page=employee_dashboard)
-* [Correction]({%}&page=correction)
-* [Analysis]({%}&page=analysis)
+* [Login]({%}&page=Help/login)
+* [Recording]({%}&page=Help/recording)
+* [Employee Dashboard]({%}&page=Help/employee_dashboard)
+* [Correction]({%}&page=Help/correction)
+* [Analysis]({%}&page=Help/analysis)

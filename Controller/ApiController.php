@@ -96,7 +96,7 @@ final class ApiController extends Controller
             return;
         }
 
-        $this->createModel($request->getHeader()->getAccount(), $session, SessionMapper::class, 'session');
+        $this->createModel($request->getHeader()->getAccount(), $session, SessionMapper::class, 'session', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Session', 'Session successfully created', $session);
     }
 
@@ -187,7 +187,7 @@ final class ApiController extends Controller
             SessionMapper::update($session);
         }
 
-        $this->createModel($request->getHeader()->getAccount(), $element, SessionElementMapper::class, 'element');
+        $this->createModel($request->getHeader()->getAccount(), $element, SessionElementMapper::class, 'element', $request->getOrigin());
 
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Session Element', 'Session Element successfully created', $element);
     }

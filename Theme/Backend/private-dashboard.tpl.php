@@ -44,8 +44,8 @@ $busy = [
 echo $this->getData('nav')->render(); ?>
 <div class="row">
     <div class="col-md-4 col-xs-12">
-        <section class="box wf-100">
-            <div class="inner">
+        <section class="portlet">
+            <div class="portlet-body">
                 <form id="iClocking" method="PUT" action="<?= \phpOMS\Uri\UriFactory::build('{/api}humanresource/timerecording/element?{?}&csrf={$CSRF}'); ?>">
                     <table class="layout wf-100" style="table-layout: fixed">
                         <tr><td><label for="iType"><?= $this->getHtml('Type') ?></label>
@@ -82,9 +82,9 @@ echo $this->getData('nav')->render(); ?>
     </div>
 
     <div class="col-md-4 col-xs-12">
-        <section class="box wf-100">
-            <header><h1>Work</h1></header>
-            <div class="inner">
+        <section class="portlet">
+            <div class="portlet-head">Work</div>
+            <div class="portlet-body">
                 <table>
                     <tr><td>This month<td>
                     <tr><td>Last month<td>
@@ -95,9 +95,9 @@ echo $this->getData('nav')->render(); ?>
     </div>
 
     <div class="col-md-4 col-xs-12">
-        <section class="box wf-100">
-            <header><h1>Vaction</h1></header>
-            <div class="inner">
+        <section class="portlet">
+            <div class="portlet-head">Vacation</div>
+            <div class="portlet-body">
                 <table>
                     <tr><td>Used Vacation<td>
                     <tr><td>Last Vacation<td>
@@ -110,9 +110,9 @@ echo $this->getData('nav')->render(); ?>
 
 <div class="row">
     <div class="col-xs-12">
-        <div class="box wf-100">
-        <table id="accountList" class="default">
-                <caption><?= $this->getHtml('Recordings') ?><i class="fa fa-download floatRight download btn"></i></caption>
+        <section class="portlet">
+            <div class="portlet-head"><?= $this->getHtml('Recordings') ?><i class="fa fa-download floatRight download btn"></i></div>
+            <table id="accountList" class="default">
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>
@@ -122,8 +122,6 @@ echo $this->getData('nav')->render(); ?>
                     <td><?= $this->getHtml('Break'); ?>
                     <td><?= $this->getHtml('End'); ?>
                     <td><?= $this->getHtml('Total'); ?>
-                <tfoot>
-                <tr><td colspan="5">
                 <tbody>
                 <?php
                     $count = 0; foreach ($sessions as $session) : ++$count;
@@ -164,6 +162,6 @@ echo $this->getData('nav')->render(); ?>
                 ?>
                 <?php endforeach; ?>
             </table>
-        </div>
+        </section>
     </div>
 </div>

@@ -191,11 +191,14 @@ final class SessionMapper extends DataMapperAbstract
         $sth->execute();
 
         $results = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        $obj     = self::populateIterable($results === false ? [] : $results);
+        $objs    = self::populateIterable($results === false ? [] : $results);
 
-        self::fillRelations($obj, RelationType::ALL, 6);
+        foreach ($objs as $obj) {
+            self::fillRelations($obj, RelationType::ALL, 6);
+        }
+
         self::clear();
 
-        return $obj;
+        return $objs;
     }
 }

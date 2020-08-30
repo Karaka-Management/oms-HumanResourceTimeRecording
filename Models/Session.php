@@ -24,7 +24,7 @@ use phpOMS\Contract\ArrayableInterface;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-class Session implements ArrayableInterface, \JsonSerializable
+class Session implements \JsonSerializable, ArrayableInterface
 {
     /**
      * Session ID.

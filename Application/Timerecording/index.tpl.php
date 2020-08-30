@@ -48,7 +48,7 @@ $dispatch = $this->getData('dispatch') ?? [];
 </head>
 <body>
 <div class="vh" id="dim"></div>
-<header><div id="t-nav-container"><?= $top ?></div></header>
+<header><div id="t-nav-container"><?= $top; ?></div></header>
 <main id="content" class="container-fluid" role="main">
 <?php
 foreach ($dispatch as $view) {

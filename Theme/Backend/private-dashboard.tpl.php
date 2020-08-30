@@ -48,23 +48,23 @@ echo $this->getData('nav')->render(); ?>
             <div class="portlet-body">
                 <form id="iClocking" method="PUT" action="<?= \phpOMS\Uri\UriFactory::build('{/api}humanresource/timerecording/element?{?}&csrf={$CSRF}'); ?>">
                     <table class="layout wf-100" style="table-layout: fixed">
-                        <tr><td><label for="iType"><?= $this->getHtml('Type') ?></label>
+                        <tr><td><label for="iType"><?= $this->getHtml('Type'); ?></label>
                         <tr><td>
                             <select id="iType" name="type">
-                                <option value="<?= ClockingType::OFFICE; ?>"<?= $type === ClockingType::OFFICE ? ' selected': ''; ?>><?= $this->getHtml('CT1') ?>
-                                <option value="<?= ClockingType::REMOTE; ?>"<?= $type === ClockingType::REMOTE ? ' selected': ''; ?>><?= $this->getHtml('CT3') ?>
-                                <option value="<?= ClockingType::HOME; ?>"<?= $type === ClockingType::HOME ? ' selected': ''; ?>><?= $this->getHtml('CT2') ?>
-                                <option value="<?= ClockingType::VACATION; ?>"<?= $type === ClockingType::VACATION ? ' selected': ''; ?>><?= $this->getHtml('CT4') ?>
-                                <option value="<?= ClockingType::SICK; ?>"<?= $type === ClockingType::SICK ? ' selected': ''; ?>><?= $this->getHtml('CT5') ?>
-                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"<?= $type === ClockingType::ON_THE_MOVE ? ' selected': ''; ?>><?= $this->getHtml('CT6') ?>
+                                <option value="<?= ClockingType::OFFICE; ?>"<?= $type === ClockingType::OFFICE ? ' selected': ''; ?>><?= $this->getHtml('CT1'); ?>
+                                <option value="<?= ClockingType::REMOTE; ?>"<?= $type === ClockingType::REMOTE ? ' selected': ''; ?>><?= $this->getHtml('CT3'); ?>
+                                <option value="<?= ClockingType::HOME; ?>"<?= $type === ClockingType::HOME ? ' selected': ''; ?>><?= $this->getHtml('CT2'); ?>
+                                <option value="<?= ClockingType::VACATION; ?>"<?= $type === ClockingType::VACATION ? ' selected': ''; ?>><?= $this->getHtml('CT4'); ?>
+                                <option value="<?= ClockingType::SICK; ?>"<?= $type === ClockingType::SICK ? ' selected': ''; ?>><?= $this->getHtml('CT5'); ?>
+                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"<?= $type === ClockingType::ON_THE_MOVE ? ' selected': ''; ?>><?= $this->getHtml('CT6'); ?>
                             </select>
-                        <tr><td><label for="iStatus"><?= $this->getHtml('Status') ?></label>
+                        <tr><td><label for="iStatus"><?= $this->getHtml('Status'); ?></label>
                         <tr><td>
                             <select id="iStatus" name="status">
-                                <option value="<?= ClockingStatus::START; ?>"<?= $status === ClockingStatus::END ? ' selected' : ''; ?>><?= $this->getHtml('CS1') ?>
-                                <option value="<?= ClockingStatus::PAUSE; ?>"<?= $status === ClockingStatus::START ? ' selected' : ''; ?>><?= $this->getHtml('CS2') ?>
-                                <option value="<?= ClockingStatus::CONTINUE; ?>"<?= $status === ClockingStatus::PAUSE ? ' selected' : ''; ?>><?= $this->getHtml('CS3') ?>
-                                <option value="<?= ClockingStatus::END; ?>"<?= $status === ClockingStatus::CONTINUE ? ' selected' : ''; ?>><?= $this->getHtml('CS4') ?>
+                                <option value="<?= ClockingStatus::START; ?>"<?= $status === ClockingStatus::END ? ' selected' : ''; ?>><?= $this->getHtml('CS1'); ?>
+                                <option value="<?= ClockingStatus::PAUSE; ?>"<?= $status === ClockingStatus::START ? ' selected' : ''; ?>><?= $this->getHtml('CS2'); ?>
+                                <option value="<?= ClockingStatus::CONTINUE; ?>"<?= $status === ClockingStatus::PAUSE ? ' selected' : ''; ?>><?= $this->getHtml('CS3'); ?>
+                                <option value="<?= ClockingStatus::END; ?>"<?= $status === ClockingStatus::CONTINUE ? ' selected' : ''; ?>><?= $this->getHtml('CS4'); ?>
                             </select>
                         <tr><td>
                             <input type="hidden" name="session" value="<?= $lastOpenSession !== null ? $lastOpenSession->getId() : ''; ?>">
@@ -111,7 +111,7 @@ echo $this->getData('nav')->render(); ?>
 <div class="row">
     <div class="col-xs-12">
         <section class="portlet">
-            <div class="portlet-head"><?= $this->getHtml('Recordings') ?><i class="fa fa-download floatRight download btn"></i></div>
+            <div class="portlet-head"><?= $this->getHtml('Recordings'); ?><i class="fa fa-download floatRight download btn"></i></div>
             <table id="accountList" class="default">
                 <thead>
                 <tr>
@@ -134,8 +134,8 @@ echo $this->getData('nav')->render(); ?>
                         <?php else : ?>
                             <?= $session->getStart()->format('Y-m-d'); ?> - <?= $this->getHtml('D' . $session->getStart()->format('w')); ?>
                         <?php endif; ?></a>
-                    <td><a href="<?= $url; ?>"><span class="tag"><?= $this->getHtml('CT' . $session->getType()) ?></span></a>
-                    <td><a href="<?= $url; ?>"><span class="tag"><?= $this->getHtml('CS' . $session->getStatus()) ?></span></a>
+                    <td><a href="<?= $url; ?>"><span class="tag"><?= $this->getHtml('CT' . $session->getType()); ?></span></a>
+                    <td><a href="<?= $url; ?>"><span class="tag"><?= $this->getHtml('CS' . $session->getStatus()); ?></span></a>
                     <td><a href="<?= $url; ?>"><?= $session->getStart()->format('H:i'); ?></a>
                     <td><a href="<?= $url; ?>"><?= (int) ($session->getBreak() / 3600); ?>h <?= ((int) ($session->getBreak() / 60) % 60); ?>m</a>
                     <td><a href="<?= $url; ?>"><?= $session->getEnd() !== null ? $session->getEnd()->format('H:i') : ''; ?></a>

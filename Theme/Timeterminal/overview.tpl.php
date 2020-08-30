@@ -26,23 +26,23 @@ echo $this->getData('nav')->render(); ?>
             <div class="inner">
                 <form id="clocking" method="PUT" action="<?= \phpOMS\Uri\UriFactory::build('{/api}task/element?{?}&csrf={$CSRF}'); ?>">
                     <table class="layout wf-100" style="table-layout: fixed">
-                        <tr><td><label for="iType"><?= $this->getHtml('Type') ?></label>
+                        <tr><td><label for="iType"><?= $this->getHtml('Type'); ?></label>
                         <tr><td>
                             <select id="iType" name="Type">
-                                <option value="<?= ClockingType::OFFICE; ?>"><?= $this->getHtml('CT0') ?>
-                                <option value="<?= ClockingType::REMOTE; ?>"><?= $this->getHtml('CT1') ?>
-                                <option value="<?= ClockingType::HOME; ?>"><?= $this->getHtml('CT2') ?>
-                                <option value="<?= ClockingType::VACATION; ?>"><?= $this->getHtml('CT3') ?>
-                                <option value="<?= ClockingType::SICK; ?>"><?= $this->getHtml('CT4') ?>
-                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"><?= $this->getHtml('CT5') ?>
+                                <option value="<?= ClockingType::OFFICE; ?>"><?= $this->getHtml('CT0'); ?>
+                                <option value="<?= ClockingType::REMOTE; ?>"><?= $this->getHtml('CT1'); ?>
+                                <option value="<?= ClockingType::HOME; ?>"><?= $this->getHtml('CT2'); ?>
+                                <option value="<?= ClockingType::VACATION; ?>"><?= $this->getHtml('CT3'); ?>
+                                <option value="<?= ClockingType::SICK; ?>"><?= $this->getHtml('CT4'); ?>
+                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"><?= $this->getHtml('CT5'); ?>
                             </select>
-                        <tr><td><label for="iStatus"><?= $this->getHtml('Status') ?></label>
+                        <tr><td><label for="iStatus"><?= $this->getHtml('Status'); ?></label>
                         <tr><td>
                             <select id="iStatus" name="Status">
-                                <option value="<?= ClockingStatus::START; ?>"><?= $this->getHtml('CS0') ?>
-                                <option value="<?= ClockingStatus::PAUSE; ?>"><?= $this->getHtml('CS1') ?>
-                                <option value="<?= ClockingStatus::CONTINUE; ?>"><?= $this->getHtml('CS2') ?>
-                                <option value="<?= ClockingStatus::END; ?>"><?= $this->getHtml('CS3') ?>
+                                <option value="<?= ClockingStatus::START; ?>"><?= $this->getHtml('CS0'); ?>
+                                <option value="<?= ClockingStatus::PAUSE; ?>"><?= $this->getHtml('CS1'); ?>
+                                <option value="<?= ClockingStatus::CONTINUE; ?>"><?= $this->getHtml('CS2'); ?>
+                                <option value="<?= ClockingStatus::END; ?>"><?= $this->getHtml('CS3'); ?>
                             </select>
                         <tr><td>
                             <input type="submit" id="iclockingButton" name="clockingButton" value="<?= $this->getHtml('Submit', '0', '0'); ?>">
@@ -83,15 +83,15 @@ echo $this->getData('nav')->render(); ?>
     <div class="col-xs-12">
         <div class="box wf-100">
         <table id="accountList" class="default">
-                <caption><?= $this->getHtml('Recordings') ?><i class="fa fa-download floatRight download btn"></i></caption>
+                <caption><?= $this->getHtml('Recordings'); ?><i class="fa fa-download floatRight download btn"></i></caption>
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>
                     <td>Status
-                    <td><?= $this->getHtml('Start') ?>
-                    <td><?= $this->getHtml('Break') ?>
-                    <td><?= $this->getHtml('End') ?>
-                    <td><?= $this->getHtml('Total') ?>
+                    <td><?= $this->getHtml('Start'); ?>
+                    <td><?= $this->getHtml('Break'); ?>
+                    <td><?= $this->getHtml('End'); ?>
+                    <td><?= $this->getHtml('Total'); ?>
                 <tfoot>
                 <tr><td colspan="5">
                 <tbody>

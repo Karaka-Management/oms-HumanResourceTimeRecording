@@ -20,23 +20,23 @@ echo $this->getData('nav')->render(); ?>
     <div class="col-xs-12">
         <div class="box wf-100">
         <table id="accountList" class="default">
-                <caption><?= $this->getHtml('Recordings') ?><i class="fa fa-download floatRight download btn"></i></caption>
+                <caption><?= $this->getHtml('Recordings'); ?><i class="fa fa-download floatRight download btn"></i></caption>
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>
                     <td><?= $this->getHtml('Type'); ?>
                     <td>Employee
-                    <td><?= $this->getHtml('Start') ?>
-                    <td><?= $this->getHtml('Break') ?>
-                    <td><?= $this->getHtml('End') ?>
-                    <td><?= $this->getHtml('Total') ?>
+                    <td><?= $this->getHtml('Start'); ?>
+                    <td><?= $this->getHtml('Break'); ?>
+                    <td><?= $this->getHtml('End'); ?>
+                    <td><?= $this->getHtml('Total'); ?>
                 <tfoot>
                 <tr><td colspan="5">
                 <tbody>
                 <?php foreach ($sessions as $session) : ?>
                 <tr>
                     <td><?= $session->getStart()->format('Y-m-d'); ?>
-                    <td><span class="tag"><?= $this->getHtml('CT' . $session->getType()) ?></span>
+                    <td><span class="tag"><?= $this->getHtml('CT' . $session->getType()); ?></span>
                     <td>
                         <?= $this->printHtml($session->getEmployee()->getProfile()->getAccount()->getName1()); ?>,
                         <?= $this->printHtml($session->getEmployee()->getProfile()->getAccount()->getName2()); ?>

@@ -8,23 +8,23 @@ use phpOMS\Router\RouteVerb;
 return [
     '^.*/humanresource/timerecording/session.*$' => [
         [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\ApiController:apiSessionCreate',
-            'verb' => RouteVerb::PUT,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\ApiController:apiSessionCreate',
+            'verb'       => RouteVerb::PUT,
             'permission' => [
                 'module' => ApiController::MODULE_NAME,
-                'type'  => PermissionType::CREATE,
-                'state' => PermissionState::SESSION,
+                'type'   => PermissionType::CREATE,
+                'state'  => PermissionState::SESSION,
             ],
         ],
     ],
     '^.*/humanresource/timerecording/element.*$' => [
         [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\ApiController:apiSessionElementCreate',
-            'verb' => RouteVerb::PUT,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\ApiController:apiSessionElementCreate',
+            'verb'       => RouteVerb::PUT,
             'permission' => [
                 'module' => ApiController::MODULE_NAME,
-                'type'  => PermissionType::CREATE,
-                'state' => PermissionState::SESSION_ELEMENT,
+                'type'   => PermissionType::CREATE,
+                'state'  => PermissionState::SESSION_ELEMENT,
             ],
         ],
     ],

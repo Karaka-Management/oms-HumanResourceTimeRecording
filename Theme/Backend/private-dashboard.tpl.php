@@ -38,7 +38,7 @@ $endMonth   = $startMonth->createModify(0, 1, -1);
 $busy = [
     'total' => 0,
     'month' => 0,
-    'week' => 0,
+    'week'  => 0,
 ];
 
 echo $this->getData('nav')->render(); ?>
@@ -125,7 +125,7 @@ echo $this->getData('nav')->render(); ?>
                 <tbody>
                 <?php
                     $count = 0; foreach ($sessions as $session) : ++$count;
-                    $url = \phpOMS\Uri\UriFactory::build('{/prefix}private/timerecording/session?{?}&id=' . $session->getId());
+                    $url   = \phpOMS\Uri\UriFactory::build('{/prefix}private/timerecording/session?{?}&id=' . $session->getId());
                 ?>
                 <tr data-href="<?= $url; ?>">
                     <td><a href="<?= $url; ?>">

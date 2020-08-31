@@ -8,23 +8,23 @@ use phpOMS\Router\RouteVerb;
 return [
     '^/timerecording$' => [
         [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
-            'verb' => RouteVerb::GET,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
+            'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => TimerecordingController::MODULE_NAME,
-                'type'  => PermissionType::READ,
-                'state' => PermissionState::DASHBOARD,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::DASHBOARD,
             ],
         ],
     ],
     '^.*/timerecording/dashboard.*$' => [
         [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
-            'verb' => RouteVerb::GET,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
+            'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => TimerecordingController::MODULE_NAME,
-                'type'  => PermissionType::READ,
-                'state' => PermissionState::DASHBOARD,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::DASHBOARD,
             ],
         ],
     ],

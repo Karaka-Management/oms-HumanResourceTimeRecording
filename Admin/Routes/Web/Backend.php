@@ -8,34 +8,34 @@ use phpOMS\Router\RouteVerb;
 return [
     '^.*/humanresource/timerecording/dashboard.*$' => [
         [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewDashboard',
-            'verb' => RouteVerb::GET,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewDashboard',
+            'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::MODULE_NAME,
-                'type'  => PermissionType::READ,
-                'state' => PermissionState::DASHBOARD,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::DASHBOARD,
             ],
         ],
     ],
     '^.*/private/timerecording/dashboard.*$' => [
         [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewPrivateDashboard',
-            'verb' => RouteVerb::GET,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewPrivateDashboard',
+            'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::MODULE_NAME,
-                'type'  => PermissionType::READ,
-                'state' => PermissionState::PRIVATE_DASHBOARD,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::PRIVATE_DASHBOARD,
             ],
         ],
     ],
     '^.*/private/timerecording/session.*$' => [
         [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewPrivateSession',
-            'verb' => RouteVerb::GET,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewPrivateSession',
+            'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::MODULE_NAME,
-                'type'  => PermissionType::READ,
-                'state' => PermissionState::PRIVATE_DASHBOARD,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::PRIVATE_DASHBOARD,
             ],
         ],
     ],

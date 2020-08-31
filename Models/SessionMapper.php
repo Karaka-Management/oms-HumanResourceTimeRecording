@@ -53,10 +53,10 @@ final class SessionMapper extends DataMapperAbstract
      */
     protected static array $hasMany = [
         'sessionElements' => [
-            'mapper' => SessionElementMapper::class,
-            'table'  => 'hr_timerecording_session_element',
+            'mapper'   => SessionElementMapper::class,
+            'table'    => 'hr_timerecording_session_element',
             'external' => 'hr_timerecording_session_element_session',
-            'self'   => null,
+            'self'     => null,
         ],
     ];
 

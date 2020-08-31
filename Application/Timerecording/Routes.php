@@ -2,23 +2,23 @@
 return [
     '^/timerecording$' => [
         0 => [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
-            'verb' => 1,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
+            'verb'       => 1,
             'permission' => [
                 'module' => 'HumanResourceTimeRecording',
-                'type' => 2,
-                'state' => 1,
+                'type'   => 2,
+                'state'  => 1,
             ],
         ],
     ],
     '^.*/timerecording/dashboard.*$' => [
         0 => [
-            'dest' => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
-            'verb' => 1,
+            'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
+            'verb'       => 1,
             'permission' => [
                 'module' => 'HumanResourceTimeRecording',
-                'type' => 2,
-                'state' => 1,
+                'type'   => 2,
+                'state'  => 1,
             ],
         ],
     ],

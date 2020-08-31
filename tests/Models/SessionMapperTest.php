@@ -32,7 +32,7 @@ class SessionMapperTest extends \PHPUnit\Framework\TestCase
     {
         $session = new Session(1);
 
-        $dt = new \DateTime(\date('Y-m-d', \strtotime('now')) . ' 7:55:34');
+        $dt      = new \DateTime(\date('Y-m-d', \strtotime('now')) . ' 7:55:34');
         $element = new SessionElement($session, $dt);
         $element->setStatus(ClockingStatus::START);
         $session->addSessionElement($element);

@@ -16,12 +16,10 @@ namespace Web\Timerecording;
 
 use Model\CoreSettings;
 use Model\Settings;
-
 use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\LocalizationMapper;
 use Modules\Organization\Models\UnitMapper;
 use Modules\Profile\Models\ProfileMapper;
-
 use phpOMS\Account\Account;
 use phpOMS\Account\AccountManager;
 use phpOMS\Account\NullAccount;
@@ -49,7 +47,6 @@ use phpOMS\Router\WebRouter;
 use phpOMS\System\File\PathException;
 use phpOMS\Uri\UriFactory;
 use phpOMS\Views\View;
-
 use Web\WebApplication;
 
 /**

@@ -16,7 +16,6 @@ namespace Modules\HumanResourceTimeRecording\Controller;
 
 use Modules\Dashboard\Models\DashboardElementInterface;
 use Modules\HumanResourceManagement\Models\EmployeeMapper;
-
 use Modules\HumanResourceTimeRecording\Models\NullSession;
 use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 use phpOMS\Contract\RenderableInterface;

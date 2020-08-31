@@ -23,7 +23,6 @@ use Modules\HumanResourceTimeRecording\Models\NullSession;
 use Modules\HumanResourceTimeRecording\Models\PermissionState;
 use Modules\HumanResourceTimeRecording\Models\Session;
 use Modules\HumanResourceTimeRecording\Models\SessionElement;
-
 use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
 use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 use phpOMS\Account\PermissionType;

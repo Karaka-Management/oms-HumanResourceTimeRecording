@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Web\Timerecording;
 
 use Model\CoreSettings;
-use Model\Settings;
+use Model\SettingsEnum;
 use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\LocalizationMapper;
 use Modules\Organization\Models\UnitMapper;
@@ -252,7 +252,7 @@ final class Application
         return (int) (
             $request->getData('u') ?? (
                 $config['domains'][$request->getUri()->getHost()]['org'] ?? $this->app->appSettings->get(
-                    Settings::DEFAULT_ORGANIZATION
+                    SettingsEnum::DEFAULT_ORGANIZATION
                 ) ?? 1
             )
         );

@@ -31,6 +31,7 @@ use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Model\Message\FormValidation;
+use phpOMS\Message\Http\RequestStatusCode;
 
 /**
  * HumanResourceTimeRecording controller class.
@@ -170,6 +171,7 @@ final class ApiController extends Controller
 
         if (!empty($val = $this->validateSessionElementCreate($request))) {
             $response->set($request->getUri()->__toString(), new FormValidation($val));
+            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
 
             return;
         }

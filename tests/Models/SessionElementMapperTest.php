@@ -23,6 +23,10 @@ use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
  */
 class SessionElementMapperTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\HumanResourceManagement\Models\SessionElementMapper
+     * @group module
+     */
     public function testCRUD() : void
     {
         $element = new SessionElement(new Session(1), new \DateTime('now'));

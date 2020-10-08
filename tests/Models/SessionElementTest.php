@@ -22,6 +22,10 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
  */
 class SessionElementTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
+     * @group module
+     */
     public function testDefault() : void
     {
         $element = new SessionElement();
@@ -32,6 +36,10 @@ class SessionElementTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(ClockingStatus::START, $element->getStatus());
     }
 
+    /**
+     * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
+     * @group module
+     */
     public function testSetGet() : void
     {
         $element = new SessionElement();

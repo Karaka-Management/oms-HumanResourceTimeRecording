@@ -24,6 +24,10 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
  */
 class SessionTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\HumanResourceTimeRecording\Models\Session
+     * @group module
+     */
     public function testDefault() : void
     {
         $session = new Session();
@@ -36,6 +40,10 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         self::assertNull($session->getEnd());
     }
 
+    /**
+     * @covers Modules\HumanResourceTimeRecording\Models\Session
+     * @group module
+     */
     public function testSetGet() : void
     {
         $session = new Session();

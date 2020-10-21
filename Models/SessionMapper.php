@@ -55,8 +55,8 @@ final class SessionMapper extends DataMapperAbstract
         'sessionElements' => [
             'mapper'   => SessionElementMapper::class,
             'table'    => 'hr_timerecording_session_element',
-            'external' => 'hr_timerecording_session_element_session',
-            'self'     => null,
+            'self' => 'hr_timerecording_session_element_session',
+            'external'     => null,
         ],
     ];
 
@@ -69,7 +69,7 @@ final class SessionMapper extends DataMapperAbstract
     protected static array $belongsTo = [
         'employee' => [
             'mapper' => EmployeeMapper::class,
-            'self'   => 'hr_timerecording_session_employee',
+            'external'   => 'hr_timerecording_session_employee',
         ],
     ];
 

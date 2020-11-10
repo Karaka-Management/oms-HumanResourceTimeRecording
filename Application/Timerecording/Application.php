@@ -192,14 +192,14 @@ final class Application
                 );
         }
 
-        UriFactory::setQuery('/lang', $response->getHeader()->getL11n()->getLanguage());
+        UriFactory::setQuery('/lang', $response->getLanguage());
 
         $this->loadLanguageFromPath(
-            $response->getHeader()->getL11n()->getLanguage(),
-            __DIR__ . '/lang/' . $response->getHeader()->getL11n()->getLanguage() . '.lang.php'
+            $response->getLanguage(),
+            __DIR__ . '/lang/' . $response->getLanguage() . '.lang.php'
         );
 
-        $response->getHeader()->set('content-language', $response->getHeader()->getL11n()->getLanguage(), true);
+        $response->getHeader()->set('content-language', $response->getLanguage(), true);
 
         /* Create html head */
         $this->initResponseHead($head, $request, $response);
@@ -273,8 +273,8 @@ final class Application
         $response->getHeader()->setStatusCode(RequestStatusCode::R_406);
         $pageView->setTemplate('/Web/Timerecording/Error/406');
         $this->loadLanguageFromPath(
-            $response->getHeader()->getL11n()->getLanguage(),
-            __DIR__ . '/Error/lang/' . $response->getHeader()->getL11n()->getLanguage() . '.lang.php'
+            $response->getLanguage(),
+            __DIR__ . '/Error/lang/' . $response->getLanguage() . '.lang.php'
         );
     }
 
@@ -293,8 +293,8 @@ final class Application
         $response->getHeader()->setStatusCode(RequestStatusCode::R_503);
         $pageView->setTemplate('/Web/Timerecording/Error/503');
         $this->loadLanguageFromPath(
-            $response->getHeader()->getL11n()->getLanguage(),
-            __DIR__ . '/Error/lang/' . $response->getHeader()->getL11n()->getLanguage() . '.lang.php'
+            $response->getLanguage(),
+            __DIR__ . '/Error/lang/' . $response->getLanguage() . '.lang.php'
         );
     }
 
@@ -352,8 +352,8 @@ final class Application
         $response->getHeader()->setStatusCode(RequestStatusCode::R_403);
         $pageView->setTemplate('/Web/Timerecording/Error/403');
         $this->loadLanguageFromPath(
-            $response->getHeader()->getL11n()->getLanguage(),
-            __DIR__ . '/Error/lang/' . $response->getHeader()->getL11n()->getLanguage() . '.lang.php'
+            $response->getLanguage(),
+            __DIR__ . '/Error/lang/' . $response->getLanguage() . '.lang.php'
         );
     }
 

@@ -170,8 +170,8 @@ final class Application
         $this->app->orgId = $this->getApplicationOrganization($request, $this->config);
         $pageView->setData('orgId', $this->app->orgId);
 
-        $aid = Auth::authenticate($this->app->sessionManager);
-        $request->header->account = $aid;
+        $aid                       = Auth::authenticate($this->app->sessionManager);
+        $request->header->account  = $aid;
         $response->header->account = $aid;
 
         $account = $this->loadAccount($request);

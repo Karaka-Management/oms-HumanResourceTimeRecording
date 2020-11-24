@@ -24,8 +24,8 @@ $head = $this->getData('head');
     <meta name="description" content="<?= $this->getHtml(':meta', '0', '0'); ?>">
     <link rel="manifest" href="<?= \phpOMS\Uri\UriFactory::build('Web/Timerecording/manifest.json'); ?>">
     <link rel="shortcut icon" href="<?= \phpOMS\Uri\UriFactory::build('Web/Timerecording/img/favicon.ico'); ?>" type="image/x-icon">
-    <?= $head->getMeta()->render(); ?>
-    <title><?= $this->printHtml($head->getTitle()); ?></title>
+    <?= $head->meta->render(); ?>
+    <title><?= $this->printHtml($head->title); ?></title>
     <style><?= $head->renderStyle(); ?></style>
     <script><?= $head->renderScript(); ?></script>
     <?= $head->renderAssets(); ?>

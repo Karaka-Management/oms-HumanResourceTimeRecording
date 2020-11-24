@@ -58,10 +58,10 @@ final class ApiController extends Controller
      */
     public function apiSessionsListForEmployeeGet(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
-        $account = (int) ($request->getData('account') ?? $request->getHeader()->getAccount());
+        $account = (int) ($request->getData('account') ?? $request->header->account);
 
         if ($request->getData('account') !== null) {
-            if (!$this->app->accountManager->get($request->getHeader()->getAccount())->hasPermission(
+            if (!$this->app->accountManager->get($request->header->account)->hasPermission(
                 PermissionType::READ, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::SESSION_FOREIGN
             )) {
                 $this->fillJsonResponse($request, $response, NotificationLevel::HIDDEN, '', '', []);
@@ -96,7 +96,7 @@ final class ApiController extends Controller
             return;
         }
 
-        $this->createModel($request->getHeader()->getAccount(), $session, SessionMapper::class, 'session', $request->getOrigin());
+        $this->createModel($request->header->account, $session, SessionMapper::class, 'session', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Session', 'Session successfully created', $session);
     }
 
@@ -111,10 +111,10 @@ final class ApiController extends Controller
      */
     private function createSessionFromRequest(RequestAbstract $request) : ?Session
     {
-        $account = (int) ($request->getData('account') ?? $request->getHeader()->getAccount());
+        $account = (int) ($request->getData('account') ?? $request->header->account);
 
         if ($request->getData('account') !== null) {
-            if (!$this->app->accountManager->get($request->getHeader()->getAccount())->hasPermission(
+            if (!$this->app->accountManager->get($request->header->account)->hasPermission(
                 PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::SESSION_FOREIGN
             )) {
                 return null;
@@ -170,8 +170,8 @@ final class ApiController extends Controller
         }
 
         if (!empty($val = $this->validateSessionElementCreate($request))) {
-            $response->set($request->getUri()->__toString(), new FormValidation($val));
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+            $response->set($request->uri->__toString(), new FormValidation($val));
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
@@ -188,7 +188,7 @@ final class ApiController extends Controller
             SessionMapper::update($session);
         }
 
-        $this->createModel($request->getHeader()->getAccount(), $element, SessionElementMapper::class, 'element', $request->getOrigin());
+        $this->createModel($request->header->account, $element, SessionElementMapper::class, 'element', $request->getOrigin());
 
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Session Element', 'Session Element successfully created', $element);
     }
@@ -223,7 +223,7 @@ final class ApiController extends Controller
      */
     private function createSessionElementFromRequest(RequestAbstract $request) : ?SessionElement
     {
-        $account = (int) ($request->getData('account') ?? $request->getHeader()->getAccount());
+        $account = (int) ($request->getData('account') ?? $request->header->account);
 
         /** @var Session $session */
         $session = SessionMapper::get((int) $request->getData('session'), RelationType::ALL, 6);
@@ -234,15 +234,15 @@ final class ApiController extends Controller
         }
 
         // account and owner of the session don't match = exception!
-        if ($session->getEmployee()->getProfile()->getAccount()->getId() !== $account) {
+        if ($session->getEmployee()->profile->account->getId() !== $account) {
             return null;
         }
 
         // check permissions to edit session and create session element of a foreign account
         if ($request->getData('account') !== null
-            || $session->getEmployee()->getProfile()->getAccount()->getId() !== $request->getHeader()->getAccount()
+            || $session->getEmployee()->profile->account->getId() !== $request->header->account
         ) {
-            if (!$this->app->accountManager->get($request->getHeader()->getAccount())->hasPermission(
+            if (!$this->app->accountManager->get($request->header->account)->hasPermission(
                 PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::SESSION_ELEMENT_FOREIGN
             )) {
                 return null;

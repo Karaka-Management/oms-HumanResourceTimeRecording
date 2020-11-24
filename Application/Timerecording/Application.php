@@ -127,7 +127,7 @@ final class Application
             function() use ($request, $response) {
                 $view = new View($this->app->l11nManager, $request, $response);
                 $view->setTemplate('/Web/Timerecording/Error/403_inline');
-                $response->getHeader()->setStatusCode(RequestStatusCode::R_403);
+                $response->header->status = RequestStatusCode::R_403;
 
                 return $view;
             },
@@ -152,7 +152,7 @@ final class Application
         if ($request->getData('CSRF') !== null
             && !\hash_equals($this->app->sessionManager->get('CSRF'), $request->getData('CSRF'))
         ) {
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_403);
+            $response->header->status = RequestStatusCode::R_403;
 
             return;
         }
@@ -171,21 +171,21 @@ final class Application
         $pageView->setData('orgId', $this->app->orgId);
 
         $aid = Auth::authenticate($this->app->sessionManager);
-        $request->getHeader()->setAccount($aid);
-        $response->getHeader()->setAccount($aid);
+        $request->header->account = $aid;
+        $response->header->account = $aid;
 
         $account = $this->loadAccount($request);
 
         if (!($account instanceof NullAccount)) {
-            $response->getHeader()->setL11n($account->getL11n());
+            $response->header->l11n = $account->l11n;
         } elseif ($this->app->sessionManager->get('language') !== null) {
-            $response->getHeader()->getL11n()
+            $response->header->l11n
                 ->loadFromLanguage(
                     $this->app->sessionManager->get('language'),
                     $this->app->sessionManager->get('country') ?? '*'
                 );
         } elseif ($this->app->cookieJar->get('language') !== null) {
-            $response->getHeader()->getL11n()
+            $response->header->l11n
                 ->loadFromLanguage(
                     $this->app->cookieJar->get('language'),
                     $this->app->cookieJar->get('country') ?? '*'
@@ -199,7 +199,7 @@ final class Application
             __DIR__ . '/lang/' . $response->getLanguage() . '.lang.php'
         );
 
-        $response->getHeader()->set('content-language', $response->getLanguage(), true);
+        $response->header->set('content-language', $response->getLanguage(), true);
 
         /* Create html head */
         $this->initResponseHead($head, $request, $response);
@@ -223,7 +223,7 @@ final class Application
 
         $dispatched = $this->app->dispatcher->dispatch(
             $this->app->router->route(
-                $request->getUri()->getRoute(),
+                $request->uri->getRoute(),
                 $request->getData('CSRF'),
                 $request->getRouteVerb(),
                 $this->app->appName,
@@ -251,7 +251,7 @@ final class Application
     {
         return (int) (
             $request->getData('u') ?? (
-                $config['domains'][$request->getUri()->getHost()]['org'] ?? $this->app->appSettings->get(
+                $config['domains'][$request->uri->host]['org'] ?? $this->app->appSettings->get(
                     SettingsEnum::DEFAULT_ORGANIZATION
                 ) ?? 1
             )
@@ -270,7 +270,7 @@ final class Application
      */
     private function create406Response(HttpResponse $response, View $pageView) : void
     {
-        $response->getHeader()->setStatusCode(RequestStatusCode::R_406);
+        $response->header->status = RequestStatusCode::R_406;
         $pageView->setTemplate('/Web/Timerecording/Error/406');
         $this->loadLanguageFromPath(
             $response->getLanguage(),
@@ -290,7 +290,7 @@ final class Application
      */
     private function create503Response(HttpResponse $response, View $pageView) : void
     {
-        $response->getHeader()->setStatusCode(RequestStatusCode::R_503);
+        $response->header->status = RequestStatusCode::R_503;
         $pageView->setTemplate('/Web/Timerecording/Error/503');
         $this->loadLanguageFromPath(
             $response->getLanguage(),
@@ -331,7 +331,7 @@ final class Application
      */
     private function loadAccount(HttpRequest $request) : Account
     {
-        $account = AccountMapper::getWithPermissions($request->getHeader()->getAccount());
+        $account = AccountMapper::getWithPermissions($request->header->account);
         $this->app->accountManager->add($account);
 
         return $account;
@@ -349,7 +349,7 @@ final class Application
      */
     private function create403Response(HttpResponse $response, View $pageView) : void
     {
-        $response->getHeader()->setStatusCode(RequestStatusCode::R_403);
+        $response->header->status = RequestStatusCode::R_403;
         $pageView->setTemplate('/Web/Timerecording/Error/403');
         $this->loadLanguageFromPath(
             $response->getLanguage(),
@@ -382,7 +382,7 @@ final class Application
         $head->addAsset(AssetType::JSLATE, 'Modules/Navigation/Controller.js', ['type' => 'module']);
 
         $script = '';
-        $response->getHeader()->set(
+        $response->header->set(
             'content-security-policy',
             'base-uri \'self\'; script-src \'self\' blob: \'sha256-'
             . \base64_encode(\hash('sha256', $script, true))
@@ -401,7 +401,7 @@ final class Application
 
         $css = \preg_replace('!\s+!', ' ', $css);
         $head->setStyle('core', $css ?? '');
-        $head->setTitle('Orange Management Timerecording');
+        $head->title = 'Orange Management Timerecording';
     }
 
     /**
@@ -417,7 +417,7 @@ final class Application
      */
     private function createLoggedOutResponse(HttpResponse $response, Head $head, View $pageView) : void
     {
-        $response->getHeader()->setStatusCode(RequestStatusCode::R_403);
+        $response->header->status = RequestStatusCode::R_403;
         $pageView->setTemplate('/Web/Timerecording/login');
         $head->addAsset(AssetType::JS, 'Web/Timerecording/js/login.js', ['type' => 'module']);
     }
@@ -436,7 +436,7 @@ final class Application
     private function createDefaultPageView(HttpRequest $request, HttpResponse $response, TimerecordingView $pageView) : void
     {
         $pageView->setOrganizations(UnitMapper::getAll());
-        $pageView->setProfile(ProfileMapper::getFor($request->getHeader()->getAccount(), 'account'));
+        $pageView->setProfile(ProfileMapper::getFor($request->header->account, 'account'));
         $pageView->setData('nav', $this->getNavigation($request, $response));
 
         $pageView->setTemplate('/Web/Timerecording/index');

@@ -38,8 +38,8 @@ echo $this->getData('nav')->render(); ?>
                     <td><?= $session->getStart()->format('Y-m-d'); ?>
                     <td><span class="tag"><?= $this->getHtml('CT' . $session->getType()); ?></span>
                     <td>
-                        <?= $this->printHtml($session->getEmployee()->getProfile()->getAccount()->getName1()); ?>,
-                        <?= $this->printHtml($session->getEmployee()->getProfile()->getAccount()->getName2()); ?>
+                        <?= $this->printHtml($session->getEmployee()->profile->account->name1); ?>,
+                        <?= $this->printHtml($session->getEmployee()->profile->account->name2); ?>
                     <td><?= $session->getStart()->format('H:i:s'); ?>
                     <td><?= (int) ($session->getBreak() / 3600); ?>h <?= ((int) ($session->getBreak() / 60) % 60); ?>m
                     <td><?= $session->getEnd() !== null ? $session->getEnd()->format('H:i') : ''; ?>

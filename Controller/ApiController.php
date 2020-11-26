@@ -272,10 +272,6 @@ final class ApiController extends Controller
      *
      * @return void
      *
-     * @todo Orange-Management/Modules#194
-     *  Allow session update
-     *  Employee can only change start/end if vacation
-     *
      * @api
      *
      * @since 1.0.0
@@ -292,11 +288,6 @@ final class ApiController extends Controller
      * @param mixed            $data     Generic data
      *
      * @return void
-     *
-     * @todo Orange-Management/Modules#195
-     *  Allow session element update
-     *  Employee can only change start/end if vacation.
-     *  This also has to update the session since the data is not 100% normalized.
      *
      * @api
      *
@@ -315,10 +306,6 @@ final class ApiController extends Controller
      *
      * @return void
      *
-     * @todo Orange-Management/Modules#196
-     *  Implement session delete
-     *  Employee can only delete vacations (maybe)
-     *
      * @api
      *
      * @since 1.0.0
@@ -335,10 +322,6 @@ final class ApiController extends Controller
      * @param mixed            $data     Generic data
      *
      * @return void
-     *
-     * @todo Orange-Management/Modules#196
-     *  Implement session delete
-     *  Employee can only delete vacations (maybe)
      *
      * @api
      *

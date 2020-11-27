@@ -180,10 +180,12 @@ final class ApiController extends Controller
 
         if ($element === null) {
             $this->fillJsonResponse($request, $response, NotificationLevel::ERROR, 'Session Element', 'You cannot create a session element for another person!', $element);
+
+            return;
         }
 
         if ($element->getStatus() === ClockingStatus::END) {
-            $session = SessionMapper::get($element->getSession()->getId());
+            $session = SessionMapper::get($element->session->getId());
             $session->addSessionElement($element);
             SessionMapper::update($session);
         }

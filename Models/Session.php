@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Models;
 
+use Modules\HumanResourceManagement\Models\Employee;
+use Modules\HumanResourceManagement\Models\NullEmployee;
 use phpOMS\Contract\ArrayableInterface;
 
 /**
@@ -77,22 +79,22 @@ class Session implements \JsonSerializable, ArrayableInterface
     /**
      * Employee.
      *
-     * @var int|Employee
+     * @var Employee
      * @since 1.0.0
      */
-    private $employee = 0;
+    private Employee $employee;
 
     /**
      * Constructor.
      *
-     * @param int|Employee $employee Employee
+     * @param Employee $employee Employee
      *
      * @since 1.0.0
      */
-    public function __construct($employee = 0)
+    public function __construct(Employee $employee = null)
     {
         $this->start    = new \DateTime('now');
-        $this->employee = $employee;
+        $this->employee = $employee ?? new NullEmployee();
     }
 
     /**
@@ -110,11 +112,11 @@ class Session implements \JsonSerializable, ArrayableInterface
     /**
      * Get employee.
      *
-     * @return int|Employee
+     * @return Employee
      *
      * @since 1.0.0
      */
-    public function getEmployee()
+    public function getEmployee() : Employee
     {
         return $this->employee;
     }
@@ -122,13 +124,13 @@ class Session implements \JsonSerializable, ArrayableInterface
     /**
      * Add a session element to the session
      *
-     * @param int|SessionElement $element Session element
+     * @param SessionElement $element Session element
      *
      * @return void
      *
      * @since 1.0.0
      */
-    public function addSessionElement($element) : void
+    public function addSessionElement(SessionElement $element) : void
     {
         if ($element->getStatus() === ClockingStatus::START) {
             foreach ($this->sessionElements as $e) {

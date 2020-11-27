@@ -36,8 +36,8 @@ $head = $this->getData('head');
 
             --input-border: rgba(166, 135, 232, .4);
             --input-border-active: rgba(166, 135, 232, .7);
-            --input-color: rgba(255, 255, 255, 0.7);
-            --input-color-active: rgba(255, 255, 255, 0.7);
+            --input-color: rgba(166, 135, 232, .6);
+            --input-color-active: rgba(166, 135, 232, .8);
 
             --input-icon-color: rgba(166, 135, 232, .6);
             --input-icon-color-active: rgba(166, 135, 232, 1);

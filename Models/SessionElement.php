@@ -53,22 +53,22 @@ class SessionElement implements \JsonSerializable, ArrayableInterface
     /**
      * Session id this element belongs to
      *
-     * @var int|Session
+     * @var Session
      * @since 1.0.0
      */
-    private $session = 0;
+    public Session $session;
 
     /**
      * Constructor.
      *
-     * @param int            $session Session id
+     * @param Session        $session Session id
      * @param null|\DateTime $dt      DateTime of the session element
      *
      * @since 1.0.0
      */
-    public function __construct($session = 0, \DateTime $dt = null)
+    public function __construct(Session $session = null, \DateTime $dt = null)
     {
-        $this->session = $session;
+        $this->session = $session ?? new NullSession();
         $this->dt      = $dt ?? new \DateTime('now');
     }
 
@@ -123,18 +123,6 @@ class SessionElement implements \JsonSerializable, ArrayableInterface
     }
 
     /**
-     * Get session this element is for
-     *
-     * @return int|Session
-     *
-     * @since 1.0.0
-     */
-    public function getSession()
-    {
-        return $this->session;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function toArray() : array
@@ -143,7 +131,7 @@ class SessionElement implements \JsonSerializable, ArrayableInterface
             'id'       => $this->id,
             'status'   => $this->status,
             'dt'       => $this->dt,
-            'session'  => \is_int($this->session) ? $this->session : $this->session->getId(),
+            'session'  => $this->session->getId(),
         ];
     }
 

@@ -31,7 +31,7 @@ class SessionElementTest extends \PHPUnit\Framework\TestCase
         $element = new SessionElement();
 
         self::assertEquals(0, $element->getId());
-        self::assertEquals(0, $element->getSession());
+        self::assertEquals(0, $element->session->getId());
         self::assertEquals((new \DateTime('now'))->format('Y-m-d'), $element->getDatetime()->format('Y-m-d'));
         self::assertEquals(ClockingStatus::START, $element->getStatus());
     }

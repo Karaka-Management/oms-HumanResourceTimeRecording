@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\tests\Models;
 
+use Modules\HumanResourceManagement\Models\NullEmployee;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\HumanResourceTimeRecording\Models\Session;
 use Modules\HumanResourceTimeRecording\Models\SessionElement;
@@ -30,7 +31,7 @@ class SessionMapperTest extends \PHPUnit\Framework\TestCase
      */
     public function testCRUD() : void
     {
-        $session = new Session(1);
+        $session = new Session(new NullEmployee(1));
 
         $dt      = new \DateTime(\date('Y-m-d', \strtotime('now')) . ' 7:55:34');
         $element = new SessionElement($session, $dt);
@@ -60,7 +61,7 @@ class SessionMapperTest extends \PHPUnit\Framework\TestCase
                 continue;
             }
 
-            $session = new Session(1);
+            $session = new Session(new NullEmployee(1));
 
             $hourStart    = \mt_rand(7, 9);
             $minutesStart = \mt_rand(0, 59);

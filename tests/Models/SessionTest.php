@@ -51,7 +51,7 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         $session->setType(ClockingType::VACATION);
         self::assertEquals(ClockingType::VACATION, $session->getType());
 
-        $element = new SessionElement(0, new \DateTime('now'));
+        $element = new SessionElement(null, new \DateTime('now'));
         $element->setStatus(ClockingStatus::PAUSE);
         $session->addSessionElement($element);
 

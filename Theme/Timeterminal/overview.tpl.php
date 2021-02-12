@@ -86,7 +86,7 @@ echo $this->getData('nav')->render(); ?>
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>
-                    <td>Status
+                    <td><?= $this->getHtml('Status'); ?>
                     <td><?= $this->getHtml('Start'); ?>
                     <td><?= $this->getHtml('Break'); ?>
                     <td><?= $this->getHtml('End'); ?>

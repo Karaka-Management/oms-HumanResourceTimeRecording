@@ -31,6 +31,7 @@ return ['HumanResourceTimeRecording' => [
     'D5'         => 'Freitag',
     'D6'         => 'Samstag',
     'Date'       => 'Datum',
+    'Employee'   => '',
     'End'        => 'Ende',
     'Recordings' => 'Aufzeichnungen',
     'Start'      => 'Start',

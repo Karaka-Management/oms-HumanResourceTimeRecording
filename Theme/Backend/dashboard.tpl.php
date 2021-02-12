@@ -25,7 +25,7 @@ echo $this->getData('nav')->render(); ?>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>
                     <td><?= $this->getHtml('Type'); ?>
-                    <td>Employee
+                    <td><?= $this->getHtml('Employee'); ?>
                     <td><?= $this->getHtml('Start'); ?>
                     <td><?= $this->getHtml('Break'); ?>
                     <td><?= $this->getHtml('End'); ?>

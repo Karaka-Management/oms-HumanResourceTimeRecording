@@ -4,6 +4,7 @@
  *
  * PHP Version 8.0
  *
+ * @package   Modules\Localization
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
@@ -31,7 +32,7 @@ return ['HumanResourceTimeRecording' => [
     'D5'         => 'Friday',
     'D6'         => 'Saturday',
     'Date'       => 'Date',
-    'Employee'   => '',
+    'Employee'   => 'Employee',
     'End'        => 'End',
     'Recordings' => 'Recordings',
     'Start'      => 'Start',

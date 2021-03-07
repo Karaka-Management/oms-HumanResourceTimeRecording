@@ -15,6 +15,7 @@ declare(strict_types=1);
 use \Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use \Modules\HumanResourceTimeRecording\Models\ClockingType;
 use \phpOMS\Stdlib\Base\SmartDateTime;
+use phpOMS\Uri\UriFactory;
 
 /** @var Session[] $sessions */
 $sessions     = $this->getData('sessions');
@@ -46,7 +47,7 @@ echo $this->getData('nav')->render(); ?>
     <div class="col-md-4 col-xs-12">
         <section class="portlet">
             <div class="portlet-body">
-                <form id="iClocking" method="PUT" action="<?= \phpOMS\Uri\UriFactory::build('{/api}humanresource/timerecording/element?{?}&csrf={$CSRF}'); ?>">
+                <form id="iClocking" method="PUT" action="<?= UriFactory::build('{/api}humanresource/timerecording/element?{?}&csrf={$CSRF}'); ?>">
                     <table class="layout wf-100" style="table-layout: fixed">
                         <tr><td><label for="iType"><?= $this->getHtml('Type'); ?></label>
                         <tr><td>
@@ -112,24 +113,105 @@ echo $this->getData('nav')->render(); ?>
     <div class="col-xs-12">
         <section class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Recordings'); ?><i class="fa fa-download floatRight download btn"></i></div>
-            <table id="accountList" class="default">
+            <table id="recordingList" class="default">
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>
+                        <label for="recordingList-sort-1">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-1">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="recordingList-sort-2">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-2">
+                             <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                     <td><?= $this->getHtml('Type'); ?>
+                        <label for="recordingList-sort-3">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-3">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="recordingList-sort-4">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-4">
+                             <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                     <td><?= $this->getHtml('Status'); ?>
+                        <label for="recordingList-sort-5">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-5">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="recordingList-sort-6">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-6">
+                             <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                     <td><?= $this->getHtml('Start'); ?>
+                        <label for="recordingList-sort-7">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-7">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="recordingList-sort-8">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-8">
+                             <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                     <td><?= $this->getHtml('Break'); ?>
+                        <label for="recordingList-sort-9">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-9">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="recordingList-sort-10">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-10">
+                             <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                     <td><?= $this->getHtml('End'); ?>
+                        <label for="recordingList-sort-11">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-11">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="recordingList-sort-12">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-12">
+                             <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                     <td><?= $this->getHtml('Total'); ?>
+                        <label for="recordingList-sort-13">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-13">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="recordingList-sort-14">
+                            <input type="radio" name="recordingList-sort" id="recordingList-sort-14">
+                             <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                 <tbody>
                 <?php
-                    $count = 0; foreach ($sessions as $session) : ++$count;
-                    $url   = \phpOMS\Uri\UriFactory::build('{/prefix}private/timerecording/session?{?}&id=' . $session->getId());
+                    $count = 0;
+                    foreach ($sessions as $session) : ++$count;
+                    $url   = UriFactory::build('{/prefix}private/timerecording/session?{?}&id=' . $session->getId());
                 ?>
                 <tr data-href="<?= $url; ?>">
                     <td><a href="<?= $url; ?>">
-                        <?php if ($lastOpenSession !== null && $session->getStart()->format('Y-m-d') === $lastOpenSession->getStart()->format('Y-m-d')) : ?>
+                        <?php
+                            if ($lastOpenSession !== null
+                                && $session->getStart()->format('Y-m-d') === $lastOpenSession->getStart()->format('Y-m-d')
+                            ) : ?>
                             <span class="tag">Today</span>
                         <?php else : ?>
                             <?= $session->getStart()->format('Y-m-d'); ?> - <?= $this->getHtml('D' . $session->getStart()->format('w')); ?>
@@ -140,7 +222,11 @@ echo $this->getData('nav')->render(); ?>
                     <td><a href="<?= $url; ?>"><?= (int) ($session->getBreak() / 3600); ?>h <?= ((int) ($session->getBreak() / 60) % 60); ?>m</a>
                     <td><a href="<?= $url; ?>"><?= $session->getEnd() !== null ? $session->getEnd()->format('H:i') : ''; ?></a>
                     <td><a href="<?= $url; ?>"><?= (int) ($session->getBusy() / 3600); ?>h <?= ((int) ($session->getBusy() / 60) % 60); ?>m</a>
-                <?php $busy['week'] += $session->getBusy(); if ($session->getStart()->getTimestamp() < $startWeek->getTimestamp() || $count === $sessionCount) : ?>
+                <?php
+                    $busy['week'] += $session->getBusy();
+                    if ($session->getStart()->getTimestamp() < $startWeek->getTimestamp()
+                        || $count === $sessionCount
+                ) : ?>
                 <tr>
                     <th colspan="6"> <?= $startWeek->format('Y/m/d'); ?> - <?= $endWeek->format('Y/m/d'); ?>
                     <th><?= (int) ($busy['week'] / 3600); ?>h <?= ((int) ($busy['week'] / 60) % 60); ?>m
@@ -150,7 +236,11 @@ echo $this->getData('nav')->render(); ?>
                         $busy['week'] = 0;
                     endif;
                 ?>
-                <?php $busy['month'] += $session->getBusy(); if ($session->getStart()->getTimestamp() < $startMonth->getTimestamp() || $count === $sessionCount) : ?>
+                <?php
+                    $busy['month'] += $session->getBusy();
+                    if ($session->getStart()->getTimestamp() < $startMonth->getTimestamp()
+                        || $count === $sessionCount
+                ) : ?>
                 <tr>
                     <th colspan="6"> <?= $startMonth->format('Y/m/d'); ?> - <?= $endMonth->format('Y/m/d'); ?>
                     <th><?= (int) ($busy['month'] / 3600); ?>h <?= ((int) ($busy['month'] / 60) % 60); ?>m
@@ -161,6 +251,10 @@ echo $this->getData('nav')->render(); ?>
                     endif;
                 ?>
                 <?php endforeach; ?>
+                <?php if ($count === 0) : ?>
+                <tr>
+                    <td colspan="7" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
+                <?php endif; ?>
             </table>
         </section>
     </div>

@@ -119,8 +119,8 @@ final class SessionMapper extends DataMapperAbstract
         $depth = 3;
         $query = self::getQuery();
         $query->innerJoin($join, 'tm')
-            ->on(self::$table . '_' . $depth . '.hr_timerecording_session_employee', '=', 'tm.hr_timerecording_session_employee')
-            ->andOn(self::$table . '_' . $depth . '.hr_timerecording_session_start', '=', 'tm.maxDate');
+            ->on(self::$table . '_d' . $depth . '.hr_timerecording_session_employee', '=', 'tm.hr_timerecording_session_employee')
+            ->andOn(self::$table . '_d' . $depth . '.hr_timerecording_session_start', '=', 'tm.maxDate');
 
         return self::getAllByQuery($query, RelationType::ALL, $depth);
     }
@@ -145,9 +145,9 @@ final class SessionMapper extends DataMapperAbstract
 
         $depth = 3;
         $query = self::getQuery();
-        $query->where(self::$table . '_' . $depth . '.hr_timerecording_session_employee', '=', $employee)
-            ->andWhere(self::$table . '_' . $depth . '.hr_timerecording_session_start', '>', $dt)
-            ->orderBy(self::$table . '_' . $depth . '.hr_timerecording_session_start', 'DESC')
+        $query->where(self::$table . '_d' . $depth . '.hr_timerecording_session_employee', '=', $employee)
+            ->andWhere(self::$table . '_d' . $depth . '.hr_timerecording_session_start', '>', $dt)
+            ->orderBy(self::$table . '_d' . $depth . '.hr_timerecording_session_start', 'DESC')
             ->limit(1);
 
         /** @var Session[] $sessions */
@@ -181,9 +181,9 @@ final class SessionMapper extends DataMapperAbstract
         $depth = 3;
         $query = new Builder(self::$db);
         $query = self::getQuery($query)
-            ->where(self::$table . '_' . $depth . '.hr_timerecording_session_employee', '=', $employee)
-            ->andWhere(self::$table . '_' . $depth . '.' . self::$createdAt, '<=', $start->format('Y-m-d H:i:s'))
-            ->orderBy(self::$table . '_' . $depth . '.' . self::$createdAt, 'DESC')
+            ->where(self::$table . '_d' . $depth . '.hr_timerecording_session_employee', '=', $employee)
+            ->andWhere(self::$table . '_d' . $depth . '.' . self::$createdAt, '<=', $start->format('Y-m-d H:i:s'))
+            ->orderBy(self::$table . '_d' . $depth . '.' . self::$createdAt, 'DESC')
             ->offset($offset)
             ->limit($limit);
 

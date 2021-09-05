@@ -28,8 +28,6 @@ echo $this->getData('nav')->render(); ?>
                     <td><?= $this->getHtml('Status'); ?>
                     <td class="wf-100"><?= $this->getHtml('Time'); ?>
                     <td class="wf-100"><?= $this->getHtml('Date'); ?>
-                <tfoot>
-                <tr><td colspan="2">
                 <tbody>
                 <?php foreach ($elements as $element) : ?>
                 <tr>

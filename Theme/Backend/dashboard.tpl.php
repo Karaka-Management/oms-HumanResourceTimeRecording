@@ -30,8 +30,6 @@ echo $this->getData('nav')->render(); ?>
                     <td><?= $this->getHtml('Break'); ?>
                     <td><?= $this->getHtml('End'); ?>
                     <td><?= $this->getHtml('Total'); ?>
-                <tfoot>
-                <tr><td colspan="5">
                 <tbody>
                 <?php foreach ($sessions as $session) : ?>
                 <tr>

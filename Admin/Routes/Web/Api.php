@@ -23,7 +23,7 @@ return [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\ApiController:apiSessionCreate',
             'verb'       => RouteVerb::PUT,
             'permission' => [
-                'module' => ApiController::MODULE_NAME,
+                'module' => ApiController::NAME,
                 'type'   => PermissionType::CREATE,
                 'state'  => PermissionState::SESSION,
             ],
@@ -34,7 +34,7 @@ return [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\ApiController:apiSessionElementCreate',
             'verb'       => RouteVerb::PUT,
             'permission' => [
-                'module' => ApiController::MODULE_NAME,
+                'module' => ApiController::NAME,
                 'type'   => PermissionType::CREATE,
                 'state'  => PermissionState::SESSION_ELEMENT,
             ],

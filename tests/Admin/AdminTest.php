@@ -19,7 +19,7 @@ namespace Modules\HumanResourceTimeRecording\tests\Admin;
  */
 class AdminTest extends \PHPUnit\Framework\TestCase
 {
-    protected const MODULE_NAME = 'HumanResourceTimeRecording';
+    protected const NAME = 'HumanResourceTimeRecording';
 
     protected const URI_LOAD = '';
 

@@ -62,7 +62,7 @@ final class ApiController extends Controller
 
         if ($request->getData('account') !== null) {
             if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::READ, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::SESSION_FOREIGN
+                PermissionType::READ, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_FOREIGN
             )) {
                 $this->fillJsonResponse($request, $response, NotificationLevel::HIDDEN, '', '', []);
             }
@@ -115,7 +115,7 @@ final class ApiController extends Controller
 
         if ($request->getData('account') !== null) {
             if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::SESSION_FOREIGN
+                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_FOREIGN
             )) {
                 return null;
             }
@@ -245,7 +245,7 @@ final class ApiController extends Controller
             || $session->getEmployee()->profile->account->getId() !== $request->header->account
         ) {
             if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::SESSION_ELEMENT_FOREIGN
+                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_ELEMENT_FOREIGN
             )) {
                 return null;
             }

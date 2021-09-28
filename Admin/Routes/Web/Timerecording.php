@@ -11,7 +11,7 @@ return [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => TimerecordingController::MODULE_NAME,
+                'module' => TimerecordingController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::DASHBOARD,
             ],
@@ -22,7 +22,7 @@ return [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => TimerecordingController::MODULE_NAME,
+                'module' => TimerecordingController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::DASHBOARD,
             ],

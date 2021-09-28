@@ -23,7 +23,7 @@ return [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewDashboard',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => BackendController::MODULE_NAME,
+                'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::DASHBOARD,
             ],
@@ -34,7 +34,7 @@ return [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewPrivateDashboard',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => BackendController::MODULE_NAME,
+                'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::PRIVATE_DASHBOARD,
             ],
@@ -45,7 +45,7 @@ return [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewPrivateSession',
             'verb'       => RouteVerb::GET,
             'permission' => [
-                'module' => BackendController::MODULE_NAME,
+                'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
                 'state'  => PermissionState::PRIVATE_DASHBOARD,
             ],

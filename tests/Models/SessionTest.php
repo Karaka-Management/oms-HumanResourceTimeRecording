@@ -22,7 +22,7 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
 /**
  * @internal
  */
-class SessionTest extends \PHPUnit\Framework\TestCase
+final class SessionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\HumanResourceTimeRecording\Models\Session

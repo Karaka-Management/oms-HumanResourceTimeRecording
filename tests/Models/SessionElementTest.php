@@ -20,7 +20,7 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
 /**
  * @internal
  */
-class SessionElementTest extends \PHPUnit\Framework\TestCase
+final class SessionElementTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\HumanResourceTimeRecording\Models\SessionElement

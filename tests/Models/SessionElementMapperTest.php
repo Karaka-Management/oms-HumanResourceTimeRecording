@@ -22,7 +22,7 @@ use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
 /**
  * @internal
  */
-class SessionElementMapperTest extends \PHPUnit\Framework\TestCase
+final class SessionElementMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\HumanResourceTimeRecording\Models\SessionElementMapper

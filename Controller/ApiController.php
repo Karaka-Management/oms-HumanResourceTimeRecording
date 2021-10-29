@@ -69,7 +69,7 @@ final class ApiController extends Controller
         }
 
         $employee = EmployeeMapper::getFromAccount($account);
-        $sessions = SessionMapper::getSessionListForEmployee($employee->getId(), new DateTime($request->getData('start') ?? 'now'), (int) ($request->getData('session') ?? 0), 50);
+        $sessions = SessionMapper::getSessionListForEmployee($employee->getId(), new \DateTime($request->getData('start') ?? 'now'), (int) ($request->getData('session') ?? 0), 50);
         $this->fillJsonResponse($request, $response, NotificationLevel::HIDDEN, '', '', $sessions);
     }
 

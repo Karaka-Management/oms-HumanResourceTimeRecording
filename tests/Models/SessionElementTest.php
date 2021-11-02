@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Modules\HumanResourceTimeRecording\tests\Models;
 
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
+use Modules\HumanResourceTimeRecording\Models\NullSession;
 use Modules\HumanResourceTimeRecording\Models\SessionElement;
 
 /**
@@ -22,29 +23,57 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
  */
 final class SessionElementTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
-     * @group module
-     */
-    public function testDefault() : void
-    {
-        $element = new SessionElement();
+    private SessionElement $element;
 
-        self::assertEquals(0, $element->getId());
-        self::assertEquals(0, $element->session->getId());
-        self::assertEquals((new \DateTime('now'))->format('Y-m-d'), $element->getDatetime()->format('Y-m-d'));
-        self::assertEquals(ClockingStatus::START, $element->getStatus());
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp() : void
+    {
+        $this->element = new SessionElement();
     }
 
     /**
      * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
      * @group module
      */
-    public function testSetGet() : void
+    public function testDefault() : void
     {
-        $element = new SessionElement();
+        self::assertEquals(0, $this->element->getId());
+        self::assertEquals(0, $this->element->session->getId());
+        self::assertInstanceOf('\DateTime', $this->element->datetime);
+        self::assertEquals(ClockingStatus::START, $this->element->getStatus());
+    }
 
-        $element->setStatus(ClockingStatus::END);
-        self::assertEquals(ClockingStatus::END, $element->getStatus());
+    /**
+     * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
+     * @group module
+     */
+    public function testStatusInputOutput() : void
+    {
+        $this->element->setStatus(ClockingStatus::END);
+        self::assertEquals(ClockingStatus::END, $this->element->getStatus());
+    }
+
+    /**
+     * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
+     * @group module
+     */
+    public function testSerialize() : void
+    {
+        $this->element->session = new NullSession(2);
+        $this->element->setStatus(ClockingStatus::END);
+
+        $serialized = $this->element->jsonSerialize();
+        unset($serialized['datetime']);
+        unset($serialized['session']);
+
+        self::assertEquals(
+            [
+                'id'       => 0,
+                'status'      => ClockingStatus::END,
+            ],
+            $serialized
+        );
     }
 }

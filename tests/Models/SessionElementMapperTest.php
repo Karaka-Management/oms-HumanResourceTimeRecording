@@ -37,8 +37,8 @@ final class SessionElementMapperTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($id, $element->getId());
 
         $elementR = SessionElementMapper::get($element->getId());
-        self::assertEquals($element->getDatetime()->format('Y-m-d'), $elementR->getDatetime()->format('Y-m-d'));
+        self::assertEquals($element->datetime->format('Y-m-d'), $elementR->datetime->format('Y-m-d'));
         self::assertEquals($element->getStatus(), $elementR->getStatus());
-        self::assertEquals($element->session->getEmployee()->getId(), $elementR->session->getEmployee()->getId());
+        self::assertEquals($element->session->employee->getId(), $elementR->session->employee->getId());
     }
 }

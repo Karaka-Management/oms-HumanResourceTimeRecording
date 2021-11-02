@@ -48,28 +48,28 @@ class SessionElement implements \JsonSerializable, ArrayableInterface
      * @var \DateTime
      * @since 1.0.0
      */
-    private \DateTime $dt;
+    public \DateTime $datetime;
 
     /**
      * Session id this element belongs to
      *
-     * @var Session
+     * @var int|Session
      * @since 1.0.0
      */
-    public Session $session;
+    public int|Session $session;
 
     /**
      * Constructor.
      *
      * @param Session        $session Session id
-     * @param null|\DateTime $dt      DateTime of the session element
+     * @param null|\DateTime $datetime      DateTime of the session element
      *
      * @since 1.0.0
      */
-    public function __construct(Session $session = null, \DateTime $dt = null)
+    public function __construct(Session $session = null, \DateTime $datetime = null)
     {
-        $this->session = $session ?? new NullSession();
-        $this->dt      = $dt ?? new \DateTime('now');
+        $this->session  = $session ?? new NullSession();
+        $this->datetime = $datetime ?? new \DateTime('now');
     }
 
     /**
@@ -82,18 +82,6 @@ class SessionElement implements \JsonSerializable, ArrayableInterface
     public function getId() : int
     {
         return $this->id;
-    }
-
-    /**
-     * Get the dt data
-     *
-     * @return \DateTime
-     *
-     * @since 1.0.0
-     */
-    public function getDatetime() : \DateTime
-    {
-        return $this->dt;
     }
 
     /**
@@ -130,17 +118,9 @@ class SessionElement implements \JsonSerializable, ArrayableInterface
         return [
             'id'       => $this->id,
             'status'   => $this->status,
-            'dt'       => $this->dt,
-            'session'  => $this->session->getId(),
+            'datetime'       => $this->datetime,
+            'session'  => $this->session,
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return (string) \json_encode($this->toArray());
     }
 
     /**

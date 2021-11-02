@@ -44,36 +44,6 @@ use phpOMS\Model\Message\FormValidation;
 final class ApiController extends Controller
 {
     /**
-     * Api method to get multiple sessions for an employee
-     *
-     * @param RequestAbstract  $request  Request
-     * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
-     *
-     * @return void
-     *
-     * @api
-     *
-     * @since 1.0.0
-     */
-    public function apiSessionsListForEmployeeGet(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
-    {
-        $account = (int) ($request->getData('account') ?? $request->header->account);
-
-        if ($request->getData('account') !== null) {
-            if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::READ, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_FOREIGN
-            )) {
-                $this->fillJsonResponse($request, $response, NotificationLevel::HIDDEN, '', '', []);
-            }
-        }
-
-        $employee = EmployeeMapper::getFromAccount($account);
-        $sessions = SessionMapper::getSessionListForEmployee($employee->getId(), new \DateTime($request->getData('start') ?? 'now'), (int) ($request->getData('session') ?? 0), 50);
-        $this->fillJsonResponse($request, $response, NotificationLevel::HIDDEN, '', '', $sessions);
-    }
-
-    /**
      * Api method to create a session
      *
      * @param RequestAbstract  $request  Request
@@ -88,10 +58,19 @@ final class ApiController extends Controller
      */
     public function apiSessionCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
+        if ($request->getData('account') !== null && !$this->app->accountManager->get($request->header->account)->hasPermission(
+            PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_FOREIGN
+        )) {
+            $response->header->status = RequestStatusCode::R_403;
+
+            return;
+        }
+
         $session = $this->createSessionFromRequest($request);
 
         if ($session === null) {
             $this->fillJsonResponse($request, $response, NotificationLevel::ERROR, 'Session', 'Session couldn\'t be created.', $session);
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
@@ -113,17 +92,9 @@ final class ApiController extends Controller
     {
         $account = (int) ($request->getData('account') ?? $request->header->account);
 
-        if ($request->getData('account') !== null) {
-            if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_FOREIGN
-            )) {
-                return null;
-            }
-        }
-
         $employee = EmployeeMapper::getFromAccount($account);
-        $type     = (int) $request->getData('type');
-        $status   = (int) $request->getData('status');
+        $type     = (int) ($request->getData('type') ?? ClockingType::OFFICE);
+        $status   = (int) ($request->getData('status') ?? ClockingStatus::START);
 
         if ($employee instanceof NullEmployee) {
             return null;
@@ -163,7 +134,7 @@ final class ApiController extends Controller
      */
     public function apiSessionElementCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
-        if ((int) $request->getData('status') === ClockingStatus::START) {
+        if ((int) ($request->getData('status') ?? -1) === ClockingStatus::START) {
             $this->apiSessionCreate($request, $response);
 
             return;
@@ -176,18 +147,30 @@ final class ApiController extends Controller
             return;
         }
 
+        if ($request->getData('account') !== null && ((int) $request->getData('account')) !== $request->header->account
+        ) {
+            if (!$this->app->accountManager->get($request->header->account)->hasPermission(
+                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_ELEMENT_FOREIGN
+            )) {
+                $response->header->status = RequestStatusCode::R_403;
+
+                return;
+            }
+        }
+
         $element = $this->createSessionElementFromRequest($request);
 
         if ($element === null) {
             $this->fillJsonResponse($request, $response, NotificationLevel::ERROR, 'Session Element', 'You cannot create a session element for another person!', $element);
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
 
         if ($element->getStatus() === ClockingStatus::END) {
-            $session = SessionMapper::get($element->session->getId());
+            $session = SessionMapper::get((int) $request->getData('session'));
             $session->addSessionElement($element);
-            SessionMapper::update($session);
+            SessionMapper::update($session, depth: 1);
         }
 
         $this->createModel($request->header->account, $element, SessionElementMapper::class, 'element', $request->getOrigin());
@@ -235,23 +218,7 @@ final class ApiController extends Controller
             return null;
         }
 
-        // account and owner of the session don't match = exception!
-        if ($session->getEmployee()->profile->account->getId() !== $account) {
-            return null;
-        }
-
-        // check permissions to edit session and create session element of a foreign account
-        if ($request->getData('account') !== null
-            || $session->getEmployee()->profile->account->getId() !== $request->header->account
-        ) {
-            if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_ELEMENT_FOREIGN
-            )) {
-                return null;
-            }
-        }
-
-        $status = (int) $request->getData('status');
+        $status = (int) ($request->getData('status') ?? -1);
 
         // a custom datetime can only be set if the user is allowed to create a session for a foreign account or if the session is a vacation
         $dt = $request->getData('datetime') !== null
@@ -261,6 +228,7 @@ final class ApiController extends Controller
 
         $element = new SessionElement($session, $dt);
         $element->setStatus(ClockingStatus::isValidValue($status) ? $status : ClockingStatus::END);
+        $element->session = $session;
 
         return $element;
     }

@@ -42,7 +42,7 @@ class Session implements \JsonSerializable, ArrayableInterface
      * @var \DateTime
      * @since 1.0.0
      */
-    private \DateTime $start;
+    public \DateTime $start;
 
     /**
      * Session end
@@ -50,7 +50,7 @@ class Session implements \JsonSerializable, ArrayableInterface
      * @var null|\DateTime
      * @since 1.0.0
      */
-    private ?\DateTime $end = null;
+    public ?\DateTime $end = null;
 
     /**
      * Busy time.
@@ -82,7 +82,7 @@ class Session implements \JsonSerializable, ArrayableInterface
      * @var Employee
      * @since 1.0.0
      */
-    private Employee $employee;
+    public Employee $employee;
 
     /**
      * Constructor.
@@ -110,15 +110,15 @@ class Session implements \JsonSerializable, ArrayableInterface
     }
 
     /**
-     * Get employee.
+     * Get busy time.
      *
-     * @return Employee
+     * @return int
      *
      * @since 1.0.0
      */
-    public function getEmployee() : Employee
+    public function getBusy() : int
     {
-        return $this->employee;
+        return $this->busy;
     }
 
     /**
@@ -134,12 +134,12 @@ class Session implements \JsonSerializable, ArrayableInterface
     {
         if ($element->getStatus() === ClockingStatus::START) {
             foreach ($this->sessionElements as $e) {
-                if ($e->getStatus === ClockingStatus::START) {
+                if ($e->getStatus() === ClockingStatus::START) {
                     return;
                 }
             }
 
-            $this->start = $element->getDatetime();
+            $this->start = $element->datetime;
         }
 
         if ($element->getStatus() === ClockingStatus::END) {
@@ -147,14 +147,12 @@ class Session implements \JsonSerializable, ArrayableInterface
                 return;
             }
 
-            $this->end = $element->getDatetime();
+            $this->end = $element->datetime;
         }
 
         $this->sessionElements[] = $element;
 
-        \usort($this->sessionElements, function($a, $b) {
-            return $a->getDatetime()->getTimestamp() <=> $b->getDatetime()->getTimestamp();
-        });
+        \usort($this->sessionElements, [$this, 'compareSessionElementTimestamps']);
 
         $busyTime  = 0;
         $lastStart = $this->start;
@@ -165,11 +163,11 @@ class Session implements \JsonSerializable, ArrayableInterface
             }
 
             if ($e->getStatus() === ClockingStatus::PAUSE || $e->getStatus() === ClockingStatus::END) {
-                $busyTime += $e->getDatetime()->getTimestamp() - $lastStart->getTimestamp();
+                $busyTime += $e->datetime->getTimestamp() - $lastStart->getTimestamp();
             }
 
             if ($e->getStatus() === ClockingStatus::CONTINUE) {
-                $lastStart = $e->getDatetime();
+                $lastStart = $e->datetime;
             }
         }
 
@@ -189,6 +187,21 @@ class Session implements \JsonSerializable, ArrayableInterface
     }
 
     /**
+     * Compare session selements
+     *
+     * @param SessionElement $a First session element
+     * @param SessionElement $b Second session element
+     *
+     * @return int
+     *
+     * @since 1.0.0
+     */
+    private function compareSessionElementTimestamps(SessionElement $a, SessionElement $b) : int
+    {
+        return $a->datetime->getTimestamp() <=> $b->datetime->getTimestamp();
+    }
+
+    /**
      * Get the status of the last session element
      *
      * @return int
@@ -201,9 +214,7 @@ class Session implements \JsonSerializable, ArrayableInterface
             return ClockingStatus::START;
         }
 
-        \usort($this->sessionElements, function($a, $b) {
-            return $a->getDatetime()->getTimestamp() <=> $b->getDatetime()->getTimestamp();
-        });
+        \usort($this->sessionElements, [$this, 'compareSessionElementTimestamps']);
 
         $last = \end($this->sessionElements);
 
@@ -221,9 +232,7 @@ class Session implements \JsonSerializable, ArrayableInterface
      */
     public function getBreak() : int
     {
-        \usort($this->sessionElements, function($a, $b) {
-            return $a->getDatetime()->getTimestamp() <=> $b->getDatetime()->getTimestamp();
-        });
+        \usort($this->sessionElements, [$this, 'compareSessionElementTimestamps']);
 
         $breakTime = 0;
         $lastBreak = $this->start;
@@ -234,27 +243,15 @@ class Session implements \JsonSerializable, ArrayableInterface
             }
 
             if ($element->getStatus() === ClockingStatus::PAUSE || $element->getStatus() === ClockingStatus::END) {
-                $lastBreak = $element->getDatetime();
+                $lastBreak = $element->datetime;
             }
 
             if ($element->getStatus() === ClockingStatus::CONTINUE) {
-                $breakTime += $element->getDatetime()->getTimestamp() - ($lastBreak->getTimestamp() ?? 0);
+                $breakTime += $element->datetime->getTimestamp() - ($lastBreak->getTimestamp() ?? 0);
             }
         }
 
         return $breakTime;
-    }
-
-    /**
-     * Get busy time
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getBusy() : int
-    {
-        return $this->busy;
     }
 
     /**
@@ -284,30 +281,6 @@ class Session implements \JsonSerializable, ArrayableInterface
     }
 
     /**
-     * Return session start
-     *
-     * @return \DateTime
-     *
-     * @since 1.0.0
-     */
-    public function getStart() : \DateTime
-    {
-        return $this->start;
-    }
-
-    /**
-     * Return session end
-     *
-     * @return null|\DateTime
-     *
-     * @since 1.0.0
-     */
-    public function getEnd() : ?\DateTime
-    {
-        return $this->end;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function toArray() : array
@@ -321,14 +294,6 @@ class Session implements \JsonSerializable, ArrayableInterface
             'employee' => $this->employee,
             'elements' => $this->sessionElements,
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return (string) \json_encode($this->toArray());
     }
 
     /**

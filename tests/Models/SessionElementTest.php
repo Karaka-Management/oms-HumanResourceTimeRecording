@@ -70,7 +70,7 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(
             [
-                'id'       => 0,
+                'id'          => 0,
                 'status'      => ClockingStatus::END,
             ],
             $serialized

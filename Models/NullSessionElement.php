@@ -24,7 +24,7 @@ namespace Modules\HumanResourceTimeRecording\Models;
  */
 final class NullSessionElement extends SessionElement
 {
-	/**
+    /**
      * Constructor
      *
      * @param int $id Model id

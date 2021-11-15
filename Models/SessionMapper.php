@@ -143,7 +143,7 @@ final class SessionMapper extends DataMapperAbstract
         $dt = new SmartDateTime('now');
         $dt->smartModify(0, 0, -32);
 
-        $depth = 2;
+        $depth = 3;
         $query = self::getQuery();
         $query->where(self::$table . '_d' . $depth . '.hr_timerecording_session_employee', '=', $employee)
             ->andWhere(self::$table . '_d' . $depth . '.hr_timerecording_session_start', '>', $dt)

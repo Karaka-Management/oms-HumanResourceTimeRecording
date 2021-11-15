@@ -121,8 +121,8 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         $element->setStatus(ClockingStatus::END);
         $this->session->addSessionElement($element);
 
-        self::assertEquals(2*60*60, $this->session->getBreak());
-        self::assertEquals(7*60*60, $this->session->getBusy());
+        self::assertEquals(2 * 60 * 60, $this->session->getBreak());
+        self::assertEquals(7 * 60 * 60, $this->session->getBusy());
     }
 
     /**

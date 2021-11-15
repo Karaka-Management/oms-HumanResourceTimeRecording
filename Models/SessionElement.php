@@ -61,8 +61,8 @@ class SessionElement implements \JsonSerializable, ArrayableInterface
     /**
      * Constructor.
      *
-     * @param Session        $session Session id
-     * @param null|\DateTime $datetime      DateTime of the session element
+     * @param Session        $session  Session id
+     * @param null|\DateTime $datetime DateTime of the session element
      *
      * @since 1.0.0
      */
@@ -116,10 +116,10 @@ class SessionElement implements \JsonSerializable, ArrayableInterface
     public function toArray() : array
     {
         return [
-            'id'       => $this->id,
-            'status'   => $this->status,
+            'id'             => $this->id,
+            'status'         => $this->status,
             'datetime'       => $this->datetime,
-            'session'  => $this->session,
+            'session'        => $this->session,
         ];
     }
 

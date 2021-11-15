@@ -16,6 +16,7 @@ namespace Modules\HumanResourceTimeRecording\tests\Controller;
 
 use Model\CoreSettings;
 use Modules\Admin\Models\AccountPermission;
+use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use phpOMS\Account\Account;
 use phpOMS\Account\AccountManager;
 use phpOMS\Account\PermissionType;
@@ -29,10 +30,8 @@ use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Module\ModuleAbstract;
 use phpOMS\Module\ModuleManager;
 use phpOMS\Router\WebRouter;
-use phpOMS\System\MimeType;
 use phpOMS\Uri\HttpUri;
 use phpOMS\Utils\TestUtils;
-use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 
 /**
  * @testdox Modules\HumanResourceTimeRecording\tests\Controller\ApiControllerTest: HumanResourceTimeRecording api controller
@@ -73,7 +72,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
 
         $permission = new AccountPermission();
         $permission->setUnit(1);
-        $permission->setApp('backend');
+        $permission->setApp('api');
         $permission->setPermission(
             PermissionType::READ
             | PermissionType::CREATE

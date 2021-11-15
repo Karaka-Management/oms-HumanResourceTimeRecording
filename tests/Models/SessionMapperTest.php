@@ -46,7 +46,7 @@ final class SessionMapperTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($session->getType(), $sessionR->getType());
 
         self::assertGreaterThan(0, \count(SessionMapper::getLastSessionsFromAllEmployees()));
-        self::assertEquals(null, SessionMapper::getMostPlausibleOpenSessionForEmployee(9999));
+        self::assertNull(SessionMapper::getMostPlausibleOpenSessionForEmployee(9999));
 
         // @todo implement
         //self::assertGreaterThan(0, \count(SessionMapper::getSessionListForEmployee(1, (new \DateTime('now'))->modify('+1 month'))));

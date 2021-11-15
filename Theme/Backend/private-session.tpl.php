@@ -22,7 +22,7 @@ echo $this->getData('nav')->render(); ?>
     <div class="col-xs-12">
         <div class="box wf-100">
         <table id="accountList" class="default">
-                <caption><?= $session->getStart()->format('Y-m-d'); ?><i class="fa fa-download floatRight download btn"></i></caption>
+                <caption><?= $session->start->format('Y-m-d'); ?><i class="fa fa-download floatRight download btn"></i></caption>
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Status'); ?>
@@ -32,8 +32,8 @@ echo $this->getData('nav')->render(); ?>
                 <?php foreach ($elements as $element) : ?>
                 <tr>
                     <td><?= $this->getHtml('CS' . $element->getStatus()); ?>
-                    <td><?= $element->getDatetime()->format('H:i:s'); ?>
-                    <td><?= $element->getDatetime()->format('Y-m-d'); ?>
+                    <td><?= $element->datetime->format('H:i:s'); ?>
+                    <td><?= $element->datetime->format('Y-m-d'); ?>
                 <?php endforeach; ?>
             </table>
         </div>

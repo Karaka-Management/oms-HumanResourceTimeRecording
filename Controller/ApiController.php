@@ -92,7 +92,7 @@ final class ApiController extends Controller
     {
         $account = (int) ($request->getData('account') ?? $request->header->account);
 
-        $employee = EmployeeMapper::getFromAccount($account);
+        $employee = EmployeeMapper::getFromAccount($account)->limit(1)->execute();
         $type     = (int) ($request->getData('type') ?? ClockingType::OFFICE);
         $status   = (int) ($request->getData('status') ?? ClockingStatus::START);
 
@@ -168,9 +168,9 @@ final class ApiController extends Controller
         }
 
         if ($element->getStatus() === ClockingStatus::END) {
-            $session = SessionMapper::get((int) $request->getData('session'));
+            $session = SessionMapper::get()->where('id', (int) $request->getData('session'))->execute();
             $session->addSessionElement($element);
-            SessionMapper::update($session, depth: 1);
+            SessionMapper::update()->execute($session);
         }
 
         $this->createModel($request->header->account, $element, SessionElementMapper::class, 'element', $request->getOrigin());
@@ -211,7 +211,7 @@ final class ApiController extends Controller
         $account = (int) ($request->getData('account') ?? $request->header->account);
 
         /** @var Session $session */
-        $session = SessionMapper::get((int) $request->getData('session'), RelationType::ALL, 6);
+        $session = SessionMapper::get()->where('id', (int) $request->getData('session'))->execute();
 
         // cannot create session element for none existing session
         if ($session === null || $session instanceof NullSession) {

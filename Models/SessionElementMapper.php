@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Models;
 
-use phpOMS\DataStorage\Database\DataMapperAbstract;
+use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
  * Mapper class.
@@ -24,7 +24,7 @@ use phpOMS\DataStorage\Database\DataMapperAbstract;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class SessionElementMapper extends DataMapperAbstract
+final class SessionElementMapper extends DataMapperFactory
 {
     /**
      * Columns.
@@ -32,7 +32,7 @@ final class SessionElementMapper extends DataMapperAbstract
      * @var array<string, array{name:string, type:string, internal:string, autocomplete?:bool, readonly?:bool, writeonly?:bool, annotations?:array}>
      * @since 1.0.0
      */
-    protected static array $columns = [
+    public const COLUMNS = [
         'hr_timerecording_session_element_id'      => ['name' => 'hr_timerecording_session_element_id',      'type' => 'int',      'internal' => 'id'],
         'hr_timerecording_session_element_status'  => ['name' => 'hr_timerecording_session_element_status',  'type' => 'int',      'internal' => 'status'],
         'hr_timerecording_session_element_dt'      => ['name' => 'hr_timerecording_session_element_dt',      'type' => 'DateTime', 'internal' => 'datetime'],
@@ -45,7 +45,7 @@ final class SessionElementMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, external:string}>
      * @since 1.0.0
      */
-    protected static array $belongsTo = [
+    public const BELONGS_TO = [
         'session' => [
             'mapper'     => SessionMapper::class,
             'external'   => 'hr_timerecording_session_element_session',
@@ -58,7 +58,7 @@ final class SessionElementMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $table = 'hr_timerecording_session_element';
+    public const TABLE = 'hr_timerecording_session_element';
 
     /**
      * Primary field name.
@@ -66,5 +66,5 @@ final class SessionElementMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $primaryField = 'hr_timerecording_session_element_id';
+    public const PRIMARYFIELD ='hr_timerecording_session_element_id';
 }

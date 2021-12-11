@@ -15,9 +15,8 @@ declare(strict_types=1);
 namespace Modules\HumanResourceTimeRecording\Models;
 
 use Modules\HumanResourceManagement\Models\EmployeeMapper;
-use phpOMS\DataStorage\Database\DataMapperAbstract;
+use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 use phpOMS\DataStorage\Database\Query\Builder;
-use phpOMS\DataStorage\Database\RelationType;
 use phpOMS\Stdlib\Base\SmartDateTime;
 
 /**
@@ -28,7 +27,7 @@ use phpOMS\Stdlib\Base\SmartDateTime;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class SessionMapper extends DataMapperAbstract
+final class SessionMapper extends DataMapperFactory
 {
     /**
      * Columns.
@@ -36,7 +35,7 @@ final class SessionMapper extends DataMapperAbstract
      * @var array<string, array{name:string, type:string, internal:string, autocomplete?:bool, readonly?:bool, writeonly?:bool, annotations?:array}>
      * @since 1.0.0
      */
-    protected static array $columns = [
+    public const COLUMNS = [
         'hr_timerecording_session_id'       => ['name' => 'hr_timerecording_session_id',       'type' => 'int',      'internal' => 'id'],
         'hr_timerecording_session_type'     => ['name' => 'hr_timerecording_session_type',     'type' => 'int',      'internal' => 'type'],
         'hr_timerecording_session_start'    => ['name' => 'hr_timerecording_session_start',    'type' => 'DateTime', 'internal' => 'start'],
@@ -51,7 +50,7 @@ final class SessionMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, table:string, self?:?string, external?:?string, column?:string}>
      * @since 1.0.0
      */
-    protected static array $hasMany = [
+    public const HAS_MANY = [
         'sessionElements' => [
             'mapper'       => SessionElementMapper::class,
             'table'        => 'hr_timerecording_session_element',
@@ -66,7 +65,7 @@ final class SessionMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, external:string}>
      * @since 1.0.0
      */
-    protected static array $belongsTo = [
+    public const BELONGS_TO = [
         'employee' => [
             'mapper'     => EmployeeMapper::class,
             'external'   => 'hr_timerecording_session_employee',
@@ -79,7 +78,7 @@ final class SessionMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $table = 'hr_timerecording_session';
+    public const TABLE = 'hr_timerecording_session';
 
     /**
      * Primary field name.
@@ -87,7 +86,7 @@ final class SessionMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $primaryField = 'hr_timerecording_session_id';
+    public const PRIMARYFIELD ='hr_timerecording_session_id';
 
     /**
      * Created at column
@@ -95,7 +94,7 @@ final class SessionMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $createdAt = 'hr_timerecording_session_start';
+    public const CREATED_AT = 'hr_timerecording_session_start';
 
     /**
      * Get last sessions from all employees
@@ -111,18 +110,17 @@ final class SessionMapper extends DataMapperAbstract
     public static function getLastSessionsFromAllEmployees(\DateTime $dt = null) : array
     {
         $join = new Builder(self::$db);
-        $join->select(self::$table . '.hr_timerecording_session_employee')
+        $join->select(self::TABLE . '.hr_timerecording_session_employee')
             ->selectAs('MAX(hr_timerecording_session_start)', 'maxDate')
-            ->from(self::$table)
-            ->groupBy(self::$table . '.hr_timerecording_session_employee');
+            ->from(self::TABLE)
+            ->groupBy(self::TABLE . '.hr_timerecording_session_employee');
 
-        $depth = 3;
         $query = self::getQuery();
         $query->innerJoin($join, 'tm')
-            ->on(self::$table . '_d' . $depth . '.hr_timerecording_session_employee', '=', 'tm.hr_timerecording_session_employee')
-            ->andOn(self::$table . '_d' . $depth . '.hr_timerecording_session_start', '=', 'tm.maxDate');
+            ->on(self::TABLE . '_d1.hr_timerecording_session_employee', '=', 'tm.hr_timerecording_session_employee')
+            ->andOn(self::TABLE . '_d1.hr_timerecording_session_start', '=', 'tm.maxDate');
 
-        return self::getAllByQuery($query, RelationType::ALL, $depth);
+        return self::getAll()->execute($query);
     }
 
     /**
@@ -143,15 +141,14 @@ final class SessionMapper extends DataMapperAbstract
         $dt = new SmartDateTime('now');
         $dt->smartModify(0, 0, -32);
 
-        $depth = 3;
         $query = self::getQuery();
-        $query->where(self::$table . '_d' . $depth . '.hr_timerecording_session_employee', '=', $employee)
-            ->andWhere(self::$table . '_d' . $depth . '.hr_timerecording_session_start', '>', $dt)
-            ->orderBy(self::$table . '_d' . $depth . '.hr_timerecording_session_start', 'DESC')
+        $query->where(self::TABLE . '_d1.hr_timerecording_session_employee', '=', $employee)
+            ->andWhere(self::TABLE . '_d1.hr_timerecording_session_start', '>', $dt)
+            ->orderBy(self::TABLE . '_d1.hr_timerecording_session_start', 'DESC')
             ->limit(1);
 
         /** @var Session[] $sessions */
-        $sessions = self::getAllByQuery($query, RelationType::ALL, $depth);
+        $sessions = self::getAll()->execute($query);
 
         if (empty($sessions)) {
             return null;
@@ -178,12 +175,11 @@ final class SessionMapper extends DataMapperAbstract
      */
     public static function getSessionListForEmployee(int $employee, \DateTime $start, int $offset = 0, int $limit = 50) : array
     {
-        $depth = 3;
         $query = new Builder(self::$db);
         $query = self::getQuery($query)
-            ->where(self::$table . '_d' . $depth . '.hr_timerecording_session_employee', '=', $employee)
-            ->andWhere(self::$table . '_d' . $depth . '.' . self::$createdAt, '<=', $start->format('Y-m-d H:i:s'))
-            ->orderBy(self::$table . '_d' . $depth . '.' . self::$createdAt, 'DESC')
+            ->where(self::TABLE . '_d1.hr_timerecording_session_employee', '=', $employee)
+            ->andWhere(self::TABLE . '_d1.' . self::CREATED_AT, '<=', $start->format('Y-m-d H:i:s'))
+            ->orderBy(self::TABLE . '_d1.' . self::CREATED_AT, 'DESC')
             ->offset($offset)
             ->limit($limit);
 

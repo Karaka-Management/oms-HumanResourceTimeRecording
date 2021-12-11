@@ -32,11 +32,11 @@ final class SessionElementMapperTest extends \PHPUnit\Framework\TestCase
     {
         $element = new SessionElement(new Session(new NullEmployee(1)), new \DateTime('now'));
 
-        $id = SessionElementMapper::create($element);
+        $id = SessionElementMapper::create()->execute($element);
         self::assertGreaterThan(0, $element->getId());
         self::assertEquals($id, $element->getId());
 
-        $elementR = SessionElementMapper::get($element->getId());
+        $elementR = SessionElementMapper::get()->with('session')->with('employee')->where('id', $element->getId())->execute();
         self::assertEquals($element->datetime->format('Y-m-d'), $elementR->datetime->format('Y-m-d'));
         self::assertEquals($element->getStatus(), $elementR->getStatus());
         self::assertEquals($element->session->employee->getId(), $elementR->session->employee->getId());

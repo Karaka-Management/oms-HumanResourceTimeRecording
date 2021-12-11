@@ -68,7 +68,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/private-dashboard');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006303001, $request, $response));
 
-        $employee        = EmployeeMapper::getFromAccount($request->header->account)->getId();
+        $employee        = EmployeeMapper::getFromAccount($request->header->account)->limit(1)->execute()->getId();
         $lastOpenSession = SessionMapper::getMostPlausibleOpenSessionForEmployee($employee);
 
         $start = new SmartDateTime('now');
@@ -103,7 +103,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/private-session');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006303001, $request, $response));
 
-        $session  = SessionMapper::get((int) $request->getData('id'));
+        $session  = SessionMapper::get()->where('id', (int) $request->getData('id'))->execute();
         $employee = EmployeeMapper::getFromAccount($request->header->account)->getId();
 
         if ($session->getEmployee()->getId() !== $employee) {

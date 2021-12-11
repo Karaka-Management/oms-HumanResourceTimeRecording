@@ -38,11 +38,11 @@ final class SessionMapperTest extends \PHPUnit\Framework\TestCase
         $element->setStatus(ClockingStatus::START);
         $session->addSessionElement($element);
 
-        $id = SessionMapper::create($session);
+        $id = SessionMapper::create()->execute($session);
         self::assertGreaterThan(0, $session->getId());
         self::assertEquals($id, $session->getId());
 
-        $sessionR = SessionMapper::get($session->getId());
+        $sessionR = SessionMapper::get()->where('id', $session->getId())->execute();
         self::assertEquals($session->getType(), $sessionR->getType());
 
         self::assertGreaterThan(0, \count(SessionMapper::getLastSessionsFromAllEmployees()));

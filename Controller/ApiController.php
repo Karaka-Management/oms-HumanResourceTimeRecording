@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Controller;
 
-use DateTime;
 use Modules\HumanResourceManagement\Models\EmployeeMapper;
 use Modules\HumanResourceManagement\Models\NullEmployee;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
@@ -26,7 +25,6 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
 use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
 use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 use phpOMS\Account\PermissionType;
-use phpOMS\DataStorage\Database\RelationType;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
@@ -92,9 +90,15 @@ final class ApiController extends Controller
     {
         $account = (int) ($request->getData('account') ?? $request->header->account);
 
-        $employee = EmployeeMapper::getFromAccount($account)->limit(1)->execute();
-        $type     = (int) ($request->getData('type') ?? ClockingType::OFFICE);
-        $status   = (int) ($request->getData('status') ?? ClockingStatus::START);
+        $employee = EmployeeMapper::get()
+            ->with('profile')
+            ->with('profile/account')
+            ->where('profile/account', $account)
+            ->limit(1)
+            ->execute();
+
+        $type   = (int) ($request->getData('type') ?? ClockingType::OFFICE);
+        $status = (int) ($request->getData('status') ?? ClockingStatus::START);
 
         if ($employee instanceof NullEmployee) {
             return null;

@@ -52,10 +52,10 @@ final class SessionMapper extends DataMapperFactory
      */
     public const HAS_MANY = [
         'sessionElements' => [
-            'mapper'       => SessionElementMapper::class,
-            'table'        => 'hr_timerecording_session_element',
-            'self'         => 'hr_timerecording_session_element_session',
-            'external'     => null,
+            'mapper'   => SessionElementMapper::class,
+            'table'    => 'hr_timerecording_session_element',
+            'self'     => 'hr_timerecording_session_element_session',
+            'external' => null,
         ],
     ];
 
@@ -67,8 +67,8 @@ final class SessionMapper extends DataMapperFactory
      */
     public const BELONGS_TO = [
         'employee' => [
-            'mapper'     => EmployeeMapper::class,
-            'external'   => 'hr_timerecording_session_employee',
+            'mapper'   => EmployeeMapper::class,
+            'external' => 'hr_timerecording_session_employee',
         ],
     ];
 
@@ -159,42 +159,5 @@ final class SessionMapper extends DataMapperFactory
         }
 
         return null;
-    }
-
-    /**
-     * Get sessions for employee
-     *
-     * @param int       $employee Employee id
-     * @param \DateTime $start    Start
-     * @param int       $offset   Offset
-     * @param int       $limit    Result limit
-     *
-     * @return Session[]
-     *
-     * @since 1.0.0
-     */
-    public static function getSessionListForEmployee(int $employee, \DateTime $start, int $offset = 0, int $limit = 50) : array
-    {
-        $query = new Builder(self::$db);
-        $query = self::getQuery($query)
-            ->where(self::TABLE . '_d1.hr_timerecording_session_employee', '=', $employee)
-            ->andWhere(self::TABLE . '_d1.' . self::CREATED_AT, '<=', $start->format('Y-m-d H:i:s'))
-            ->orderBy(self::TABLE . '_d1.' . self::CREATED_AT, 'DESC')
-            ->offset($offset)
-            ->limit($limit);
-
-        $sth = self::$db->con->prepare($query->toSql());
-        $sth->execute();
-
-        $results = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        $objs    = self::populateIterable($results === false ? [] : $results);
-
-        foreach ($objs as $obj) {
-            self::fillRelations($obj, RelationType::ALL, 6);
-        }
-
-        self::clear();
-
-        return $objs;
     }
 }

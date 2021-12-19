@@ -47,8 +47,8 @@ final class SessionElementMapper extends DataMapperFactory
      */
     public const BELONGS_TO = [
         'session' => [
-            'mapper'     => SessionMapper::class,
-            'external'   => 'hr_timerecording_session_element_session',
+            'mapper'   => SessionMapper::class,
+            'external' => 'hr_timerecording_session_element_session',
         ],
     ];
 

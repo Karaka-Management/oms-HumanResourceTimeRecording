@@ -16,6 +16,7 @@ namespace Modules\HumanResourceTimeRecording\Controller;
 
 use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 use phpOMS\Contract\RenderableInterface;
+use phpOMS\DataStorage\Database\Query\OrderType;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Views\View;
@@ -48,7 +49,7 @@ final class TimerecordingController extends Controller
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Timeterminal/overview');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response));
 
-        $list = SessionMapper::getNewest(50);
+        $list = SessionMapper::getAll()->sort('id', OrderType::DESC)->limit(50)->execute();
         $view->addData('sessions', $list);
 
         return $view;

@@ -19,6 +19,7 @@ use Modules\HumanResourceManagement\Models\EmployeeMapper;
 use Modules\HumanResourceTimeRecording\Models\NullSession;
 use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 use phpOMS\Contract\RenderableInterface;
+use phpOMS\DataStorage\Database\Query\OrderType;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Stdlib\Base\SmartDateTime;
@@ -68,7 +69,13 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/private-dashboard');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006303001, $request, $response));
 
-        $employee        = EmployeeMapper::getFromAccount($request->header->account)->limit(1)->execute()->getId();
+        $employee = EmployeeMapper::get()
+            ->with('profile')
+            ->with('profile/account')
+            ->where('profile/account', $request->header->account)
+            ->execute()
+            ->getId();
+
         $lastOpenSession = SessionMapper::getMostPlausibleOpenSessionForEmployee($employee);
 
         $start = new SmartDateTime('now');
@@ -76,7 +83,11 @@ final class BackendController extends Controller implements DashboardElementInte
         $limit = $start->getEndOfMonth();
         $limit->smartModify(0, -2, 0);
 
-        $list = SessionMapper::getSessionListForEmployee($employee, $start, 0);
+        $list = SessionMapper::getAll()
+            ->where('employee', $employee)
+            ->where('createdAt', $start->format('Y-m-d H:i:s'), '<=')
+            ->sort('id', OrderType::DESC)
+            ->execute();
 
         $view->addData('sessions', $list);
         $view->addData('lastSession', $lastOpenSession);
@@ -104,7 +115,12 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006303001, $request, $response));
 
         $session  = SessionMapper::get()->where('id', (int) $request->getData('id'))->execute();
-        $employee = EmployeeMapper::getFromAccount($request->header->account)->getId();
+        $employee = EmployeeMapper::get()
+            ->with('profile')
+            ->with('profile/account')
+            ->where('profile/account', $request->header->account)
+            ->execute()
+            ->getId();
 
         if ($session->getEmployee()->getId() !== $employee) {
             $view->addData('session', new NullSession());

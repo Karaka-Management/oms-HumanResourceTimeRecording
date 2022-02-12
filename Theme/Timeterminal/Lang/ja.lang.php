@@ -13,9 +13,9 @@
 declare(strict_types=1);
 
 return ['HumanResourceTimeRecording' => [
-    'Break'      => 'ブレーク',
-    'CS0'        => '開始',
-    'CS1'        => '休止',
+    'Break'      => '壊す',
+    'CS0'        => '始める',
+    'CS1'        => '一時停止',
     'CS2'        => '継続する',
     'CS3'        => '終わり',
     'CT0'        => 'オフィス',
@@ -31,11 +31,11 @@ return ['HumanResourceTimeRecording' => [
     'D4'         => '木曜日',
     'D5'         => '金曜日',
     'D6'         => '土曜日',
-    'Date'       => '日付',
+    'Date'       => '日にち',
     'End'        => '終わり',
     'Recordings' => '録音',
-    'Start'      => '開始',
+    'Start'      => '始める',
     'Status'     => '状態',
-    'Total'      => 'トータル',
+    'Total'      => '合計',
     'Type'       => 'タイプ',
 ]];

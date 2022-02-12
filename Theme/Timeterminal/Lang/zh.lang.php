@@ -23,7 +23,7 @@ return ['HumanResourceTimeRecording' => [
     'CT2'        => '家',
     'CT3'        => '假期',
     'CT4'        => '生病的',
-    'CT5'        => '在移动',
+    'CT5'        => '在移动上',
     'D0'         => '星期日',
     'D1'         => '周一',
     'D2'         => '周二',
@@ -35,7 +35,7 @@ return ['HumanResourceTimeRecording' => [
     'End'        => '结尾',
     'Recordings' => '录音',
     'Start'      => '开始',
-    'Status'     => '状态',
+    'Status'     => '地位',
     'Total'      => '全部的',
     'Type'       => '类型',
 ]];

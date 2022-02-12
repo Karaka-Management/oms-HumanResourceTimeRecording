@@ -13,13 +13,13 @@
 declare(strict_types=1);
 
 return ['HumanResourceTimeRecording' => [
-    'Break'      => 'mola',
-    'CS0'        => 'Başlat',
+    'Break'      => 'Kırmak',
+    'CS0'        => 'Başlangıç',
     'CS1'        => 'Duraklat',
     'CS2'        => 'Devam et',
     'CS3'        => 'Son',
     'CT0'        => 'Ofis',
-    'CT1'        => 'uzak',
+    'CT1'        => 'Uzak',
     'CT2'        => 'Ev',
     'CT3'        => 'Tatil',
     'CT4'        => 'Hasta',
@@ -31,11 +31,11 @@ return ['HumanResourceTimeRecording' => [
     'D4'         => 'Perşembe',
     'D5'         => 'Cuma',
     'D6'         => 'Cumartesi',
-    'Date'       => 'tarih',
+    'Date'       => 'Tarih',
     'End'        => 'Son',
     'Recordings' => 'Kayıtlar',
-    'Start'      => 'Başlat',
-    'Status'     => 'durum',
+    'Start'      => 'Başlangıç',
+    'Status'     => 'Durum',
     'Total'      => 'Toplam',
-    'Type'       => 'tip',
+    'Type'       => 'Tip',
 ]];

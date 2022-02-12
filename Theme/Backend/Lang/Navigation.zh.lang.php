@@ -13,9 +13,9 @@
 declare(strict_types=1);
 
 return ['Navigation' => [
-    'Create'        => 'Erstellen',
-    'List'          => 'Aufführen',
-    'Stats'         => 'Statistiken',
-    'TimeRecording' => 'Zeitaufnahme',
-    'Today'         => 'Heute',
+    'Create'        => '创建',
+    'List'          => '列表',
+    'Stats'         => '统计',
+    'TimeRecording' => '时间记录',
+    'Today'         => '今天',
 ]];

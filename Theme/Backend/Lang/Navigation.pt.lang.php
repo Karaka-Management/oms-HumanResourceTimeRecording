@@ -13,9 +13,9 @@
 declare(strict_types=1);
 
 return ['Navigation' => [
-    'Create'        => 'Erstellen',
-    'List'          => 'Aufführen',
-    'Stats'         => 'Statistiken',
-    'TimeRecording' => 'Zeitaufnahme',
-    'Today'         => 'Heute',
+    'Create'        => 'Crio',
+    'List'          => 'Lista',
+    'Stats'         => 'Estatísticas',
+    'TimeRecording' => 'Gravação de tempo',
+    'Today'         => 'Hoje',
 ]];

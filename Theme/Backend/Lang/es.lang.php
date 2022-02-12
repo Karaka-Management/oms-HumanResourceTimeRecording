@@ -13,13 +13,13 @@
 declare(strict_types=1);
 
 return ['HumanResourceTimeRecording' => [
-    'Break'      => 'Rotura',
+    'Break'      => 'Romper',
     'CS1'        => 'Comienzo',
     'CS2'        => 'Pausa',
     'CS3'        => 'Continuar',
     'CS4'        => 'Fin',
     'CT1'        => 'Oficina',
-    'CT2'        => 'Hogar',
+    'CT2'        => 'Casa',
     'CT3'        => 'Remoto',
     'CT4'        => 'Vacaciones',
     'CT5'        => 'Enfermo',
@@ -34,7 +34,7 @@ return ['HumanResourceTimeRecording' => [
     'Date'       => 'Fecha',
     'Employee'   => 'Empleado',
     'End'        => 'Fin',
-    'Recordings' => 'grabaciones',
+    'Recordings' => 'Grabaciones',
     'Start'      => 'Comienzo',
     'Status'     => 'Estado',
     'Time'       => 'Hora',

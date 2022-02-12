@@ -13,9 +13,9 @@
 declare(strict_types=1);
 
 return ['Navigation' => [
-    'Create'        => 'Erstellen',
-    'List'          => 'Aufführen',
-    'Stats'         => 'Statistiken',
-    'TimeRecording' => 'Zeitaufnahme',
-    'Today'         => 'Heute',
+    'Create'        => '만들다',
+    'List'          => '목록',
+    'Stats'         => '통계',
+    'TimeRecording' => '시간 녹음',
+    'Today'         => '오늘',
 ]];

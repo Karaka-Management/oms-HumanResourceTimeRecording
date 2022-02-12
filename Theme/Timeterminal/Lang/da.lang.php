@@ -33,9 +33,9 @@ return ['HumanResourceTimeRecording' => [
     'D6'         => 'lørdag',
     'Date'       => 'Dato',
     'End'        => 'Ende',
-    'Recordings' => 'Optagelser',
+    'Recordings' => 'Optagelser.',
     'Start'      => 'Start',
-    'Status'     => 'status',
-    'Total'      => 'Total',
+    'Status'     => 'Status.',
+    'Total'      => 'i alt',
     'Type'       => 'Type',
 ]];

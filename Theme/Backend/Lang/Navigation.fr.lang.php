@@ -17,5 +17,5 @@ return ['Navigation' => [
     'List'          => 'Lister',
     'Stats'         => 'Statistiques',
     'TimeRecording' => 'Enregistrement de temps',
-    'Today'         => 'Aujourd\\'hui',
+    'Today'         => 'Aujourd\'hui',
 ]];

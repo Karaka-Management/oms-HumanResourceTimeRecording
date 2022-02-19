@@ -1,6 +1,6 @@
 <?php
 /**
- * Orange Management
+ * Karaka
  *
  * PHP Version 8.0
  *
@@ -8,7 +8,7 @@
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
- * @link      https://orange-management.org
+ * @link      https://karaka.app
  */
 declare(strict_types=1);
 
@@ -54,7 +54,7 @@ use Web\WebApplication;
  *
  * @package Web\Timerecording
  * @license OMS License 1.0
- * @link    https://orange-management.org
+ * @link    https://karaka.app
  * @since   1.0.0
  * @codeCoverageIgnore
  */
@@ -401,7 +401,7 @@ final class Application
 
         $css = \preg_replace('!\s+!', ' ', $css);
         $head->setStyle('core', $css ?? '');
-        $head->title = 'Orange Management Timerecording';
+        $head->title = 'Karaka Timerecording';
     }
 
     /**

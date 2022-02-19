@@ -101,7 +101,7 @@ final class SessionMapper extends DataMapperFactory
      *
      * @return Session[]
      *
-     * @todo Orange-Management/Modules#189
+     * @todo Karaka/Modules#189
      *  Currently the last work session of all employees is returned. This should be optionally reduced to only return active employees.
      *  Alternatively it might make sense to limit the last session by an oldest date.
      *

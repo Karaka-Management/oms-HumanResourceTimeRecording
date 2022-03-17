@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use Modules\HumanResourceTimeRecording\Controller\TimerecordingController;
-use Modules\HumanResourceTimeRecording\Models\PermissionState;
+use Modules\HumanResourceTimeRecording\Models\PermissionCategory;
 use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
@@ -13,7 +13,7 @@ return [
             'permission' => [
                 'module' => TimerecordingController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::DASHBOARD,
+                'state'  => PermissionCategory::DASHBOARD,
             ],
         ],
     ],
@@ -24,7 +24,7 @@ return [
             'permission' => [
                 'module' => TimerecordingController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::DASHBOARD,
+                'state'  => PermissionCategory::DASHBOARD,
             ],
         ],
     ],

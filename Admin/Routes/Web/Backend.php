@@ -13,7 +13,7 @@
 declare(strict_types=1);
 
 use Modules\HumanResourceTimeRecording\Controller\BackendController;
-use Modules\HumanResourceTimeRecording\Models\PermissionState;
+use Modules\HumanResourceTimeRecording\Models\PermissionCategory;
 use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
@@ -25,7 +25,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::DASHBOARD,
+                'state'  => PermissionCategory::DASHBOARD,
             ],
         ],
     ],
@@ -36,7 +36,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::PRIVATE_DASHBOARD,
+                'state'  => PermissionCategory::PRIVATE_DASHBOARD,
             ],
         ],
     ],
@@ -47,7 +47,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::PRIVATE_DASHBOARD,
+                'state'  => PermissionCategory::PRIVATE_DASHBOARD,
             ],
         ],
     ],

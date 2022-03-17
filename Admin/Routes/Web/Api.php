@@ -13,7 +13,7 @@
 declare(strict_types=1);
 
 use Modules\HumanResourceTimeRecording\Controller\ApiController;
-use Modules\HumanResourceTimeRecording\Models\PermissionState;
+use Modules\HumanResourceTimeRecording\Models\PermissionCategory;
 use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
@@ -25,7 +25,7 @@ return [
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::CREATE,
-                'state'  => PermissionState::SESSION,
+                'state'  => PermissionCategory::SESSION,
             ],
         ],
     ],
@@ -36,7 +36,7 @@ return [
             'permission' => [
                 'module' => ApiController::NAME,
                 'type'   => PermissionType::CREATE,
-                'state'  => PermissionState::SESSION_ELEMENT,
+                'state'  => PermissionCategory::SESSION_ELEMENT,
             ],
         ],
     ],

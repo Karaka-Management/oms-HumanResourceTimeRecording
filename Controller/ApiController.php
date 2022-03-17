@@ -19,7 +19,7 @@ use Modules\HumanResourceManagement\Models\NullEmployee;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\HumanResourceTimeRecording\Models\ClockingType;
 use Modules\HumanResourceTimeRecording\Models\NullSession;
-use Modules\HumanResourceTimeRecording\Models\PermissionState;
+use Modules\HumanResourceTimeRecording\Models\PermissionCategory;
 use Modules\HumanResourceTimeRecording\Models\Session;
 use Modules\HumanResourceTimeRecording\Models\SessionElement;
 use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
@@ -57,7 +57,7 @@ final class ApiController extends Controller
     public function apiSessionCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
         if ($request->getData('account') !== null && !$this->app->accountManager->get($request->header->account)->hasPermission(
-            PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_FOREIGN
+            PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionCategory::SESSION_FOREIGN
         )) {
             $response->header->status = RequestStatusCode::R_403;
 
@@ -154,7 +154,7 @@ final class ApiController extends Controller
         if ($request->getData('account') !== null && ((int) $request->getData('account')) !== $request->header->account
         ) {
             if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::SESSION_ELEMENT_FOREIGN
+                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionCategory::SESSION_ELEMENT_FOREIGN
             )) {
                 $response->header->status = RequestStatusCode::R_403;
 

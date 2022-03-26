@@ -16,7 +16,6 @@ namespace Modules\HumanResourceTimeRecording\Models;
 
 use Modules\HumanResourceManagement\Models\Employee;
 use Modules\HumanResourceManagement\Models\NullEmployee;
-use phpOMS\Contract\ArrayableInterface;
 
 /**
  * Session model
@@ -26,7 +25,7 @@ use phpOMS\Contract\ArrayableInterface;
  * @link    https://karaka.app
  * @since   1.0.0
  */
-class Session implements \JsonSerializable, ArrayableInterface
+class Session implements \JsonSerializable
 {
     /**
      * Session ID.

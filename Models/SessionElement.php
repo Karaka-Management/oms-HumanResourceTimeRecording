@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Models;
 
-use phpOMS\Contract\ArrayableInterface;
 
 /**
  * Session element model
@@ -24,7 +23,7 @@ use phpOMS\Contract\ArrayableInterface;
  * @link    https://karaka.app
  * @since   1.0.0
  */
-class SessionElement implements \JsonSerializable, ArrayableInterface
+class SessionElement implements \JsonSerializable
 {
     /**
      * Session element ID.

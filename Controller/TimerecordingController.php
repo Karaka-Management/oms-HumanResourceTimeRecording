@@ -43,7 +43,7 @@ final class TimerecordingController extends Controller
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewDashboard(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewDashboard(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Timeterminal/overview');

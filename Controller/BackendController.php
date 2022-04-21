@@ -39,7 +39,7 @@ final class BackendController extends Controller implements DashboardElementInte
     /**
      * {@inheritdoc}
      */
-    public function viewDashboard(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewDashboard(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/dashboard');
@@ -63,7 +63,7 @@ final class BackendController extends Controller implements DashboardElementInte
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewPrivateDashboard(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewPrivateDashboard(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/private-dashboard');
@@ -108,7 +108,7 @@ final class BackendController extends Controller implements DashboardElementInte
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewPrivateSession(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewPrivateSession(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/private-session');
@@ -143,7 +143,7 @@ final class BackendController extends Controller implements DashboardElementInte
      * @since 1.0.0
      * @codeCoverageIgnore
      */
-    public function viewHRStats(RequestAbstract $request, ResponseAbstract $response, $data = null) : RenderableInterface
+    public function viewHRStats(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/hr-stats');

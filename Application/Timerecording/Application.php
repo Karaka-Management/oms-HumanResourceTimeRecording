@@ -15,9 +15,9 @@ declare(strict_types=1);
 namespace Web\Timerecording;
 
 use Model\CoreSettings;
-use Modules\Admin\Models\SettingsEnum;
 use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\LocalizationMapper;
+use Modules\Admin\Models\SettingsEnum;
 use Modules\Organization\Models\UnitMapper;
 use Modules\Profile\Models\ProfileMapper;
 use phpOMS\Account\Account;

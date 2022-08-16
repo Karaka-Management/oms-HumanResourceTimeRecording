@@ -371,15 +371,15 @@ final class Application
     private function initResponseHead(Head $head, HttpRequest $request, HttpResponse $response) : void
     {
         /* Load assets */
-        $head->addAsset(AssetType::CSS, 'Resources/fonts/fontawesome/css/font-awesome.min.css');
-        $head->addAsset(AssetType::CSS, 'cssOMS/styles.css');
+        $head->addAsset(AssetType::CSS, 'Resources/fonts/fontawesome/css/font-awesome.min.css?v=1.0.0');
+        $head->addAsset(AssetType::CSS, 'cssOMS/styles.css?v=1.0.0');
         $head->addAsset(AssetType::CSS, '//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900');
 
         // Framework
-        $head->addAsset(AssetType::JS, 'jsOMS/Utils/oLib.js');
-        $head->addAsset(AssetType::JS, 'jsOMS/UnhandledException.js');
-        $head->addAsset(AssetType::JS, 'Web/Timerecording/js/timerecording.js', ['type' => 'module']);
-        $head->addAsset(AssetType::JSLATE, 'Modules/Navigation/Controller.js', ['type' => 'module']);
+        $head->addAsset(AssetType::JS, 'jsOMS/Utils/oLib.js?v=1.0.0');
+        $head->addAsset(AssetType::JS, 'jsOMS/UnhandledException.js?v=1.0.0');
+        $head->addAsset(AssetType::JS, 'Web/Timerecording/js/timerecording.js?v=1.0.0', ['type' => 'module']);
+        $head->addAsset(AssetType::JSLATE, 'Modules/Navigation/Controller.js?v=1.0.0', ['type' => 'module']);
 
         $script = '';
         $response->header->set(
@@ -391,7 +391,7 @@ final class Application
         );
 
         if ($request->hasData('debug')) {
-            $head->addAsset(AssetType::CSS, 'cssOMS/debug.css');
+            $head->addAsset(AssetType::CSS, 'cssOMS/debug.css?v=1.0.0');
         }
 
         $css = \file_get_contents(__DIR__ . '/css/timerecording-small.css');

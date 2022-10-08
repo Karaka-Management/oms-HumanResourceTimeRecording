@@ -43,7 +43,7 @@ jsOMS.ready(function ()
                         jsOMS.removeClass(logo, 'hidden');
 
                         video.pause();
-                        stream.getVideoTracks()[0].stop();;
+                        stream.getVideoTracks()[0].stop();
 
                         clearInterval(cameraTimer);
                     }

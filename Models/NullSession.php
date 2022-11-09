@@ -36,4 +36,12 @@ final class NullSession extends Session
         $this->id = $id;
         parent::__construct();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize() : mixed
+    {
+        return ['id' => $this->id];
+    }
 }

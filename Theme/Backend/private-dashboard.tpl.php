@@ -204,7 +204,7 @@ echo $this->getData('nav')->render(); ?>
                 <?php
                     $count = 0;
                     foreach ($sessions as $session) : ++$count;
-                    $url   = UriFactory::build('private/timerecording/session?{?}&id=' . $session->getId());
+                    $url   = UriFactory::build('{/lang}/{/app}/private/timerecording/session?{?}&id=' . $session->getId());
                 ?>
                 <tr data-href="<?= $url; ?>">
                     <td><a href="<?= $url; ?>">

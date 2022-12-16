@@ -8,7 +8,7 @@
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
- * @link      https://karaka.app
+ * @link      https://jingga.app
  */
 declare(strict_types=1);
 
@@ -19,7 +19,7 @@ namespace Modules\HumanResourceTimeRecording\Models;
  *
  * @package Modules\HumanResourceTimeRecording\Models
  * @license OMS License 1.0
- * @link    https://karaka.app
+ * @link    https://jingga.app
  * @since   1.0.0
  */
 class SessionElement implements \JsonSerializable

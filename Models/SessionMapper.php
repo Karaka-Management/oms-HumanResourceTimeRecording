@@ -101,13 +101,9 @@ final class SessionMapper extends DataMapperFactory
      *
      * @return Session[]
      *
-     * @todo Karaka/Modules#189
-     *  Currently the last work session of all employees is returned. This should be optionally reduced to only return active employees.
-     *  Alternatively it might make sense to limit the last session by an oldest date.
-     *
      * @since 1.0.0
      */
-    public static function getLastSessionsFromAllEmployees(\DateTime $dt = null) : array
+    public static function getLastSessionsFromAllEmployees() : array
     {
         $join = new Builder(self::$db);
         $join->select(self::TABLE . '.hr_timerecording_session_employee')

@@ -45,7 +45,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/dashboard');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response));
 
-        $list = SessionMapper::getLastSessionsFromAllEmployees(new \DateTime('now'));
+        $list = SessionMapper::getLastSessionsFromAllEmployees();
         $view->addData('sessions', $list);
 
         return $view;
@@ -149,7 +149,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/hr-stats');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response));
 
-        $list = SessionMapper::getLastSessionsFromAllEmployees(new \DateTime('now'));
+        $list = SessionMapper::getLastSessionsFromAllEmployees();
         $view->addData('sessions', $list);
 
         return $view;

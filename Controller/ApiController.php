@@ -172,7 +172,9 @@ final class ApiController extends Controller
         }
 
         if ($element->getStatus() === ClockingStatus::END) {
+            /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
             $session = SessionMapper::get()->where('id', (int) $request->getData('session'))->execute();
+
             $session->addSessionElement($element);
             SessionMapper::update()->execute($session);
         }

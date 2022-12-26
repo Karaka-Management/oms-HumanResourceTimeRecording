@@ -45,6 +45,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/dashboard');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response));
 
+        /** @var \Modules\HumanResourceTimeRecording\Models\Session[] $list */
         $list = SessionMapper::getLastSessionsFromAllEmployees();
         $view->addData('sessions', $list);
 
@@ -69,14 +70,15 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/private-dashboard');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006303001, $request, $response));
 
+        /** @var \Modules\HumanResourceManagement\Models\Employee $employee */
         $employee = EmployeeMapper::get()
             ->with('profile')
             ->with('profile/account')
             ->where('profile/account', $request->header->account)
-            ->execute()
-            ->getId();
+            ->execute();
 
-        $lastOpenSession = SessionMapper::getMostPlausibleOpenSessionForEmployee($employee);
+        /** @var \Modules\HumanResourceTimeRecording\Models\Session $lastOpenSession */
+        $lastOpenSession = SessionMapper::getMostPlausibleOpenSessionForEmployee($employee->getId());
 
         $start = new SmartDateTime('now');
         $start = $start->getEndOfDay();
@@ -84,7 +86,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $limit->smartModify(0, -2, 0);
 
         $list = SessionMapper::getAll()
-            ->where('employee', $employee)
+            ->where('employee', $employee->getId())
             ->where('createdAt', $start->format('Y-m-d H:i:s'), '<=')
             ->sort('id', OrderType::DESC)
             ->execute();
@@ -114,15 +116,17 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/private-session');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006303001, $request, $response));
 
-        $session  = SessionMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
+        $session = SessionMapper::get()->where('id', (int) $request->getData('id'))->execute();
+
+        /** @var \Modules\HumanResourceManagement\Models\Employee $employee */
         $employee = EmployeeMapper::get()
             ->with('profile')
             ->with('profile/account')
             ->where('profile/account', $request->header->account)
-            ->execute()
-            ->getId();
+            ->execute();
 
-        if ($session->getEmployee()->getId() !== $employee) {
+        if ($session->employee->getId() !== $employee->getId()) {
             $view->addData('session', new NullSession());
         } else {
             $view->addData('session', $session);
@@ -149,6 +153,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Backend/hr-stats');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response));
 
+        /** @var \Modules\HumanResourceTimeRecording\Models\Session[] $list */
         $list = SessionMapper::getLastSessionsFromAllEmployees();
         $view->addData('sessions', $list);
 

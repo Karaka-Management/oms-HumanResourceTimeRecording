@@ -167,8 +167,8 @@ final class Application
         $this->app->accountManager = new AccountManager($this->app->sessionManager);
         $this->app->l11nServer     = LocalizationMapper::get()->where('id', 1)->execute();
 
-        $this->app->orgId = $this->getApplicationOrganization($request, $this->config);
-        $pageView->setData('orgId', $this->app->orgId);
+        $this->app->unitId = $this->getApplicationOrganization($request, $this->config);
+        $pageView->setData('unitId', $this->app->unitId);
 
         $aid                       = Auth::authenticate($this->app->sessionManager);
         $request->header->account  = $aid;
@@ -212,7 +212,7 @@ final class Application
         }
 
         /* No reading permission */
-        if (!$account->hasPermission(PermissionType::READ, $this->app->orgId, $this->app->appName, 'Dashboard')) {
+        if (!$account->hasPermission(PermissionType::READ, $this->app->unitId, $this->app->appName, 'Dashboard')) {
             $this->create403Response($response, $pageView);
 
             return;
@@ -227,7 +227,7 @@ final class Application
                 $request->getData('CSRF'),
                 $request->getRouteVerb(),
                 $this->app->appName,
-                $this->app->orgId,
+                $this->app->unitId,
                 $account,
                 $request->getData()
             ),
@@ -252,7 +252,7 @@ final class Application
         return (int) (
             $request->getData('u') ?? (
                 $config['domains'][$request->uri->host]['org'] ?? $this->app->appSettings->get(
-                    SettingsEnum::DEFAULT_ORGANIZATION
+                    SettingsEnum::DEFAULT_UNIT
                 ) ?? 1
             )
         );

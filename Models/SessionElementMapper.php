@@ -66,5 +66,5 @@ final class SessionElementMapper extends DataMapperFactory
      * @var string
      * @since 1.0.0
      */
-    public const PRIMARYFIELD ='hr_timerecording_session_element_id';
+    public const PRIMARYFIELD = 'hr_timerecording_session_element_id';
 }

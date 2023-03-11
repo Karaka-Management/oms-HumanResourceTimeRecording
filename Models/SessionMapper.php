@@ -86,7 +86,7 @@ final class SessionMapper extends DataMapperFactory
      * @var string
      * @since 1.0.0
      */
-    public const PRIMARYFIELD ='hr_timerecording_session_id';
+    public const PRIMARYFIELD = 'hr_timerecording_session_id';
 
     /**
      * Created at column

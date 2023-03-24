@@ -6,7 +6,7 @@
  *
  * @package   HumanResourceTimeRecording
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -204,7 +204,7 @@ echo $this->getData('nav')->render(); ?>
                 <?php
                     $count = 0;
                     foreach ($sessions as $session) : ++$count;
-                    $url   = UriFactory::build('{/lang}/{/app}/private/timerecording/session?{?}&id=' . $session->getId());
+                    $url   = UriFactory::build('{/base}/private/timerecording/session?{?}&id=' . $session->getId());
                 ?>
                 <tr data-href="<?= $url; ?>">
                     <td><a href="<?= $url; ?>">

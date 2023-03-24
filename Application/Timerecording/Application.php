@@ -6,7 +6,7 @@
  *
  * @package   Web\Timerecording
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -53,7 +53,7 @@ use Web\WebApplication;
  * Application class.
  *
  * @package Web\Timerecording
- * @license OMS License 1.0
+ * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  * @codeCoverageIgnore
@@ -104,7 +104,7 @@ final class Application
      */
     public function run(HttpRequest $request, HttpResponse $response) : void
     {
-        $this->app->l11nManager = new L11nManager($this->app->appName);
+        $this->app->l11nManager = new L11nManager();
 
         $pageView = new TimerecordingView($this->app->l11nManager, $request, $response);
         $head     = new Head();
@@ -149,8 +149,8 @@ final class Application
         }
 
         /* CSRF token OK? */
-        if ($request->getData('CSRF') !== null
-            && !\hash_equals($this->app->sessionManager->get('CSRF'), $request->getData('CSRF'))
+        if ($request->hasData('CSRF')
+            && !\hash_equals($this->app->sessionManager->get('CSRF'), $request->getDataString('CSRF'))
         ) {
             $response->header->status = RequestStatusCode::R_403;
 
@@ -224,7 +224,7 @@ final class Application
         $dispatched = $this->app->dispatcher->dispatch(
             $this->app->router->route(
                 $request->uri->getRoute(),
-                $request->getData('CSRF'),
+                $request->getDataString('CSRF'),
                 $request->getRouteVerb(),
                 $this->app->appName,
                 $this->app->unitId,

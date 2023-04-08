@@ -57,7 +57,7 @@ final class ApiController extends Controller
     public function apiSessionCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if ($request->hasData('account') && !$this->app->accountManager->get($request->header->account)->hasPermission(
-            PermissionType::CREATE, $this->app->unitId, $this->app->appName, self::NAME, PermissionCategory::SESSION_FOREIGN
+            PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_FOREIGN
         )) {
             $response->header->status = RequestStatusCode::R_403;
 
@@ -153,7 +153,7 @@ final class ApiController extends Controller
         if ($request->hasData('account') && ((int) $request->getData('account')) !== $request->header->account
         ) {
             if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::CREATE, $this->app->unitId, $this->app->appName, self::NAME, PermissionCategory::SESSION_ELEMENT_FOREIGN
+                PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_ELEMENT_FOREIGN
             )) {
                 $response->header->status = RequestStatusCode::R_403;
 
@@ -195,7 +195,7 @@ final class ApiController extends Controller
     private function validateSessionElementCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['session'] = empty($request->getData('session')) || !\is_numeric($request->getData('session')))) {
+        if (($val['session'] = !$request->hasData('session') || !\is_numeric($request->getData('session')))) {
             return $val;
         }
 

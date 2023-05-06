@@ -33,7 +33,7 @@ class Session implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    protected int $id = 0;
+    public int $id = 0;
 
     /**
      * Session start
@@ -65,7 +65,7 @@ class Session implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $type = ClockingType::OFFICE;
+    public int $type = ClockingType::OFFICE;
 
     /**
      * Session elements.

@@ -78,7 +78,7 @@ final class BackendController extends Controller implements DashboardElementInte
             ->execute();
 
         /** @var \Modules\HumanResourceTimeRecording\Models\Session $lastOpenSession */
-        $lastOpenSession = SessionMapper::getMostPlausibleOpenSessionForEmployee($employee->getId());
+        $lastOpenSession = SessionMapper::getMostPlausibleOpenSessionForEmployee($employee->id);
 
         $start = new SmartDateTime('now');
         $start = $start->getEndOfDay();
@@ -86,7 +86,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $limit->smartModify(0, -2, 0);
 
         $list = SessionMapper::getAll()
-            ->where('employee', $employee->getId())
+            ->where('employee', $employee->id)
             ->where('createdAt', $start->format('Y-m-d H:i:s'), '<=')
             ->sort('id', OrderType::DESC)
             ->execute();
@@ -126,7 +126,7 @@ final class BackendController extends Controller implements DashboardElementInte
             ->where('profile/account', $request->header->account)
             ->execute();
 
-        if ($session->employee->getId() !== $employee->getId()) {
+        if ($session->employee->id !== $employee->id) {
             $view->addData('session', new NullSession());
         } else {
             $view->addData('session', $session);

@@ -40,7 +40,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
      */
     public function testDefault() : void
     {
-        self::assertEquals(0, $this->session->getId());
+        self::assertEquals(0, $this->session->id);
         self::assertEquals(0, $this->session->getBusy());
         self::assertEquals(0, $this->session->getBreak());
         self::assertEquals([], $this->session->getSessionElements());

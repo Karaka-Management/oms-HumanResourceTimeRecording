@@ -100,7 +100,7 @@ final class ApiController extends Controller
         $type   = $request->getDataInt('type') ?? ClockingType::OFFICE;
         $status = $request->getDataInt('status') ?? ClockingStatus::START;
 
-        if ($employee instanceof NullEmployee) {
+        if ($employee->id === 0) {
             return null;
         }
 
@@ -219,7 +219,7 @@ final class ApiController extends Controller
         $session = SessionMapper::get()->where('id', (int) $request->getData('session'))->execute();
 
         // cannot create session element for none existing session
-        if ($session === null || $session instanceof NullSession) {
+        if ($session->id === 0) {
             return null;
         }
 

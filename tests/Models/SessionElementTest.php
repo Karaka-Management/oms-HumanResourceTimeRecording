@@ -39,8 +39,8 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testDefault() : void
     {
-        self::assertEquals(0, $this->element->getId());
-        self::assertEquals(0, $this->element->session->getId());
+        self::assertEquals(0, $this->element->id);
+        self::assertEquals(0, $this->element->session->id);
         self::assertInstanceOf('\DateTime', $this->element->datetime);
         self::assertEquals(ClockingStatus::START, $this->element->getStatus());
     }

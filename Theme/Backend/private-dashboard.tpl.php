@@ -68,7 +68,7 @@ echo $this->getData('nav')->render(); ?>
                                 <option value="<?= ClockingStatus::END; ?>"<?= $status === ClockingStatus::CONTINUE ? ' selected' : ''; ?>><?= $this->getHtml('CS4'); ?>
                             </select>
                         <tr><td>
-                            <input type="hidden" name="session" value="<?= $lastOpenSession !== null ? $lastOpenSession->getId() : ''; ?>">
+                            <input type="hidden" name="session" value="<?= $lastOpenSession !== null ? $lastOpenSession->id : ''; ?>">
                             <input type="submit" id="iclockingButton" name="clockingButton" value="<?= $this->getHtml('Submit', '0', '0'); ?>" data-action='[
                                     {
                                         "key": 1, "listener": "click", "action": [
@@ -204,7 +204,7 @@ echo $this->getData('nav')->render(); ?>
                 <?php
                     $count = 0;
                     foreach ($sessions as $session) : ++$count;
-                    $url   = UriFactory::build('{/base}/private/timerecording/session?{?}&id=' . $session->getId());
+                    $url   = UriFactory::build('{/base}/private/timerecording/session?{?}&id=' . $session->id);
                 ?>
                 <tr data-href="<?= $url; ?>">
                     <td><a href="<?= $url; ?>">

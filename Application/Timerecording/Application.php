@@ -176,7 +176,7 @@ final class Application
 
         $account = $this->loadAccount($request);
 
-        if (!($account instanceof NullAccount)) {
+        if ($account->id > 0) {
             $response->header->l11n = $account->l11n;
         } elseif ($this->app->sessionManager->get('language') !== null
             && $response->header->l11n->getLanguage() !== $this->app->sessionManager->get('language')
@@ -186,6 +186,8 @@ final class Application
                     $this->app->sessionManager->get('language'),
                     $this->app->sessionManager->get('country') ?? '*'
                 );
+        } else {
+            $this->app->setResponseLanguage($request, $response, $this->config);
         }
 
         UriFactory::setQuery('/lang', $response->getLanguage());
@@ -201,7 +203,7 @@ final class Application
         $this->initResponseHead($head, $request, $response);
 
         /* Handle not logged in */
-        if ($account->getId() < 1) {
+        if ($account->id < 1) {
             $this->createLoggedOutResponse($response, $head, $pageView);
 
             return;

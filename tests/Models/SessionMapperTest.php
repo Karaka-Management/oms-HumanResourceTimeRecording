@@ -39,16 +39,16 @@ final class SessionMapperTest extends \PHPUnit\Framework\TestCase
         $session->addSessionElement($element);
 
         $id = SessionMapper::create()->execute($session);
-        self::assertGreaterThan(0, $session->getId());
-        self::assertEquals($id, $session->getId());
+        self::assertGreaterThan(0, $session->id);
+        self::assertEquals($id, $session->id);
 
-        $sessionR = SessionMapper::get()->where('id', $session->getId())->execute();
+        $sessionR = SessionMapper::get()->where('id', $session->id)->execute();
         self::assertEquals($session->getType(), $sessionR->getType());
 
         self::assertGreaterThan(0, \count(SessionMapper::getLastSessionsFromAllEmployees()));
         self::assertNull(SessionMapper::getMostPlausibleOpenSessionForEmployee(9999));
 
         // @todo implement
-        // self::assertGreaterThan(0, SessionMapper::getMostPlausibleOpenSessionForEmployee(1)->getId());
+        // self::assertGreaterThan(0, SessionMapper::getMostPlausibleOpenSessionForEmployee(1)->id);
     }
 }

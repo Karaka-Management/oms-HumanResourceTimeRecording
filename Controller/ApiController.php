@@ -15,10 +15,8 @@ declare(strict_types=1);
 namespace Modules\HumanResourceTimeRecording\Controller;
 
 use Modules\HumanResourceManagement\Models\EmployeeMapper;
-use Modules\HumanResourceManagement\Models\NullEmployee;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\HumanResourceTimeRecording\Models\ClockingType;
-use Modules\HumanResourceTimeRecording\Models\NullSession;
 use Modules\HumanResourceTimeRecording\Models\PermissionCategory;
 use Modules\HumanResourceTimeRecording\Models\Session;
 use Modules\HumanResourceTimeRecording\Models\SessionElement;

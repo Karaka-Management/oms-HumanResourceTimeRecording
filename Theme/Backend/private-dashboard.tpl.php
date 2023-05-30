@@ -18,11 +18,11 @@ use \phpOMS\Stdlib\Base\SmartDateTime;
 use phpOMS\Uri\UriFactory;
 
 /** @var Session[] $sessions */
-$sessions     = $this->getData('sessions');
+$sessions     = $this->data['sessions'];
 $sessionCount = \count($sessions);
 
 /** @var Session $lastOpenSession */
-$lastOpenSession = $this->getData('lastSession');
+$lastOpenSession = $this->data['lastSession'];
 
 $type   = $lastOpenSession !== null ? $lastOpenSession->getType() : ClockingType::OFFICE;
 $status = $lastOpenSession !== null ? $lastOpenSession->getStatus() : ClockingStatus::END;
@@ -42,7 +42,7 @@ $busy = [
     'week'  => 0,
 ];
 
-echo $this->getData('nav')->render(); ?>
+echo $this->data['nav']->render(); ?>
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <section class="portlet">

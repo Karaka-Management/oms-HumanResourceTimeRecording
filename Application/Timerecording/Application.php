@@ -108,7 +108,7 @@ final class Application
         $pageView = new TimerecordingView($this->app->l11nManager, $request, $response);
         $head     = new Head();
 
-        $pageView->setData('head', $head);
+        $pageView->data['head'] = $head;
         $response->set('Content', $pageView);
 
         /* Timerecording only allows GET */
@@ -433,7 +433,7 @@ final class Application
     private function createDefaultPageView(HttpRequest $request, HttpResponse $response, TimerecordingView $pageView) : void
     {
         $pageView->setOrganizations(UnitMapper::getAll()->execute());
-        $pageView->setProfile(ProfileMapper::get()->where('account', $request->header->account)->execute());
+        $pageView->profile = ProfileMapper::get()->where('account', $request->header->account)->execute();
         $pageView->setData('nav', $this->getNavigation($request, $response));
 
         $pageView->setTemplate('/Web/Timerecording/index');

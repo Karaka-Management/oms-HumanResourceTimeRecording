@@ -12,9 +12,9 @@
  */
 declare(strict_types=1);
 
-$sessions = $this->getData('sessions');
+$sessions = $this->data['sessions'];
 
-echo $this->getData('nav')->render(); ?>
+echo $this->data['nav']->render(); ?>
 
 <div class="row">
     <div class="col-xs-12">

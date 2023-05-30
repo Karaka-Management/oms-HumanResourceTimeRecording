@@ -44,7 +44,7 @@ class TimerecordingView extends View
      * @var Profile
      * @since 1.0.0
      */
-    protected $profile = null;
+    public $profile = null;
 
     /**
      * Organizations.
@@ -67,21 +67,6 @@ class TimerecordingView extends View
     public function setNavigation(View $nav) : void
     {
         $this->nav = $nav;
-    }
-
-    /**
-     * Set user profile.
-     *
-     * @param Profile $profile user account
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     * @codeCoverageIgnore
-     */
-    public function setProfile(Profile $profile) : void
-    {
-        $this->profile = $profile;
     }
 
     /**

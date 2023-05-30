@@ -18,7 +18,7 @@ $nav->setTemplate('/Modules/Navigation/Theme/Backend/top');
 $top = $nav->render();
 
 /** @var phpOMS\Model\Html\Head $head */
-$head = $this->getData('head');
+$head = $this->head;
 
 /** @var array $dispatch */
 $dispatch = $this->getData('dispatch') ?? [];

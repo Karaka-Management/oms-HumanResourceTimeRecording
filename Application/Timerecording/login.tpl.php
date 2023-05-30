@@ -23,7 +23,7 @@ declare(strict_types=1);
  * @version   1.0.0
  * @link      https://jingga.app
  */
-$head = $this->getData('head');
+$head = $this->head;
 ?>
 <!DOCTYPE HTML>
 <html lang="<?= $this->printHtml($this->response->header->l11n->language); ?>">

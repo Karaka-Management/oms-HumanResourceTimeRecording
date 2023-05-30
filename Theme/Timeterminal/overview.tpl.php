@@ -15,9 +15,9 @@ declare(strict_types=1);
 use \Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use \Modules\HumanResourceTimeRecording\Models\ClockingType;
 
-$sessions = $this->getData('sessions');
+$sessions = $this->data['sessions'];
 
-echo $this->getData('nav')->render(); ?>
+echo $this->data['nav']->render(); ?>
 
 <div class="row">
     <div class="col-md-4 col-xs-12">

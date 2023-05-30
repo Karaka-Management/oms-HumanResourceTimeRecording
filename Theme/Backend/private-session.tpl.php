@@ -13,10 +13,10 @@
 declare(strict_types=1);
 
 /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
-$session  = $this->getData('session');
+$session  = $this->data['session'];
 $elements = $session->getSessionElements();
 
-echo $this->getData('nav')->render(); ?>
+echo $this->data['nav']->render(); ?>
 
 <div class="row">
     <div class="col-xs-12">

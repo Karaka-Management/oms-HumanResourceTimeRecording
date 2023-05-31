@@ -49,7 +49,7 @@ final class TimerecordingController extends Controller
         $view->setTemplate('/Modules/HumanResourceTimeRecording/Theme/Timeterminal/overview');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response);
 
-        $list = SessionMapper::getAll()->sort('id', OrderType::DESC)->limit(50)->execute();
+        $list                   = SessionMapper::getAll()->sort('id', OrderType::DESC)->limit(50)->execute();
         $view->data['sessions'] = $list;
 
         return $view;

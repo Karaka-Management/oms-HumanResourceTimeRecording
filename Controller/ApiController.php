@@ -143,7 +143,7 @@ final class ApiController extends Controller
 
         if (!empty($val = $this->validateSessionElementCreate($request))) {
             $response->data[$request->uri->__toString()] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status                    = RequestStatusCode::R_400;
 
             return;
         }

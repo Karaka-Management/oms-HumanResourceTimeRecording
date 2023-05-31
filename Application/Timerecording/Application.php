@@ -108,7 +108,7 @@ final class Application
         $pageView = new TimerecordingView($this->app->l11nManager, $request, $response);
         $head     = new Head();
 
-        $pageView->data['head'] = $head;
+        $pageView->head = $head;
         $response->set('Content', $pageView);
 
         /* Timerecording only allows GET */

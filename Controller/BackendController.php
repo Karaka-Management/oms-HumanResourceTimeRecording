@@ -46,7 +46,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response);
 
         /** @var \Modules\HumanResourceTimeRecording\Models\Session[] $list */
-        $list = SessionMapper::getLastSessionsFromAllEmployees();
+        $list                   = SessionMapper::getLastSessionsFromAllEmployees();
         $view->data['sessions'] = $list;
 
         return $view;
@@ -91,9 +91,9 @@ final class BackendController extends Controller implements DashboardElementInte
             ->sort('id', OrderType::DESC)
             ->execute();
 
-        $view->data['sessions'] = $list;
+        $view->data['sessions']    = $list;
         $view->data['lastSession'] = $lastOpenSession;
-        $view->data['date'] = $limit;
+        $view->data['date']        = $limit;
 
         return $view;
     }
@@ -154,7 +154,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response);
 
         /** @var \Modules\HumanResourceTimeRecording\Models\Session[] $list */
-        $list = SessionMapper::getLastSessionsFromAllEmployees();
+        $list                   = SessionMapper::getLastSessionsFromAllEmployees();
         $view->data['sessions'] = $list;
 
         return $view;

@@ -24,10 +24,8 @@ use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
 use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 use phpOMS\Account\PermissionType;
 use phpOMS\Message\Http\RequestStatusCode;
-use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
-use phpOMS\Model\Message\FormValidation;
 
 /**
  * HumanResourceTimeRecording controller class.
@@ -65,14 +63,14 @@ final class ApiController extends Controller
         $session = $this->createSessionFromRequest($request);
 
         if ($session === null) {
-            $this->fillJsonResponse($request, $response, NotificationLevel::ERROR, 'Session', 'Session couldn\'t be created.', $session);
             $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $session);
 
             return;
         }
 
         $this->createModel($request->header->account, $session, SessionMapper::class, 'session', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Session', 'Session successfully created', $session);
+        $this->createStandardCreateResponse($request, $response, $session);
     }
 
     /**
@@ -142,8 +140,8 @@ final class ApiController extends Controller
         }
 
         if (!empty($val = $this->validateSessionElementCreate($request))) {
-            $response->data[$request->uri->__toString()] = new FormValidation($val);
-            $response->header->status                    = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
@@ -162,8 +160,8 @@ final class ApiController extends Controller
         $element = $this->createSessionElementFromRequest($request);
 
         if ($element === null) {
-            $this->fillJsonResponse($request, $response, NotificationLevel::ERROR, 'Session Element', 'You cannot create a session element for another person!', $element);
             $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $element);
 
             return;
         }
@@ -177,8 +175,7 @@ final class ApiController extends Controller
         }
 
         $this->createModel($request->header->account, $element, SessionElementMapper::class, 'element', $request->getOrigin());
-
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Session Element', 'Session Element successfully created', $element);
+        $this->createStandardCreateResponse($request, $response, $element);
     }
 
     /**

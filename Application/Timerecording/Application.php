@@ -303,6 +303,8 @@ final class Application
      *
      * @return void
      *
+     * @throws PathException
+     *
      * @since 1.0.0
      */
     private function loadLanguageFromPath(string $language, string $path) : void

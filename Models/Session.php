@@ -57,7 +57,7 @@ class Session implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $busy = 0;
+    public int $busy = 0;
 
     /**
      * Session type.
@@ -73,7 +73,7 @@ class Session implements \JsonSerializable
      * @var array
      * @since 1.0.0
      */
-    private array $sessionElements = [];
+    public array $sessionElements = [];
 
     /**
      * Employee.

@@ -209,7 +209,7 @@ class Session implements \JsonSerializable
      */
     public function getStatus() : int
     {
-        if (\count($this->sessionElements) === 0) {
+        if (empty($this->sessionElements)) {
             return ClockingStatus::START;
         }
 

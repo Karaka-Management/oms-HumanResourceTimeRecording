@@ -146,15 +146,11 @@ final class ApiController extends Controller
             return;
         }
 
-        if ($request->hasData('account') && ((int) $request->getData('account')) !== $request->header->account
-        ) {
-            if (!$this->app->accountManager->get($request->header->account)->hasPermission(
-                PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_ELEMENT_FOREIGN
-            )) {
-                $response->header->status = RequestStatusCode::R_403;
-
-                return;
-            }
+        if ($request->hasData('account') && ((int) $request->getData('account')) !== $request->header->account && !$this->app->accountManager->get($request->header->account)->hasPermission(
+            PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_ELEMENT_FOREIGN
+        )) {
+            $response->header->status = RequestStatusCode::R_403;
+            return;
         }
 
         $element = $this->createSessionElementFromRequest($request);

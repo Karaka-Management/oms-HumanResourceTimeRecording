@@ -19,6 +19,9 @@ use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\AccountPermission;
 use Modules\Admin\Models\NullAccount;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
+use Modules\Media\Models\Media;
+use Modules\Profile\Models\Profile;
+use Modules\Profile\Models\ProfileMapper;
 use phpOMS\Account\Account;
 use phpOMS\Account\AccountManager;
 use phpOMS\Account\PermissionType;
@@ -35,9 +38,6 @@ use phpOMS\Module\ModuleManager;
 use phpOMS\Router\WebRouter;
 use phpOMS\Uri\HttpUri;
 use phpOMS\Utils\TestUtils;
-use Modules\Media\Models\Media;
-use Modules\Profile\Models\Profile;
-use Modules\Profile\Models\ProfileMapper;
 
 /**
  * @testdox Modules\HumanResourceTimeRecording\tests\Controller\ApiControllerTest: HumanResourceTimeRecording api controller

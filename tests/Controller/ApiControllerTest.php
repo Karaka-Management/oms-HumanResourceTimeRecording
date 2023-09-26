@@ -15,7 +15,9 @@ declare(strict_types=1);
 namespace Modules\HumanResourceTimeRecording\tests\Controller;
 
 use Model\CoreSettings;
+use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\AccountPermission;
+use Modules\Admin\Models\NullAccount;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use phpOMS\Account\Account;
 use phpOMS\Account\AccountManager;
@@ -33,6 +35,9 @@ use phpOMS\Module\ModuleManager;
 use phpOMS\Router\WebRouter;
 use phpOMS\Uri\HttpUri;
 use phpOMS\Utils\TestUtils;
+use Modules\Media\Models\Media;
+use Modules\Profile\Models\Profile;
+use Modules\Profile\Models\ProfileMapper;
 
 /**
  * @testdox Modules\HumanResourceTimeRecording\tests\Controller\ApiControllerTest: HumanResourceTimeRecording api controller
@@ -99,6 +104,31 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
      */
     public function testApiSessionCR() : void
     {
+        $media              = new Media();
+        $media->createdBy   = new NullAccount(1);
+        $media->description = 'desc';
+        $media->setPath('Web/Backend/img/default-user.jpg');
+        $media->size      = 11;
+        $media->extension = 'png';
+        $media->name      = 'Image';
+
+        if (($profile = ProfileMapper::get()->where('account', 1)->execute())->id === 0) {
+            $profile = new Profile();
+
+            $profile->account  = AccountMapper::get()->where('id', 1)->execute();
+            $profile->image    = $media;
+            $profile->birthday =  new \DateTime('now');
+
+            $id = ProfileMapper::create()->execute($profile);
+            self::assertGreaterThan(0, $profile->id);
+            self::assertEquals($id, $profile->id);
+        } else {
+            $profile->image    = $media;
+            $profile->birthday =  new \DateTime('now');
+
+            ProfileMapper::update()->with('image')->execute($profile);
+        }
+
         $response = new HttpResponse();
         $request  = new HttpRequest(new HttpUri(''));
 

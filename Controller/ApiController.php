@@ -52,7 +52,7 @@ final class ApiController extends Controller
      */
     public function apiSessionCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
-        if ($request->hasData('account') && !$this->app->accountManager->get($request->header->account)->hasPermission(
+        if (!$this->app->accountManager->get($request->header->account)->hasPermission(
             PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_FOREIGN
         )) {
             $response->header->status = RequestStatusCode::R_403;

@@ -42,7 +42,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -50,7 +50,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiSessionCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiSessionCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!$this->app->accountManager->get($request->header->account)->hasPermission(
             PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_FOREIGN
@@ -124,7 +124,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -132,7 +132,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiSessionElementCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiSessionElementCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (($request->getDataInt('status') ?? -1) === ClockingStatus::START) {
             $this->apiSessionCreate($request, $response);
@@ -234,7 +234,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -242,7 +242,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiSessionUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiSessionUpdate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
     }
 
@@ -251,7 +251,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -259,7 +259,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiSessionElementUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiSessionElementUpdate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
     }
 
@@ -268,7 +268,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -276,7 +276,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiSessionDelete(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiSessionDelete(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
     }
 
@@ -285,7 +285,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -293,7 +293,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiSessionElementDelete(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiSessionElementDelete(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
     }
 }

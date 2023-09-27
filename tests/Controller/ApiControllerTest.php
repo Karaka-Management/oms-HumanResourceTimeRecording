@@ -17,11 +17,9 @@ namespace Modules\HumanResourceTimeRecording\tests\Controller;
 use Model\CoreSettings;
 use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\AccountPermission;
-use Modules\Admin\Models\NullAccount;
 use Modules\HumanResourceManagement\Models\Employee;
 use Modules\HumanResourceManagement\Models\EmployeeMapper;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
-use Modules\Media\Models\Media;
 use Modules\Profile\Models\Profile;
 use Modules\Profile\Models\ProfileMapper;
 use phpOMS\Account\Account;
@@ -110,12 +108,12 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
             $profile = new Profile();
 
             $profile->account  = AccountMapper::get()->where('id', 1)->execute();
-            $profile->birthday = ($date = new \DateTime('now'));
+            $profile->birthday = new \DateTime('now');
 
             ProfileMapper::create()->execute($profile);
         }
 
-        if (($e = EmployeeMapper::get()->with('profile')->where('profile/account', 1)->execute())->id === 0) {
+        if ((EmployeeMapper::get()->with('profile')->where('profile/account', 1)->execute())->id === 0) {
             $employee = new Employee($profile);
             EmployeeMapper::create()->execute($employee);
         }

@@ -104,7 +104,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
      */
     public function testApiSessionCR() : void
     {
-        if (($profile = ProfileMapper::get()->where('account', 1)->execute())->id === 0) {
+        if (($profile = ProfileMapper::get()->where('account', 1)->limit(1)->execute())->id === 0) {
             $profile = new Profile();
 
             $profile->account  = AccountMapper::get()->where('id', 1)->execute();
@@ -113,7 +113,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
             ProfileMapper::create()->execute($profile);
         }
 
-        if ((EmployeeMapper::get()->with('profile')->where('profile/account', 1)->execute())->id === 0) {
+        if ((EmployeeMapper::get()->with('profile')->where('profile/account', 1)->limit(1)->execute())->id === 0) {
             $employee = new Employee($profile);
             EmployeeMapper::create()->execute($employee);
         }

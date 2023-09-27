@@ -18,6 +18,8 @@ use Model\CoreSettings;
 use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\AccountPermission;
 use Modules\Admin\Models\NullAccount;
+use Modules\HumanResourceManagement\Models\Employee;
+use Modules\HumanResourceManagement\Models\EmployeeMapper;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\Media\Models\Media;
 use Modules\Profile\Models\Profile;
@@ -104,29 +106,18 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
      */
     public function testApiSessionCR() : void
     {
-        $media              = new Media();
-        $media->createdBy   = new NullAccount(1);
-        $media->description = 'desc';
-        $media->setPath('Web/Backend/img/default-user.jpg');
-        $media->size      = 11;
-        $media->extension = 'png';
-        $media->name      = 'Image';
-
         if (($profile = ProfileMapper::get()->where('account', 1)->execute())->id === 0) {
             $profile = new Profile();
 
             $profile->account  = AccountMapper::get()->where('id', 1)->execute();
-            $profile->image    = $media;
-            $profile->birthday =  new \DateTime('now');
+            $profile->birthday = ($date = new \DateTime('now'));
 
-            $id = ProfileMapper::create()->execute($profile);
-            self::assertGreaterThan(0, $profile->id);
-            self::assertEquals($id, $profile->id);
-        } else {
-            $profile->image    = $media;
-            $profile->birthday =  new \DateTime('now');
+            ProfileMapper::create()->execute($profile);
+        }
 
-            ProfileMapper::update()->with('image')->execute($profile);
+        if (($e = EmployeeMapper::get()->with('profile')->where('profile/account', 1)->execute())->id === 0) {
+            $employee = new Employee($profile);
+            EmployeeMapper::create()->execute($employee);
         }
 
         $response = new HttpResponse();

@@ -56,6 +56,7 @@ final class ApiController extends Controller
             PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_FOREIGN
         )) {
             $response->header->status = RequestStatusCode::R_403;
+            $this->createInvalidCreateResponse($request, $response, []);
 
             return;
         }

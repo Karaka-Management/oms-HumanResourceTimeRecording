@@ -64,7 +64,7 @@ final class ApiController extends Controller
         $session = $this->createSessionFromRequest($request);
 
         if ($session === null) {
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_403;
             $this->createInvalidCreateResponse($request, $response, $session);
 
             return;

@@ -88,21 +88,8 @@ $head = $this->head;
         }
 
         #login-logo img {
-            animation: pulse 1.5s ease infinite alternate;
             width: 20%;
             min-width: 200px;
-        }
-
-        @keyframes pulse {
-            0% {
-                width: 20%;
-                min-width: 200px;
-            }
-
-            30%, 100% {
-                width: 25%;
-                min-width: 210px;
-            }
         }
 
         h1 {
@@ -244,7 +231,7 @@ $head = $this->head;
 <body>
 <div id="login-container">
     <div id="login-logo">
-        <img alt="<?= $this->getHtml('Logo', '0', '0'); ?>" src="<?= \phpOMS\Uri\UriFactory::build('Web/Backend/img/logo.png'); ?>">
+        <img class="animated infinte pulse" alt="<?= $this->getHtml('Logo', '0', '0'); ?>" src="<?= \phpOMS\Uri\UriFactory::build('Web/Backend/img/logo.png'); ?>">
     </div>
     <div id="login-form">
         <form id="login" method="POST" action="<?= \phpOMS\Uri\UriFactory::build('{/api}login?{?}'); ?>">

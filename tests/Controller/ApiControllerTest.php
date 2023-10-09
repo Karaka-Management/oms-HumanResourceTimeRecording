@@ -125,7 +125,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $request->header->account = 1;
 
         $this->module->apiSessionCreate($request, $response);
-        self::assertGreaterThan(0, $sId = $response->get('')['response']->id);
+        self::assertGreaterThan(0, $sId = $response->getDataArray('')['response']->id);
 
         $response = new HttpResponse();
         $request  = new HttpRequest(new HttpUri(''));
@@ -135,7 +135,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $request->setData('status', ClockingStatus::END);
 
         $this->module->apiSessionElementCreate($request, $response);
-        self::assertGreaterThan(0, $response->get('')['response']->id);
+        self::assertGreaterThan(0, $response->getDataArray('')['response']->id);
     }
 
     /**

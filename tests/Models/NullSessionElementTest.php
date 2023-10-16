@@ -23,7 +23,7 @@ final class NullSessionElementTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\HumanResourceTimeRecording\Models\NullSessionElement
-     * @group framework
+     * @group module
      */
     public function testNull() : void
     {
@@ -32,11 +32,21 @@ final class NullSessionElementTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers Modules\HumanResourceTimeRecording\Models\NullSessionElement
-     * @group framework
+     * @group module
      */
     public function testId() : void
     {
         $null = new NullSessionElement(2);
         self::assertEquals(2, $null->id);
+    }
+
+    /**
+     * @covers Modules\HumanResourceTimeRecording\Models\NullSessionElement
+     * @group module
+     */
+    public function testJsonSerialize() : void
+    {
+        $null = new NullSessionElement(2);
+        self::assertEquals(['id' => 2], $null);
     }
 }

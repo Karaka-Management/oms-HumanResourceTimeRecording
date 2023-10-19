@@ -247,15 +247,15 @@ $head = $this->head;
             <h1><?= $this->getHtml('Login', '0', '0'); ?>:</h1>
                 <label for="iName"><?= $this->getHtml('Username', '0', '0'); ?>:</label>
                 <div class="inputWithIcon">
-                    <i class="frontIcon fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                    <i class="frontIcon g-icon" aria-hidden="true">person</i>
                     <input id="iName" type="text" name="user" tabindex="3" value="admin" autofocus>
-                    <i class="endIcon fa fa-times close fa-lg fa-fw" aria-hidden="true"></i>
+                    <i class="endIcon g-icon close" aria-hidden="true">close</i>
                 </div>
                 <label for="iPassword"><?= $this->getHtml('Password', '0', '0'); ?>:</label>
                 <div class="inputWithIcon">
-                    <i class="frontIcon fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
+                    <i class="frontIcon g-icon" aria-hidden="true">lock</i>
                     <input id="iPassword" type="password" name="pass" tabindex="4" value="orange">
-                    <i class="endIcon fa fa-times close fa-lg fa-fw" aria-hidden="true"></i>
+                    <i class="endIcon g-icon close" aria-hidden="true">close</i>
                 </div>
                 <input id="iLoginButton" name="loginButton" type="submit" value="<?= $this->getHtml('Login', '0', '0'); ?>" tabindex="5">
                 <button class="cancelButton" name="cancelButton" type="button" tabindex="6"><?= $this->getHtml('Cancel', '0', '0'); ?></button>

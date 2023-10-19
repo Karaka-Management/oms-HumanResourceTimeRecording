@@ -112,93 +112,93 @@ echo $this->data['nav']->render(); ?>
 <div class="row">
     <div class="col-xs-12">
         <section class="portlet">
-            <div class="portlet-head"><?= $this->getHtml('Recordings'); ?><i class="lni lni-download download btn end-xs"></i></div>
+            <div class="portlet-head"><?= $this->getHtml('Recordings'); ?><i class="g-icon download btn end-xs">download</i></div>
             <table id="recordingList" class="default">
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>
                         <label for="recordingList-sort-1">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-1">
-                            <i class="sort-asc fa fa-chevron-up"></i>
+                            <i class="sort-asc g-icon">expand_less</i>
                         </label>
                         <label for="recordingList-sort-2">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-2">
-                            <i class="sort-desc fa fa-chevron-down"></i>
+                            <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
-                            <i class="filter fa fa-filter"></i>
+                            <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td><?= $this->getHtml('Type'); ?>
                         <label for="recordingList-sort-3">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-3">
-                            <i class="sort-asc fa fa-chevron-up"></i>
+                            <i class="sort-asc g-icon">expand_less</i>
                         </label>
                         <label for="recordingList-sort-4">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-4">
-                            <i class="sort-desc fa fa-chevron-down"></i>
+                            <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
-                            <i class="filter fa fa-filter"></i>
+                            <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td><?= $this->getHtml('Status'); ?>
                         <label for="recordingList-sort-5">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-5">
-                            <i class="sort-asc fa fa-chevron-up"></i>
+                            <i class="sort-asc g-icon">expand_less</i>
                         </label>
                         <label for="recordingList-sort-6">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-6">
-                            <i class="sort-desc fa fa-chevron-down"></i>
+                            <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
-                            <i class="filter fa fa-filter"></i>
+                            <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td><?= $this->getHtml('Start'); ?>
                         <label for="recordingList-sort-7">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-7">
-                            <i class="sort-asc fa fa-chevron-up"></i>
+                            <i class="sort-asc g-icon">expand_less</i>
                         </label>
                         <label for="recordingList-sort-8">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-8">
-                            <i class="sort-desc fa fa-chevron-down"></i>
+                            <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
-                            <i class="filter fa fa-filter"></i>
+                            <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td><?= $this->getHtml('Break'); ?>
                         <label for="recordingList-sort-9">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-9">
-                            <i class="sort-asc fa fa-chevron-up"></i>
+                            <i class="sort-asc g-icon">expand_less</i>
                         </label>
                         <label for="recordingList-sort-10">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-10">
-                            <i class="sort-desc fa fa-chevron-down"></i>
+                            <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
-                            <i class="filter fa fa-filter"></i>
+                            <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td><?= $this->getHtml('End'); ?>
                         <label for="recordingList-sort-11">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-11">
-                            <i class="sort-asc fa fa-chevron-up"></i>
+                            <i class="sort-asc g-icon">expand_less</i>
                         </label>
                         <label for="recordingList-sort-12">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-12">
-                            <i class="sort-desc fa fa-chevron-down"></i>
+                            <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
-                            <i class="filter fa fa-filter"></i>
+                            <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td><?= $this->getHtml('Total'); ?>
                         <label for="recordingList-sort-13">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-13">
-                            <i class="sort-asc fa fa-chevron-up"></i>
+                            <i class="sort-asc g-icon">expand_less</i>
                         </label>
                         <label for="recordingList-sort-14">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-14">
-                            <i class="sort-desc fa fa-chevron-down"></i>
+                            <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
-                            <i class="filter fa fa-filter"></i>
+                            <i class="filter g-icon">filter_alt</i>
                         </label>
                 <tbody>
                 <?php

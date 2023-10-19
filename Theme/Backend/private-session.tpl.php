@@ -22,7 +22,7 @@ echo $this->data['nav']->render(); ?>
     <div class="col-xs-12">
         <div class="box wf-100">
         <table id="accountList" class="default">
-                <caption><?= $session->start->format('Y-m-d'); ?><i class="fa fa-download end-xs download btn"></i></caption>
+                <caption><?= $session->start->format('Y-m-d'); ?><i class="g-icon end-xs download btn">download</i></caption>
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Status'); ?>

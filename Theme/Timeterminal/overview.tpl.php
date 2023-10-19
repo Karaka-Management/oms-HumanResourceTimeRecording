@@ -82,7 +82,7 @@ echo $this->data['nav']->render(); ?>
     <div class="col-xs-12">
         <div class="box wf-100">
         <table id="accountList" class="default">
-                <caption><?= $this->getHtml('Recordings'); ?><i class="fa fa-download end-xs download btn"></i></caption>
+                <caption><?= $this->getHtml('Recordings'); ?><i class="g-icon end-xs download btn">download</i></caption>
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>

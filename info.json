@@ -14,7 +14,6 @@
         "name": "Jingga",
         "website": "jingga.app"
     },
-    "description": "The administration module.",
     "directory": "HumanResourceTimeRecording",
     "dependencies": {
         "Admin": "1.0.0",

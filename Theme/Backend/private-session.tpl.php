@@ -21,7 +21,7 @@ echo $this->data['nav']->render(); ?>
 <div class="row">
     <div class="col-xs-12">
         <div class="box wf-100">
-        <table id="accountList" class="default">
+            <table id="sessionList" class="default sticky">
                 <caption><?= $session->start->format('Y-m-d'); ?><i class="g-icon end-xs download btn">download</i></caption>
                 <thead>
                 <tr>

@@ -61,6 +61,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $this->app = new class() extends ApplicationAbstract
         {
             protected string $appName = 'Api';
+
             protected int $appId = 1;
         };
 

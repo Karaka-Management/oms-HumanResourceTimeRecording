@@ -94,27 +94,29 @@ final class ApiController extends Controller
             ->limit(1)
             ->execute();
 
+        if ($employee->id === 0) {
+            return null;
+        }
+
         $type   = $request->getDataInt('type') ?? ClockingType::OFFICE;
         $status = $request->getDataInt('status') ?? ClockingStatus::START;
 
-        if ($employee->id === 0) {
+        if (!ClockingStatus::isValidValue($status)) {
             return null;
         }
 
         $session = new Session($employee);
         $session->setType(ClockingType::isValidValue($type) ? $type : ClockingType::OFFICE);
 
-        if (ClockingStatus::isValidValue($status)) {
-            // a custom datetime can only be set if the user is allowed to create a session for a foreign account or if the session is a vacation
-            $dt = $request->hasData('account') || $type === ClockingType::VACATION
-                ? ($request->getDataDateTime('datetime') ?? new \DateTime('now'))
-                : new \DateTime('now');
+        // a custom datetime can only be set if the user is allowed to create a session for a foreign account or if the session is a vacation
+        $dt = $request->hasData('account') || $type === ClockingType::VACATION
+            ? ($request->getDataDateTime('datetime') ?? new \DateTime('now'))
+            : new \DateTime('now');
 
-            $element = new SessionElement($session, $dt);
-            $element->setStatus($status);
+        $element = new SessionElement($session, $dt);
+        $element->setStatus($status);
 
-            $session->addSessionElement($element);
-        }
+        $session->addSessionElement($element);
 
         return $session;
     }
@@ -147,7 +149,9 @@ final class ApiController extends Controller
             return;
         }
 
-        if ($request->hasData('account') && ((int) $request->getData('account')) !== $request->header->account && !$this->app->accountManager->get($request->header->account)->hasPermission(
+        if ($request->hasData('account')
+            && $request->getDataInt('account') !== $request->header->account
+            && !$this->app->accountManager->get($request->header->account)->hasPermission(
             PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_ELEMENT_FOREIGN
         )) {
             $response->header->status = RequestStatusCode::R_403;
@@ -205,8 +209,6 @@ final class ApiController extends Controller
      */
     private function createSessionElementFromRequest(RequestAbstract $request) : ?SessionElement
     {
-        $account = $request->getDataInt('account') ?? $request->header->account;
-
         /** @var Session $session */
         $session = SessionMapper::get()->where('id', (int) $request->getData('session'))->execute();
 

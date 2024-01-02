@@ -65,7 +65,7 @@ class Session implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    public int $type = ClockingType::OFFICE;
+    public int $type = ClockingType::NO_DATA;
 
     /**
      * Session elements.

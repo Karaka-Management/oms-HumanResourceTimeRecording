@@ -113,7 +113,7 @@ echo $this->data['nav']->render(); ?>
     <div class="col-xs-12">
         <section class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Recordings'); ?><i class="g-icon download btn end-xs">download</i></div>
-            <table id="recordingList" class="default">
+            <table id="recordingList" class="default sticky">
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Date'); ?>

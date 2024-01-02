@@ -46,14 +46,25 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1006301001, $request, $response);
 
         /** @var \Modules\HumanResourceTimeRecording\Models\Session[] $list */
-        $list                   = SessionMapper::getLastSessionsFromAllEmployees();
-        $view->data['sessions'] = $list;
+        $list = SessionMapper::getLastSessionsFromAllEmployees();
+
+        $sessions = [];
+        foreach ($list as $session) {
+            $sessions[$session->employee->id] = $session;
+        }
+
+        $view->data['sessions'] = $sessions;
+
+        $view->data['employees'] = EmployeeMapper::getAll()
+            ->with('profile')
+            ->with('profile/account')
+            ->execute();
 
         return $view;
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -99,7 +110,7 @@ final class BackendController extends Controller implements DashboardElementInte
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -136,7 +147,7 @@ final class BackendController extends Controller implements DashboardElementInte
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response

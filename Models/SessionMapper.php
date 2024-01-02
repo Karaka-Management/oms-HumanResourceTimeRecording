@@ -115,11 +115,12 @@ final class SessionMapper extends DataMapperFactory
             ->groupBy(self::TABLE . '.hr_timerecording_session_employee');
 
         $query = self::getQuery();
-        $query->innerJoin($join, 'tm')
+        $query->leftJoin($join, 'tm')
             ->on(self::TABLE . '_d1.hr_timerecording_session_employee', '=', 'tm.hr_timerecording_session_employee')
             ->andOn(self::TABLE . '_d1.hr_timerecording_session_start', '=', 'tm.maxDate');
 
-        return self::getAll()->execute($query);
+        return self::getAll()
+            ->execute($query);
     }
 
     /**

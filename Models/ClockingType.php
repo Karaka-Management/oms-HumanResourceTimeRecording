@@ -37,4 +37,6 @@ abstract class ClockingType extends Enum
     public const SICK = 5;
 
     public const ON_THE_MOVE = 6;
+
+    public const NO_DATA = -1;
 }

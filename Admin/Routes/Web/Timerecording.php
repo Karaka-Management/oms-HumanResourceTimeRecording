@@ -18,7 +18,7 @@ return [
             ],
         ],
     ],
-    '^.*/timerecording/dashboard.*$' => [
+    '^.*/timerecording/dashboard(\?.*$|$)' => [
         [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
             'verb'       => RouteVerb::GET,

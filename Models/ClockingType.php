@@ -38,5 +38,21 @@ abstract class ClockingType extends Enum
 
     public const ON_THE_MOVE = 6;
 
+    public const PAID_LEAVE = 7;
+
+    public const UNPAID_LEAVE = 8;
+
+    public const MATERNITY_LEAVE = 9;
+
+    public const PARENTAL_LEAVE = 10;
+
+    public const DR_VISIT = 11;
+
+    public const EDUCATION = 12;
+
+    public const TRAINING = 13;
+
+    public const HOLIDAY = 14;
+
     public const NO_DATA = -1;
 }

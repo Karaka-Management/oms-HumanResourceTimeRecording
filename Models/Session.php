@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Models;
 
-use Modules\HumanResourceManagement\Models\Employee;
-use Modules\HumanResourceManagement\Models\NullEmployee;
+use Modules\Admin\Models\Account;
+use Modules\Admin\Models\NullAccount;
 
 /**
  * Session model
@@ -78,34 +78,31 @@ class Session implements \JsonSerializable
     /**
      * Employee.
      *
-     * @var Employee
+     * @var Account
      * @since 1.0.0
      */
-    public Employee $employee;
+    public Account $employee;
+
+    /**
+     * Session start
+     *
+     * @var \DateTime
+     * @since 1.0.0
+     */
+    public \DateTimeImmutable $createdAt;
 
     /**
      * Constructor.
      *
-     * @param Employee $employee Employee
+     * @param Account $employee Account
      *
      * @since 1.0.0
      */
-    public function __construct(Employee $employee = null)
+    public function __construct(?Account $employee = null)
     {
-        $this->start    = new \DateTime('now');
-        $this->employee = $employee ?? new NullEmployee();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int Account id
-     *
-     * @since 1.0.0
-     */
-    public function getId() : int
-    {
-        return $this->id;
+        $this->start     = new \DateTime('now');
+        $this->employee  = $employee ?? new NullAccount();
+        $this->createdAt = new \DateTimeImmutable('now');
     }
 
     /**
@@ -131,9 +128,9 @@ class Session implements \JsonSerializable
      */
     public function addSessionElement(SessionElement $element) : void
     {
-        if ($element->getStatus() === ClockingStatus::START) {
+        if ($element->status === ClockingStatus::START) {
             foreach ($this->sessionElements as $e) {
-                if ($e->getStatus() === ClockingStatus::START) {
+                if ($e->status === ClockingStatus::START) {
                     return;
                 }
             }
@@ -141,7 +138,7 @@ class Session implements \JsonSerializable
             $this->start = $element->datetime;
         }
 
-        if ($element->getStatus() === ClockingStatus::END) {
+        if ($element->status === ClockingStatus::END) {
             if ($this->end !== null) {
                 return;
             }
@@ -157,15 +154,15 @@ class Session implements \JsonSerializable
         $lastStart = $this->start;
 
         foreach ($this->sessionElements as $e) {
-            if ($e->getStatus() === ClockingStatus::START) {
+            if ($e->status === ClockingStatus::START) {
                 continue;
             }
 
-            if ($e->getStatus() === ClockingStatus::PAUSE || $e->getStatus() === ClockingStatus::END) {
+            if ($e->status === ClockingStatus::PAUSE || $e->status === ClockingStatus::END) {
                 $busyTime += $e->datetime->getTimestamp() - $lastStart->getTimestamp();
             }
 
-            if ($e->getStatus() === ClockingStatus::CONTINUE) {
+            if ($e->status === ClockingStatus::CONTINUE) {
                 $lastStart = $e->datetime;
             }
         }
@@ -186,7 +183,7 @@ class Session implements \JsonSerializable
     }
 
     /**
-     * Compare session selements
+     * Compare session elements
      *
      * @param SessionElement $a First session element
      * @param SessionElement $b Second session element
@@ -219,7 +216,7 @@ class Session implements \JsonSerializable
 
         \reset($this->sessionElements);
 
-        return $last->getStatus();
+        return $last->status;
     }
 
     /**
@@ -237,46 +234,20 @@ class Session implements \JsonSerializable
         $lastBreak = $this->start;
 
         foreach ($this->sessionElements as $element) {
-            if ($element->getStatus() === ClockingStatus::START) {
+            if ($element->status === ClockingStatus::START) {
                 continue;
             }
 
-            if ($element->getStatus() === ClockingStatus::PAUSE || $element->getStatus() === ClockingStatus::END) {
+            if ($element->status === ClockingStatus::PAUSE || $element->status === ClockingStatus::END) {
                 $lastBreak = $element->datetime;
             }
 
-            if ($element->getStatus() === ClockingStatus::CONTINUE) {
+            if ($element->status === ClockingStatus::CONTINUE) {
                 $breakTime += $element->datetime->getTimestamp() - ($lastBreak->getTimestamp() ?? 0);
             }
         }
 
         return $breakTime;
-    }
-
-    /**
-     * Get the session type
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getType() : int
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set the session type
-     *
-     * @param int $type Session type
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setType(int $type) : void
-    {
-        $this->type = $type;
     }
 
     /**

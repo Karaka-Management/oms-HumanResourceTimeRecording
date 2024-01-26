@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Controller;
 
-use Modules\HumanResourceManagement\Models\EmployeeMapper;
+use Modules\Admin\Models\NullAccount;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\HumanResourceTimeRecording\Models\ClockingType;
 use Modules\HumanResourceTimeRecording\Models\PermissionCategory;
@@ -23,6 +23,7 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
 use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
 use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 use phpOMS\Account\PermissionType;
+use phpOMS\DataStorage\Database\Query\OrderType;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
@@ -87,34 +88,16 @@ final class ApiController extends Controller
     {
         $account = $request->getDataInt('account') ?? $request->header->account;
 
-        $employee = EmployeeMapper::get()
-            ->with('profile')
-            ->with('profile/account')
-            ->where('profile/account', $account)
-            ->limit(1)
-            ->execute();
-
-        if ($employee->id === 0) {
-            return null;
-        }
-
-        $type   = $request->getDataInt('type') ?? ClockingType::OFFICE;
-        $status = $request->getDataInt('status') ?? ClockingStatus::START;
-
-        if (!ClockingStatus::isValidValue($status)) {
-            return null;
-        }
-
-        $session = new Session($employee);
-        $session->setType(ClockingType::isValidValue($type) ? $type : ClockingType::OFFICE);
+        $session       = new Session(new NullAccount($account));
+        $session->type = ClockingType::tryFromValue($request->getDataInt('type')) ?? ClockingType::OFFICE;
 
         // a custom datetime can only be set if the user is allowed to create a session for a foreign account or if the session is a vacation
-        $dt = $request->hasData('account') || $type === ClockingType::VACATION
+        $dt = $request->hasData('account') || $session->type === ClockingType::VACATION
             ? ($request->getDataDateTime('datetime') ?? new \DateTime('now'))
             : new \DateTime('now');
 
-        $element = new SessionElement($session, $dt);
-        $element->setStatus($status);
+        $element         = new SessionElement($session, $dt);
+        $element->status = ClockingStatus::tryFromValue($request->getDataInt('status')) ?? ClockingStatus::OFFICE;
 
         $session->addSessionElement($element);
 
@@ -167,7 +150,7 @@ final class ApiController extends Controller
             return;
         }
 
-        if ($element->getStatus() === ClockingStatus::END) {
+        if ($element->status === ClockingStatus::END) {
             /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
             $session = SessionMapper::get()->where('id', (int) $request->getData('session'))->execute();
 
@@ -191,7 +174,7 @@ final class ApiController extends Controller
     private function validateSessionElementCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['session'] = !$request->hasData('session') || !\is_numeric($request->getData('session')))) {
+        if (false) {
             return $val;
         }
 
@@ -209,23 +192,33 @@ final class ApiController extends Controller
      */
     private function createSessionElementFromRequest(RequestAbstract $request) : ?SessionElement
     {
-        /** @var Session $session */
-        $session = SessionMapper::get()->where('id', (int) $request->getData('session'))->execute();
+        $session = null;
+        if ($request->hasData('session')) {
+            /** @var Session $session */
+            $session = SessionMapper::get()
+                ->where('id', (int) $request->getData('session'))
+                ->execute();
+        } else {
+            /** @var Session $session */
+            $session = SessionMapper::get()
+                ->where('employee', $request->getDataInt('account') ?? $request->header->account)
+                ->sort('createdAt', OrderType::DESC)
+                ->limit(1)
+                ->execute();
+        }
 
         // cannot create session element for none existing session
         if ($session->id === 0) {
             return null;
         }
 
-        $status = $request->getDataInt('status') ?? -1;
-
         // a custom datetime can only be set if the user is allowed to create a session for a foreign account or if the session is a vacation
-        $dt = $request->hasData('account') || $session->getType() === ClockingType::VACATION
+        $dt = $request->hasData('account') || $session->type === ClockingType::VACATION
             ? ($request->getDataDateTime('datetime') ?? new \DateTime('now'))
             : new \DateTime('now');
 
-        $element = new SessionElement($session, $dt);
-        $element->setStatus(ClockingStatus::isValidValue($status) ? $status : ClockingStatus::END);
+        $element          = new SessionElement($session, $dt);
+        $element->status  = ClockingStatus::tryFromValue($request->getDataInt('status')) ?? ClockingStatus::END;
         $element->session = $session;
 
         return $element;

@@ -12,7 +12,7 @@ return [
             ],
         ],
     ],
-    '^.*/timerecording/dashboard.*$' => [
+    '^.*/timerecording/dashboard(\?.*$|$)' => [
         0 => [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
             'verb'       => 1,

@@ -18,7 +18,7 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/humanresource/timerecording/dashboard.*$' => [
+    '^.*/humanresource/timerecording/dashboard(\?.*$|$)' => [
         [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewDashboard',
             'verb'       => RouteVerb::GET,
@@ -29,7 +29,7 @@ return [
             ],
         ],
     ],
-    '^.*/private/timerecording/dashboard.*$' => [
+    '^.*/private/timerecording/dashboard(\?.*$|$)' => [
         [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewPrivateDashboard',
             'verb'       => RouteVerb::GET,
@@ -40,7 +40,7 @@ return [
             ],
         ],
     ],
-    '^.*/private/timerecording/session.*$' => [
+    '^.*/private/timerecording/session(\?.*$|$)' => [
         [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\BackendController:viewPrivateSession',
             'verb'       => RouteVerb::GET,

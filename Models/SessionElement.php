@@ -56,6 +56,8 @@ class SessionElement implements \JsonSerializable
      */
     public int|Session $session;
 
+    public \DateTimeImmutable $createdAt;
+
     /**
      * Constructor.
      *
@@ -64,48 +66,11 @@ class SessionElement implements \JsonSerializable
      *
      * @since 1.0.0
      */
-    public function __construct(Session $session = null, \DateTime $datetime = null)
+    public function __construct(?Session $session = null, ?\DateTime $datetime = null)
     {
-        $this->session  = $session ?? new NullSession();
-        $this->datetime = $datetime ?? new \DateTime('now');
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int Account id
-     *
-     * @since 1.0.0
-     */
-    public function getId() : int
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get the session element status
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getStatus() : int
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set the session element status
-     *
-     * @param int $status Session element status
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setStatus(int $status) : void
-    {
-        $this->status = $status;
+        $this->session   = $session ?? new NullSession();
+        $this->datetime  = $datetime ?? new \DateTime('now');
+        $this->createdAt = new \DateTimeImmutable('now');
     }
 
     /**
@@ -114,10 +79,10 @@ class SessionElement implements \JsonSerializable
     public function toArray() : array
     {
         return [
-            'id'             => $this->id,
-            'status'         => $this->status,
-            'datetime'       => $this->datetime,
-            'session'        => $this->session,
+            'id'       => $this->id,
+            'status'   => $this->status,
+            'datetime' => $this->datetime,
+            'session'  => $this->session,
         ];
     }
 

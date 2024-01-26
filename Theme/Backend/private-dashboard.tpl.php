@@ -17,14 +17,14 @@ use \Modules\HumanResourceTimeRecording\Models\ClockingType;
 use \phpOMS\Stdlib\Base\SmartDateTime;
 use phpOMS\Uri\UriFactory;
 
-/** @var Session[] $sessions */
+/** @var \Modules\HumanResourceTimeRecording\Models\Session[] $sessions */
 $sessions     = $this->data['sessions'];
 $sessionCount = \count($sessions);
 
-/** @var Session $lastOpenSession */
+/** @var \Modules\HumanResourceTimeRecording\Models\Session $lastOpenSession */
 $lastOpenSession = $this->data['lastSession'];
 
-$type   = $lastOpenSession !== null ? $lastOpenSession->getType() : ClockingType::OFFICE;
+$type   = $lastOpenSession !== null ? $lastOpenSession->type : ClockingType::OFFICE;
 $status = $lastOpenSession !== null ? $lastOpenSession->getStatus() : ClockingStatus::END;
 
 /** @var \phpOMS\Stdlib\Base\SmartDateTime $startWeek */
@@ -112,11 +112,12 @@ echo $this->data['nav']->render(); ?>
 <div class="row">
     <div class="col-xs-12">
         <section class="portlet">
-            <div class="portlet-head"><?= $this->getHtml('Recordings'); ?><i class="g-icon download btn end-xs">download</i></div>
+            <div class="portlet-head"><?= $this->getHtml('Recordings', 'HumanResourceTimeRecording', 'Backend'); ?><i class="g-icon download btn end-xs">download</i></div>
+            <div class="slider">
             <table id="recordingList" class="default sticky">
                 <thead>
                 <tr>
-                    <td><?= $this->getHtml('Date'); ?>
+                    <td><?= $this->getHtml('Date', 'HumanResourceTimeRecording', 'Backend'); ?>
                         <label for="recordingList-sort-1">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-1">
                             <i class="sort-asc g-icon">expand_less</i>
@@ -128,7 +129,7 @@ echo $this->data['nav']->render(); ?>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
-                    <td><?= $this->getHtml('Type'); ?>
+                    <td><?= $this->getHtml('Type', 'HumanResourceTimeRecording', 'Backend'); ?>
                         <label for="recordingList-sort-3">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-3">
                             <i class="sort-asc g-icon">expand_less</i>
@@ -140,7 +141,7 @@ echo $this->data['nav']->render(); ?>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
-                    <td><?= $this->getHtml('Status'); ?>
+                    <td><?= $this->getHtml('Status', 'HumanResourceTimeRecording', 'Backend'); ?>
                         <label for="recordingList-sort-5">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-5">
                             <i class="sort-asc g-icon">expand_less</i>
@@ -152,7 +153,7 @@ echo $this->data['nav']->render(); ?>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
-                    <td><?= $this->getHtml('Start'); ?>
+                    <td><?= $this->getHtml('Start', 'HumanResourceTimeRecording', 'Backend'); ?>
                         <label for="recordingList-sort-7">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-7">
                             <i class="sort-asc g-icon">expand_less</i>
@@ -164,7 +165,7 @@ echo $this->data['nav']->render(); ?>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
-                    <td><?= $this->getHtml('Break'); ?>
+                    <td><?= $this->getHtml('Break', 'HumanResourceTimeRecording', 'Backend'); ?>
                         <label for="recordingList-sort-9">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-9">
                             <i class="sort-asc g-icon">expand_less</i>
@@ -176,7 +177,7 @@ echo $this->data['nav']->render(); ?>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
-                    <td><?= $this->getHtml('End'); ?>
+                    <td><?= $this->getHtml('End', 'HumanResourceTimeRecording', 'Backend'); ?>
                         <label for="recordingList-sort-11">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-11">
                             <i class="sort-asc g-icon">expand_less</i>
@@ -188,7 +189,7 @@ echo $this->data['nav']->render(); ?>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
-                    <td><?= $this->getHtml('Total'); ?>
+                    <td><?= $this->getHtml('Total', 'HumanResourceTimeRecording', 'Backend'); ?>
                         <label for="recordingList-sort-13">
                             <input type="radio" name="recordingList-sort" id="recordingList-sort-13">
                             <i class="sort-asc g-icon">expand_less</i>
@@ -203,49 +204,49 @@ echo $this->data['nav']->render(); ?>
                 <tbody>
                 <?php
                     $count = 0;
-                    foreach ($sessions as $session) : ++$count;
-                    $url   = UriFactory::build('{/base}/private/timerecording/session?{?}&id=' . $session->id);
+                    foreach ($this->data['sessions'] as $session) : ++$count;
+                    $url = UriFactory::build('{/base}/private/timerecording/session?{?}&id=' . $session->id);
                 ?>
                 <tr data-href="<?= $url; ?>">
                     <td><a href="<?= $url; ?>">
                         <?php
-                            if ($lastOpenSession !== null
-                                && $session->getStart()->format('Y-m-d') === $lastOpenSession->getStart()->format('Y-m-d')
+                            if ($this->data['lastSession'] !== null
+                                && $session->start->format('Y-m-d') === $this->data['lastSession']->start->format('Y-m-d')
                             ) : ?>
                             <span class="tag">Today</span>
                         <?php else : ?>
-                            <?= $session->getStart()->format('Y-m-d'); ?> - <?= $this->getHtml('D' . $session->getStart()->format('w')); ?>
+                            <?= $session->start->format('Y-m-d'); ?> - <?= $this->getHtml('D' . $session->start->format('w'), 'HumanResourceTimeRecording', 'Backend'); ?>
                         <?php endif; ?></a>
-                    <td><a href="<?= $url; ?>"><span class="tag"><?= $this->getHtml('CT' . $session->getType()); ?></span></a>
-                    <td><a href="<?= $url; ?>"><span class="tag"><?= $this->getHtml('CS' . $session->getStatus()); ?></span></a>
-                    <td><a href="<?= $url; ?>"><?= $session->getStart()->format('H:i'); ?></a>
+                    <td><a href="<?= $url; ?>"><span class="tag"><?= $this->getHtml('CT' . $session->type, 'HumanResourceTimeRecording', 'Backend'); ?></span></a>
+                    <td><a href="<?= $url; ?>"><span class="tag"><?= $this->getHtml('CS' . $session->getStatus(), 'HumanResourceTimeRecording', 'Backend'); ?></span></a>
+                    <td><a href="<?= $url; ?>"><?= $session->start->format('H:i'); ?></a>
                     <td><a href="<?= $url; ?>"><?= (int) ($session->getBreak() / 3600); ?>h <?= ((int) ($session->getBreak() / 60) % 60); ?>m</a>
-                    <td><a href="<?= $url; ?>"><?= $session->getEnd() !== null ? $session->getEnd()->format('H:i') : ''; ?></a>
+                    <td><a href="<?= $url; ?>"><?= $session->end?->format('H:i'); ?></a>
                     <td><a href="<?= $url; ?>"><?= (int) ($session->getBusy() / 3600); ?>h <?= ((int) ($session->getBusy() / 60) % 60); ?>m</a>
                 <?php
                     $busy['week'] += $session->getBusy();
-                    if ($session->getStart()->getTimestamp() < $startWeek->getTimestamp()
+                    if ($session->start->getTimestamp() < $startWeek->getTimestamp()
                         || $count === $sessionCount
                 ) : ?>
                 <tr>
                     <th colspan="6"> <?= $startWeek->format('Y/m/d'); ?> - <?= $endWeek->format('Y/m/d'); ?>
                     <th><?= (int) ($busy['week'] / 3600); ?>h <?= ((int) ($busy['week'] / 60) % 60); ?>m
                 <?php
-                        $endWeek      = $startWeek;
+                        $endWeek      = $startWeek->createModify(0, 0, -1);
                         $startWeek    = $startWeek->createModify(0, 0, -7);
                         $busy['week'] = 0;
                     endif;
                 ?>
                 <?php
                     $busy['month'] += $session->getBusy();
-                    if ($session->getStart()->getTimestamp() < $startMonth->getTimestamp()
+                    if ($session->start->getTimestamp() < $startMonth->getTimestamp()
                         || $count === $sessionCount
                 ) : ?>
                 <tr>
                     <th colspan="6"> <?= $startMonth->format('Y/m/d'); ?> - <?= $endMonth->format('Y/m/d'); ?>
                     <th><?= (int) ($busy['month'] / 3600); ?>h <?= ((int) ($busy['month'] / 60) % 60); ?>m
                 <?php
-                        $endMonth      = $startMonth;
+                        $endMonth      = $startMonth->createModify(0, 0, -1);
                         $startMonth    = $startMonth->createModify(0, -1, 0);
                         $busy['month'] = 0;
                     endif;
@@ -256,6 +257,7 @@ echo $this->data['nav']->render(); ?>
                     <td colspan="7" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
                 <?php endif; ?>
             </table>
+            </div>
         </section>
     </div>
 </div>

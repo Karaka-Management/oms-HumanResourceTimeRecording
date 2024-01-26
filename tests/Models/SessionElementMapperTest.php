@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\tests\Models;
 
-use Modules\HumanResourceManagement\Models\NullEmployee;
+use Modules\Admin\Models\NullAccount;
 use Modules\HumanResourceTimeRecording\Models\Session;
 use Modules\HumanResourceTimeRecording\Models\SessionElement;
 use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
@@ -30,7 +30,7 @@ final class SessionElementMapperTest extends \PHPUnit\Framework\TestCase
      */
     public function testCRUD() : void
     {
-        $element = new SessionElement(new Session(new NullEmployee(1)), new \DateTime('now'));
+        $element = new SessionElement(new Session(new NullAccount(1)), new \DateTime('now'));
 
         $id = SessionElementMapper::create()->execute($element);
         self::assertGreaterThan(0, $element->id);
@@ -38,7 +38,7 @@ final class SessionElementMapperTest extends \PHPUnit\Framework\TestCase
 
         $elementR = SessionElementMapper::get()->with('session')->with('employee')->where('id', $element->id)->execute();
         self::assertEquals($element->datetime->format('Y-m-d'), $elementR->datetime->format('Y-m-d'));
-        self::assertEquals($element->getStatus(), $elementR->getStatus());
+        self::assertEquals($element->status, $elementR->status);
         self::assertEquals($element->session->employee->id, $elementR->session->employee->id);
     }
 }

@@ -36,10 +36,11 @@ final class SessionElementMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'hr_timerecording_session_element_id'      => ['name' => 'hr_timerecording_session_element_id',      'type' => 'int',      'internal' => 'id'],
-        'hr_timerecording_session_element_status'  => ['name' => 'hr_timerecording_session_element_status',  'type' => 'int',      'internal' => 'status'],
-        'hr_timerecording_session_element_dt'      => ['name' => 'hr_timerecording_session_element_dt',      'type' => 'DateTime', 'internal' => 'datetime'],
-        'hr_timerecording_session_element_session' => ['name' => 'hr_timerecording_session_element_session', 'type' => 'int',      'internal' => 'session'],
+        'hr_timerecording_session_element_id'        => ['name' => 'hr_timerecording_session_element_id',      'type' => 'int',      'internal' => 'id'],
+        'hr_timerecording_session_element_status'    => ['name' => 'hr_timerecording_session_element_status',  'type' => 'int',      'internal' => 'status'],
+        'hr_timerecording_session_element_dt'        => ['name' => 'hr_timerecording_session_element_dt',      'type' => 'DateTime', 'internal' => 'datetime'],
+        'hr_timerecording_session_element_session'   => ['name' => 'hr_timerecording_session_element_session', 'type' => 'int',      'internal' => 'session'],
+        'hr_timerecording_session_element_createdat' => ['name' => 'hr_timerecording_session_element_createdat',      'type' => 'DateTimeImmutable', 'internal' => 'createdAt'],
     ];
 
     /**

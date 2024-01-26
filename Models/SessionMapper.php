@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Models;
 
-use Modules\HumanResourceManagement\Models\EmployeeMapper;
+use Modules\Admin\Models\AccountMapper;
 use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 use phpOMS\DataStorage\Database\Query\Builder;
 use phpOMS\Stdlib\Base\SmartDateTime;
@@ -39,12 +39,13 @@ final class SessionMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'hr_timerecording_session_id'       => ['name' => 'hr_timerecording_session_id',       'type' => 'int',      'internal' => 'id'],
-        'hr_timerecording_session_type'     => ['name' => 'hr_timerecording_session_type',     'type' => 'int',      'internal' => 'type'],
-        'hr_timerecording_session_start'    => ['name' => 'hr_timerecording_session_start',    'type' => 'DateTime', 'internal' => 'start'],
-        'hr_timerecording_session_end'      => ['name' => 'hr_timerecording_session_end',      'type' => 'DateTime', 'internal' => 'end'],
-        'hr_timerecording_session_busy'     => ['name' => 'hr_timerecording_session_busy',     'type' => 'int',      'internal' => 'busy'],
-        'hr_timerecording_session_employee' => ['name' => 'hr_timerecording_session_employee', 'type' => 'int',      'internal' => 'employee'],
+        'hr_timerecording_session_id'        => ['name' => 'hr_timerecording_session_id',       'type' => 'int',      'internal' => 'id'],
+        'hr_timerecording_session_type'      => ['name' => 'hr_timerecording_session_type',     'type' => 'int',      'internal' => 'type'],
+        'hr_timerecording_session_start'     => ['name' => 'hr_timerecording_session_start',    'type' => 'DateTime', 'internal' => 'start'],
+        'hr_timerecording_session_end'       => ['name' => 'hr_timerecording_session_end',      'type' => 'DateTime', 'internal' => 'end'],
+        'hr_timerecording_session_busy'      => ['name' => 'hr_timerecording_session_busy',     'type' => 'int',      'internal' => 'busy'],
+        'hr_timerecording_session_employee'  => ['name' => 'hr_timerecording_session_employee', 'type' => 'int',      'internal' => 'employee'],
+        'hr_timerecording_session_createdat' => ['name' => 'hr_timerecording_session_createdat',    'type' => 'DateTimeImmutable', 'internal' => 'createdAt'],
     ];
 
     /**
@@ -70,7 +71,7 @@ final class SessionMapper extends DataMapperFactory
      */
     public const BELONGS_TO = [
         'employee' => [
-            'mapper'   => EmployeeMapper::class,
+            'mapper'   => AccountMapper::class,
             'external' => 'hr_timerecording_session_employee',
         ],
     ];

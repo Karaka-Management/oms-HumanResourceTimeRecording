@@ -36,7 +36,6 @@ use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Module\ModuleAbstract;
 use phpOMS\Module\ModuleManager;
 use phpOMS\Router\WebRouter;
-use phpOMS\Uri\HttpUri;
 use phpOMS\Utils\TestUtils;
 
 /**
@@ -65,13 +64,13 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
             protected int $appId = 1;
         };
 
-        $this->app->dbPool          = $GLOBALS['dbpool'];
-        $this->app->unitId          = 1;
-        $this->app->accountManager  = new AccountManager($GLOBALS['session']);
-        $this->app->appSettings     = new CoreSettings();
-        $this->app->moduleManager   = new ModuleManager($this->app, __DIR__ . '/../../../../Modules/');
-        $this->app->dispatcher      = new Dispatcher($this->app);
-        $this->app->eventManager    = new EventManager($this->app->dispatcher);
+        $this->app->dbPool         = $GLOBALS['dbpool'];
+        $this->app->unitId         = 1;
+        $this->app->accountManager = new AccountManager($GLOBALS['session']);
+        $this->app->appSettings    = new CoreSettings();
+        $this->app->moduleManager  = new ModuleManager($this->app, __DIR__ . '/../../../../Modules/');
+        $this->app->dispatcher     = new Dispatcher($this->app);
+        $this->app->eventManager   = new EventManager($this->app->dispatcher);
         $this->app->eventManager->importFromFile(__DIR__ . '/../../../../Web/Api/Hooks.php');
         $this->app->sessionManager = new HttpSession(36000);
         $this->app->l11nManager    = new L11nManager();
@@ -121,7 +120,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         }
 
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
 
@@ -129,7 +128,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertGreaterThan(0, $sId = $response->getDataArray('')['response']->id);
 
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('session', (string) $sId);
@@ -146,7 +145,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiSessionCreateInvalidPermission() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 9999;
         $request->setData('account', 2);
@@ -162,7 +161,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiSessionCreateInvalidDataEmployee() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('account', 9999);
@@ -178,7 +177,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiSessionElementCreateInvalidData() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('invalid', 1);
@@ -194,7 +193,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiSessionElementCreateInvalidSessionId() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('session', 99999);
@@ -211,7 +210,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiSessionElementCreateInvalidPermission() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 9999;
         $request->setData('session', 1);

@@ -44,7 +44,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $this->session->getBusy());
         self::assertEquals(0, $this->session->getBreak());
         self::assertEquals([], $this->session->getSessionElements());
-        self::assertEquals(ClockingType::OFFICE, $this->session->getType());
+        self::assertEquals(ClockingType::OFFICE, $this->session->type);
         self::assertEquals(ClockingStatus::START, $this->session->getStatus());
         self::assertEquals((new \DateTime('now'))->format('Y-m-d'), $this->session->start->format('Y-m-d'));
         self::assertNull($this->session->end);
@@ -54,28 +54,18 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
      * @covers Modules\HumanResourceTimeRecording\Models\Session
      * @group module
      */
-    public function testTypeInputOutput() : void
-    {
-        $this->session->setType(ClockingType::VACATION);
-        self::assertEquals(ClockingType::VACATION, $this->session->getType());
-    }
-
-    /**
-     * @covers Modules\HumanResourceTimeRecording\Models\Session
-     * @group module
-     */
     public function testStatusInputOutput() : void
     {
-        $element = new SessionElement(null, new \DateTime('2021-10-05'));
-        $element->setStatus(ClockingStatus::START);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05'));
+        $element->status = ClockingStatus::START;
         $this->session->addSessionElement($element);
 
-        $element = new SessionElement(null, new \DateTime('2021-10-06'));
-        $element->setStatus(ClockingStatus::PAUSE);
+        $element         = new SessionElement(null, new \DateTime('2021-10-06'));
+        $element->status = ClockingStatus::PAUSE;
         $this->session->addSessionElement($element);
 
-        $element = new SessionElement(null, new \DateTime('2021-10-07'));
-        $element->setStatus(ClockingStatus::CONTINUE);
+        $element         = new SessionElement(null, new \DateTime('2021-10-07'));
+        $element->status = ClockingStatus::CONTINUE;
         $this->session->addSessionElement($element);
 
         self::assertEquals(ClockingStatus::CONTINUE, $this->session->getStatus());
@@ -87,38 +77,38 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
      */
     public function testBusyBreakInputOutput() : void
     {
-        $element = new SessionElement(null, new \DateTime('2021-10-05 02:00:00'));
-        $element->setStatus(ClockingStatus::START);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05 02:00:00'));
+        $element->status = ClockingStatus::START;
         $this->session->addSessionElement($element);
 
         // this is ignored because the session is already started
-        $element = new SessionElement(null, new \DateTime('2021-10-05 03:00:00'));
-        $element->setStatus(ClockingStatus::START);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05 03:00:00'));
+        $element->status = ClockingStatus::START;
         $this->session->addSessionElement($element);
 
-        $element = new SessionElement(null, new \DateTime('2021-10-05 04:00:00'));
-        $element->setStatus(ClockingStatus::PAUSE);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05 04:00:00'));
+        $element->status = ClockingStatus::PAUSE;
         $this->session->addSessionElement($element);
 
-        $element = new SessionElement(null, new \DateTime('2021-10-05 04:30:00'));
-        $element->setStatus(ClockingStatus::CONTINUE);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05 04:30:00'));
+        $element->status = ClockingStatus::CONTINUE;
         $this->session->addSessionElement($element);
 
-        $element = new SessionElement(null, new \DateTime('2021-10-05 07:00:00'));
-        $element->setStatus(ClockingStatus::PAUSE);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05 07:00:00'));
+        $element->status = ClockingStatus::PAUSE;
         $this->session->addSessionElement($element);
 
-        $element = new SessionElement(null, new \DateTime('2021-10-05 08:30:00'));
-        $element->setStatus(ClockingStatus::CONTINUE);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05 08:30:00'));
+        $element->status = ClockingStatus::CONTINUE;
         $this->session->addSessionElement($element);
 
-        $element = new SessionElement(null, new \DateTime('2021-10-05 11:00:00'));
-        $element->setStatus(ClockingStatus::END);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05 11:00:00'));
+        $element->status = ClockingStatus::END;
         $this->session->addSessionElement($element);
 
         // this is ignored because the session is already stopped
-        $element = new SessionElement(null, new \DateTime('2021-10-05 11:30:00'));
-        $element->setStatus(ClockingStatus::END);
+        $element         = new SessionElement(null, new \DateTime('2021-10-05 11:30:00'));
+        $element->status = ClockingStatus::END;
         $this->session->addSessionElement($element);
 
         self::assertEquals(2 * 60 * 60, $this->session->getBreak());
@@ -142,7 +132,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
      */
     public function testSerialize() : void
     {
-        $this->session->setType(ClockingType::VACATION);
+        $this->session->type = ClockingType::VACATION;
 
         $serialized = $this->session->jsonSerialize();
         unset($serialized['start']);

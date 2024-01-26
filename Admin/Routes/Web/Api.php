@@ -18,7 +18,7 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/humanresource/timerecording/session.*$' => [
+    '^.*/humanresource/timerecording/session(\?.*$|$)' => [
         [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\ApiController:apiSessionCreate',
             'verb'       => RouteVerb::PUT,
@@ -29,7 +29,7 @@ return [
             ],
         ],
     ],
-    '^.*/humanresource/timerecording/element.*$' => [
+    '^.*/humanresource/timerecording/element(\?.*$|$)' => [
         [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\ApiController:apiSessionElementCreate',
             'verb'       => RouteVerb::PUT,

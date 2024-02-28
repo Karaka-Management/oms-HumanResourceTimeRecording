@@ -44,29 +44,29 @@ $head = $this->head;
     <?= $head->renderAssets(); ?>
     <style type="text/css">
         :root {
-            --main-background: #2e1a5a;
-            --main-background-highlight: #9e51c5;
+            --main-bg: #2e1a5a;
+            --main-bg-hl: #9e51c5;
 
-            --input-border: rgba(166, 135, 232, .4);
-            --input-border-active: rgba(166, 135, 232, .7);
-            --input-color: rgba(166, 135, 232, .6);
-            --input-color-active: rgba(166, 135, 232, .8);
+            --iborder: rgba(166, 135, 232, .4);
+            --iborder-active: rgba(166, 135, 232, .7);
+            --ipt-c: rgba(166, 135, 232, .6);
+            --ipt-c-active: rgba(166, 135, 232, .8);
 
-            --input-icon-color: rgba(166, 135, 232, .6);
-            --input-icon-color-active: rgba(166, 135, 232, 1);
+            --ipt-ico-c: rgba(166, 135, 232, .6);
+            --ipt-ico-c-active: rgba(166, 135, 232, 1);
 
-            --button-main-background: rgba(166, 135, 232, .6);
-            --button-main-background-active: rgba(166, 135, 232, .8);
-            --button-main-color: rgba(255, 255, 255, .9);
+            --btn-main-bg: rgba(166, 135, 232, .6);
+            --btn-main-bg-active: rgba(166, 135, 232, .8);
+            --btn-main-c: rgba(255, 255, 255, .9);
 
-            --text-on-background-color: rgba(255, 255, 255, 0.7);
+            --txt-on-bg-c: rgba(255, 255, 255, 0.7);
         }
 
         html, body {
             height: 100%;
             font-family: 'Roboto', sans-serif;
-            background-image: linear-gradient(var(--main-background-highlight), var(--main-background));
-            color: var(--text-on-background-color);
+            background-image: linear-gradient(var(--main-bg-hl), var(--main-bg));
+            color: var(--txt-on-bg-c);
             padding: 0;
             display: flex;
             justify-content: center;
@@ -117,7 +117,7 @@ $head = $this->head;
 
         form label {
             text-shadow: none;
-            color: var(--text-on-background-color);
+            color: var(--txt-on-bg-c);
             cursor: pointer;
         }
 
@@ -125,10 +125,10 @@ $head = $this->head;
         form input[type=password] {
             margin-bottom: .5rem;
             background: rgba(0, 0, 0, .15);
-            border: 1px solid var(--input-border);
+            border: 1px solid var(--iborder);
             text-shadow: none;
             box-shadow: none;
-            color: var(--text-on-background-color);
+            color: var(--txt-on-bg-c);
             width: 100%;
             transition : border 500ms ease-out;
             outline: none;
@@ -144,8 +144,8 @@ $head = $this->head;
             padding-left: 2.5rem;
         }
 
-        .inputWithIcon .frontIcon {
-            color: var(--input-icon-color);
+        .inputWithIcon .frontIco {
+            color: var(--ipt-ico-c);
             font-size: 1rem;
             position: absolute;
             left: 0;
@@ -153,8 +153,8 @@ $head = $this->head;
             padding: .65rem;
         }
 
-        .inputWithIcon .endIcon {
-            color: var(--input-icon-color);
+        .inputWithIcon .endIco {
+            color: var(--ipt-ico-c);
             font-size: 1rem;
             position: absolute;
             right: 0;
@@ -164,29 +164,29 @@ $head = $this->head;
 
         form input[type=text]:active, form input[type=text]:focus,
         form input[type=password]:active, form input[type=password]:focus {
-            border: 1px solid var(--input-border-active);
-            color: var(--text-on-background-color);
+            border: 1px solid var(--iborder-active);
+            color: var(--txt-on-bg-c);
         }
 
-        form input[type=text]:active~.frontIcon, form input[type=text]:focus~.frontIcon,
-        form input[type=password]:active~.frontIcon, form input[type=password]:focus~.frontIcon,
-        form input[type=text]:active~.endIcon, form input[type=text]:focus~.endIcon,
-        form input[type=password]:active~.endIcon, form input[type=password]:focus~.endIcon {
-            color: var(--input-icon-color-active);
+        form input[type=text]:active~.frontIco, form input[type=text]:focus~.frontIco,
+        form input[type=password]:active~.frontIco, form input[type=password]:focus~.frontIco,
+        form input[type=text]:active~.endIco, form input[type=text]:focus~.endIco,
+        form input[type=password]:active~.endIco, form input[type=password]:focus~.endIco {
+            color: var(--ipt-ico-c-active);
         }
 
-        form input[type=text]~.endIcon, form input[type=text]~.endIcon,
-        form input[type=password]~.endIcon, form input[type=password]~.endIcon {
+        form input[type=text]~.endIco, form input[type=text]~.endIco,
+        form input[type=password]~.endIco, form input[type=password]~.endIco {
             cursor: pointer;
         }
 
         form input[type=submit], button {
             width: calc(50% - 10px);
-            background-color: var(--button-main-background);
+            background-color: var(--btn-main-bg);
             border: none;
             text-shadow: none;
             box-shadow: none;
-            color: var(--button-main-color);
+            color: var(--btn-main-c);
             cursor: pointer;
             transition : background-color 500ms ease-out;
             margin-bottom: 1rem;
@@ -199,7 +199,7 @@ $head = $this->head;
 
         form input[type=submit]:hover, button:hover,
         form input[type=submit]:focus, button:focus {
-            background-color: var(--button-main-background-active);
+            background-color: var(--btn-main-bg-active);
             border: none;
             text-shadow: none;
             box-shadow: none;
@@ -224,7 +224,7 @@ $head = $this->head;
         video {
             width: 100%;
             height: 100%;
-            border: 1px solid var(--input-border);
+            border: 1px solid var(--iborder);
         }
     </style>
 </head>
@@ -237,25 +237,25 @@ $head = $this->head;
         <form id="login" method="POST" action="<?= \phpOMS\Uri\UriFactory::build('{/api}login?{?}'); ?>">
             <button id="iCameraLoginButton" name="cameraLoginButton" type="button" tabindex="1"><?= $this->getHtml('CameraLogin', '0', '0'); ?></button>
             <button id="iPasswordLoginButton" name="passwordLoginButton" type="button" tabindex="2"><?= $this->getHtml('PasswordLogin', '0', '0'); ?></button>
-            <div id="cameraLogin" class="hidden">
+            <div id="cameraLogin" class="vh">
                 <h1><?= $this->getHtml('IDCard', '0', '0'); ?>:</h1>
                 <video id="iVideoCanvas"></video>
                 <button class="cancelButton" name="cancelButton" type="button" tabindex="6"><?= $this->getHtml('Cancel', '0', '0'); ?></button>
                 <div id="iCameraCountdown"><?php \printf($this->getHtml('TimerCamera', '0', '0'), '<span id="iCameraCountdownClock"></span>'); ?></div>
             </div>
-            <div id="passwordLogin" class="hidden">
+            <div id="passwordLogin" class="vh">
             <h1><?= $this->getHtml('Login', '0', '0'); ?>:</h1>
                 <label for="iName"><?= $this->getHtml('Username', '0', '0'); ?>:</label>
                 <div class="inputWithIcon">
-                    <i class="frontIcon g-icon" aria-hidden="true">person</i>
+                    <i class="frontIco g-icon" aria-hidden="true">person</i>
                     <input id="iName" type="text" name="user" tabindex="3" value="admin" autofocus>
-                    <i class="endIcon g-icon close" aria-hidden="true">close</i>
+                    <i class="endIco g-icon close" aria-hidden="true">close</i>
                 </div>
                 <label for="iPassword"><?= $this->getHtml('Password', '0', '0'); ?>:</label>
                 <div class="inputWithIcon">
-                    <i class="frontIcon g-icon" aria-hidden="true">lock</i>
+                    <i class="frontIco g-icon" aria-hidden="true">lock</i>
                     <input id="iPassword" type="password" name="pass" tabindex="4" value="orange">
-                    <i class="endIcon g-icon close" aria-hidden="true">close</i>
+                    <i class="endIco g-icon close" aria-hidden="true">close</i>
                 </div>
                 <input id="iLoginButton" name="loginButton" type="submit" value="<?= $this->getHtml('Login', '0', '0'); ?>" tabindex="5">
                 <button class="cancelButton" name="cancelButton" type="button" tabindex="6"><?= $this->getHtml('Cancel', '0', '0'); ?></button>

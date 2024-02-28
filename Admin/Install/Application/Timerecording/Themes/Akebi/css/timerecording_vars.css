@@ -1,24 +1,24 @@
 :root {
-  --main-background: rgb(46, 26, 90);
-  --main-background-highlight: rgb(158, 81, 197);
-  --input-border: rgba(166, 135, 232, .4);
-  --input-border-active: rgba(166, 135, 232, .7);
-  --input-color: rgba(166, 135, 232, .6);
-  --input-color-active: rgba(166, 135, 232, .8);
-  --input-icon-color: rgba(166, 135, 232, .6);
-  --input-icon-color-active: rgba(166, 135, 232, 1);
-  --button-main-background: rgba(166, 135, 232, .6);
-  --button-main-background-active: rgba(166, 135, 232, .8);
-  --button-main-color: rgba(255, 255, 255, .9);
-  --text-on-background-color: rgba(255, 255, 255, 0.7);
-  --nav-category-background: rgb(43, 58, 101);
-  --nav-category-background-highlight: rgb(113, 43, 145);
-  --nav-category-background-hover: rgb(120, 50, 153);
-  --nav-sub-background: rgb(72, 39, 102);
-  --nav-sub-background-highlight: rgb(94, 52, 133);
-  --nav-sub-background-hover: rgb(116, 67, 161);
-  --nav-header-background: rgb(72, 39, 102);
-  --nav-header-background-highlight: rgb(94, 52, 133);
-  --nav-header-background-hover: rgb(116, 67, 161);
-  --font-family: 'Arial', Helvetica, sans-serif;
-  --box-border-color: rgb(202, 202, 202); }
+  --main-bg: rgb(46, 26, 90);
+  --main-bg-hl: rgb(158, 81, 197);
+  --iborder: rgba(166, 135, 232, .4);
+  --iborder-active: rgba(166, 135, 232, .7);
+  --ipt-c: rgba(166, 135, 232, .6);
+  --ipt-c-active: rgba(166, 135, 232, .8);
+  --ipt-ico-c: rgba(166, 135, 232, .6);
+  --ipt-ico-c-active: rgba(166, 135, 232, 1);
+  --btn-main-bg: rgba(166, 135, 232, .6);
+  --btn-main-bg-active: rgba(166, 135, 232, .8);
+  --btn-main-c: rgba(255, 255, 255, .9);
+  --txt-on-bg-c: rgba(255, 255, 255, 0.7);
+  --nav-cat-bg: rgb(43, 58, 101);
+  --nav-cat-bg-hl: rgb(113, 43, 145);
+  --nav-cat-bg-hover: rgb(120, 50, 153);
+  --nav-sub-bg: rgb(72, 39, 102);
+  --nav-sub-bg-hl: rgb(94, 52, 133);
+  --nav-sub-bg-hover: rgb(116, 67, 161);
+  --nav-head-bg: rgb(72, 39, 102);
+  --nav-head-bg-hl: rgb(94, 52, 133);
+  --nav-head-bg-hover: rgb(116, 67, 161);
+  --ff: 'Arial', Helvetica, sans-serif;
+  --bborder-color: rgb(202, 202, 202); }

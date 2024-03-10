@@ -19,15 +19,15 @@ jsOMS.ready(function ()
                 video.srcObject = stream;
                 video.play();
 
-                jsOMS.addClass(logo, 'hidden');
-                jsOMS.addClass(cLogin, 'hidden');
-                jsOMS.addClass(pLogin, 'hidden');
-                jsOMS.removeClass(document.getElementById('cameraLogin'), 'hidden');
+                jsOMS.addClass(logo, 'vh');
+                jsOMS.addClass(cLogin, 'vh');
+                jsOMS.addClass(pLogin, 'vh');
+                jsOMS.removeClass(document.getElementById('cameraLogin'), 'vh');
 
                 timer           = 10000;
                 clock.innerHTML = timer / 1000;
 
-                jsOMS.removeClass(countdown, 'hidden');
+                jsOMS.removeClass(countdown, 'vh');
 
                 const cameraTimer = setInterval(function() {
                     timer -= 100;
@@ -37,10 +37,10 @@ jsOMS.ready(function ()
                     }
 
                     if (timer <= 0) {
-                        jsOMS.addClass(document.getElementById('cameraLogin'), 'hidden');
-                        jsOMS.removeClass(cLogin, 'hidden');
-                        jsOMS.removeClass(pLogin, 'hidden');
-                        jsOMS.removeClass(logo, 'hidden');
+                        jsOMS.addClass(document.getElementById('cameraLogin'), 'vh');
+                        jsOMS.removeClass(cLogin, 'vh');
+                        jsOMS.removeClass(pLogin, 'vh');
+                        jsOMS.removeClass(logo, 'vh');
 
                         video.pause();
                         stream.getVideoTracks()[0].stop();
@@ -56,14 +56,14 @@ jsOMS.ready(function ()
         const clock     = document.getElementById('iPasswordCountdownClock');
         const countdown = document.getElementById('iPasswordCountdown');
 
-        jsOMS.addClass(pLogin, 'hidden');
-        jsOMS.addClass(cLogin, 'hidden');
-        jsOMS.removeClass(document.getElementById('passwordLogin'), 'hidden');
+        jsOMS.addClass(pLogin, 'vh');
+        jsOMS.addClass(cLogin, 'vh');
+        jsOMS.removeClass(document.getElementById('passwordLogin'), 'vh');
 
         timer           = 10000;
         clock.innerHTML = timer / 1000;
 
-        jsOMS.removeClass(countdown, 'hidden');
+        jsOMS.removeClass(countdown, 'vh');
 
         const passwordTimer = setInterval(function() {
             timer -= 100;
@@ -73,9 +73,9 @@ jsOMS.ready(function ()
             }
 
             if (timer <= 0) {
-                jsOMS.addClass(document.getElementById('passwordLogin'), 'hidden');
-                jsOMS.removeClass(pLogin, 'hidden');
-                jsOMS.removeClass(cLogin, 'hidden');
+                jsOMS.addClass(document.getElementById('passwordLogin'), 'vh');
+                jsOMS.removeClass(pLogin, 'vh');
+                jsOMS.removeClass(cLogin, 'vh');
 
                 clearInterval(passwordTimer);
             }

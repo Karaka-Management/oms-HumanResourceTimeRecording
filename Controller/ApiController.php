@@ -63,14 +63,6 @@ final class ApiController extends Controller
         }
 
         $session = $this->createSessionFromRequest($request);
-
-        if ($session === null) {
-            $response->header->status = RequestStatusCode::R_403;
-            $this->createInvalidCreateResponse($request, $response, $session);
-
-            return;
-        }
-
         $this->createModel($request->header->account, $session, SessionMapper::class, 'session', $request->getOrigin());
         $this->createStandardCreateResponse($request, $response, $session);
     }
@@ -80,11 +72,11 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract $request Request
      *
-     * @return null|Session
+     * @return Session
      *
      * @since 1.0.0
      */
-    private function createSessionFromRequest(RequestAbstract $request) : ?Session
+    private function createSessionFromRequest(RequestAbstract $request) : Session
     {
         $account = $request->getDataInt('account') ?? $request->header->account;
 
@@ -97,7 +89,7 @@ final class ApiController extends Controller
             : new \DateTime('now');
 
         $element         = new SessionElement($session, $dt);
-        $element->status = ClockingStatus::tryFromValue($request->getDataInt('status')) ?? ClockingStatus::OFFICE;
+        $element->status = ClockingStatus::tryFromValue($request->getDataInt('status')) ?? ClockingStatus::START;
 
         $session->addSessionElement($element);
 
@@ -125,12 +117,14 @@ final class ApiController extends Controller
             return;
         }
 
+        /*
         if (!empty($val = $this->validateSessionElementCreate($request))) {
             $response->header->status = RequestStatusCode::R_400;
             $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
+        */
 
         if ($request->hasData('account')
             && $request->getDataInt('account') !== $request->header->account
@@ -160,25 +154,6 @@ final class ApiController extends Controller
 
         $this->createModel($request->header->account, $element, SessionElementMapper::class, 'element', $request->getOrigin());
         $this->createStandardCreateResponse($request, $response, $element);
-    }
-
-    /**
-     * Validate session element create request
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return array<string, bool> Returns the validation array of the request
-     *
-     * @since 1.0.0
-     */
-    private function validateSessionElementCreate(RequestAbstract $request) : array
-    {
-        $val = [];
-        if (false) {
-            return $val;
-        }
-
-        return [];
     }
 
     /**

@@ -86,7 +86,7 @@ class Session implements \JsonSerializable
     /**
      * Session start
      *
-     * @var \DateTime
+     * @var \DateTimeImmutable
      * @since 1.0.0
      */
     public \DateTimeImmutable $createdAt;

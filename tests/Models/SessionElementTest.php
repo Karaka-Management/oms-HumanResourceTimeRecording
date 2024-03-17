@@ -42,7 +42,7 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $this->element->id);
         self::assertEquals(0, $this->element->session->id);
         self::assertInstanceOf('\DateTime', $this->element->datetime);
-        self::assertEquals(ClockingStatus::START, $this->element->getStatus());
+        self::assertEquals(ClockingStatus::START, $this->element->status);
     }
 
     /**
@@ -51,8 +51,8 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
      */
     public function testStatusInputOutput() : void
     {
-        $this->element->setStatus(ClockingStatus::END);
-        self::assertEquals(ClockingStatus::END, $this->element->getStatus());
+        $this->element->status = ClockingStatus::END;
+        self::assertEquals(ClockingStatus::END, $this->element->status);
     }
 
     /**
@@ -62,7 +62,7 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
     public function testSerialize() : void
     {
         $this->element->session = new NullSession(2);
-        $this->element->setStatus(ClockingStatus::END);
+        $this->element->status = ClockingStatus::END;
 
         $serialized = $this->element->jsonSerialize();
         unset($serialized['datetime']);

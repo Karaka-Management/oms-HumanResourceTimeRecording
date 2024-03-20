@@ -2,7 +2,7 @@
 /**
  * Jingga
  *
- * PHP Version 8.1
+ * PHP Version 8.2
  *
  * @package   Template
  * @copyright Dennis Eichhorn
@@ -15,7 +15,7 @@ declare(strict_types=1);
 /**
  * Jingga
  *
- * PHP Version 8.1
+ * PHP Version 8.2
  *
  * @package   Web\Timerecording
  * @copyright Dennis Eichhorn

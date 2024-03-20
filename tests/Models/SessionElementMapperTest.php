@@ -22,12 +22,10 @@ use Modules\HumanResourceTimeRecording\Models\SessionElementMapper;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\HumanResourceTimeRecording\Models\SessionElementMapper::class)]
 final class SessionElementMapperTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\SessionElementMapper
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCRUD() : void
     {
         $element = new SessionElement(new Session(new NullAccount(1)), new \DateTime('now'));

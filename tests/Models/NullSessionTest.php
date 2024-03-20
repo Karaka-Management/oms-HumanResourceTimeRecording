@@ -19,31 +19,23 @@ use Modules\HumanResourceTimeRecording\Models\NullSession;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\HumanResourceTimeRecording\Models\NullSession::class)]
 final class NullSessionTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\NullSession
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testNull() : void
     {
         self::assertInstanceOf('\Modules\HumanResourceTimeRecording\Models\Session', new NullSession());
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\NullSession
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testId() : void
     {
         $null = new NullSession(2);
         self::assertEquals(2, $null->id);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\NullSession
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testJsonSerialize() : void
     {
         $null = new NullSession(2);

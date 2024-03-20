@@ -23,12 +23,10 @@ use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\HumanResourceTimeRecording\Models\SessionMapper::class)]
 final class SessionMapperTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\SessionMapper
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCRUD() : void
     {
         $session = new Session(new NullAccount(1));

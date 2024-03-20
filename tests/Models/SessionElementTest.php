@@ -21,6 +21,7 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\HumanResourceTimeRecording\Models\SessionElement::class)]
 final class SessionElementTest extends \PHPUnit\Framework\TestCase
 {
     private SessionElement $element;
@@ -33,10 +34,7 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
         $this->element = new SessionElement();
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\SessionElement
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testDefault() : void
     {
         self::assertEquals(0, $this->element->id);
@@ -45,20 +43,14 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(ClockingStatus::START, $this->element->status);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\SessionElement
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testStatusInputOutput() : void
     {
         $this->element->status = ClockingStatus::END;
         self::assertEquals(ClockingStatus::END, $this->element->status);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\SessionElement
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testSerialize() : void
     {
         $this->element->session = new NullSession(2);

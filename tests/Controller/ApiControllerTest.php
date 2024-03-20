@@ -39,10 +39,10 @@ use phpOMS\Router\WebRouter;
 use phpOMS\Utils\TestUtils;
 
 /**
- * @testdox Modules\HumanResourceTimeRecording\tests\Controller\ApiControllerTest: HumanResourceTimeRecording api controller
- *
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\HumanResourceTimeRecording\Controller\ApiController::class)]
+#[\PHPUnit\Framework\Attributes\TestDox('Modules\HumanResourceTimeRecording\tests\Controller\ApiControllerTest: HumanResourceTimeRecording api controller')]
 final class ApiControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected ApplicationAbstract $app;
@@ -99,10 +99,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         TestUtils::setMember($this->module, 'app', $this->app);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiSessionCR() : void
     {
         if (($profile = ProfileMapper::get()->where('account', 1)->limit(1)->execute())->id === 0) {
@@ -138,10 +135,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertGreaterThan(0, $response->getDataArray('')['response']->id);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiSessionCreateInvalidPermission() : void
     {
         $response = new HttpResponse();
@@ -154,10 +148,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(RequestStatusCode::R_403, $response->header->status);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiSessionCreateInvalidDataEmployee() : void
     {
         $response = new HttpResponse();
@@ -170,10 +161,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(RequestStatusCode::R_403, $response->header->status);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiSessionElementCreateInvalidData() : void
     {
         $response = new HttpResponse();
@@ -186,10 +174,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(RequestStatusCode::R_400, $response->header->status);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiSessionElementCreateInvalidSessionId() : void
     {
         $response = new HttpResponse();
@@ -203,10 +188,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(RequestStatusCode::R_400, $response->header->status);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiSessionElementCreateInvalidPermission() : void
     {
         $response = new HttpResponse();

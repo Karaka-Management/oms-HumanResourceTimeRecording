@@ -22,6 +22,7 @@ use Modules\HumanResourceTimeRecording\Models\SessionElement;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\HumanResourceTimeRecording\Models\Session::class)]
 final class SessionTest extends \PHPUnit\Framework\TestCase
 {
     private Session $session;
@@ -34,10 +35,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         $this->session = new Session();
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\Session
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testDefault() : void
     {
         self::assertEquals(0, $this->session->id);
@@ -50,10 +48,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         self::assertNull($this->session->end);
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\Session
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testStatusInputOutput() : void
     {
         $element         = new SessionElement(null, new \DateTime('2021-10-05'));
@@ -71,10 +66,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(ClockingStatus::CONTINUE, $this->session->getStatus());
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\Session
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testBusyBreakInputOutput() : void
     {
         $element         = new SessionElement(null, new \DateTime('2021-10-05 02:00:00'));
@@ -115,10 +107,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(7 * 60 * 60, $this->session->getBusy());
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\Session
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testSessionElementInputOutput() : void
     {
         $element = new SessionElement(null, new \DateTime('now'));
@@ -126,10 +115,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         self::assertCount(1, $this->session->getSessionElements());
     }
 
-    /**
-     * @covers \Modules\HumanResourceTimeRecording\Models\Session
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testSerialize() : void
     {
         $this->session->type = ClockingType::VACATION;

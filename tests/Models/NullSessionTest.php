@@ -22,7 +22,7 @@ use Modules\HumanResourceTimeRecording\Models\NullSession;
 final class NullSessionTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\NullSession
+     * @covers \Modules\HumanResourceTimeRecording\Models\NullSession
      * @group module
      */
     public function testNull() : void
@@ -31,7 +31,7 @@ final class NullSessionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\NullSession
+     * @covers \Modules\HumanResourceTimeRecording\Models\NullSession
      * @group module
      */
     public function testId() : void
@@ -41,7 +41,7 @@ final class NullSessionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\NullSession
+     * @covers \Modules\HumanResourceTimeRecording\Models\NullSession
      * @group module
      */
     public function testJsonSerialize() : void

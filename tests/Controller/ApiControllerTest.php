@@ -100,7 +100,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Controller\ApiController
+     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
      * @group module
      */
     public function testApiSessionCR() : void
@@ -139,7 +139,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Controller\ApiController
+     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
      * @group module
      */
     public function testApiSessionCreateInvalidPermission() : void
@@ -155,7 +155,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Controller\ApiController
+     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
      * @group module
      */
     public function testApiSessionCreateInvalidDataEmployee() : void
@@ -171,7 +171,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Controller\ApiController
+     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
      * @group module
      */
     public function testApiSessionElementCreateInvalidData() : void
@@ -187,7 +187,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Controller\ApiController
+     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
      * @group module
      */
     public function testApiSessionElementCreateInvalidSessionId() : void
@@ -204,7 +204,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Controller\ApiController
+     * @covers \Modules\HumanResourceTimeRecording\Controller\ApiController
      * @group module
      */
     public function testApiSessionElementCreateInvalidPermission() : void

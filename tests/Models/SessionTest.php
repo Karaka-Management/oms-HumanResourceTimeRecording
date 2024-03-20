@@ -35,7 +35,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\Session
+     * @covers \Modules\HumanResourceTimeRecording\Models\Session
      * @group module
      */
     public function testDefault() : void
@@ -51,7 +51,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\Session
+     * @covers \Modules\HumanResourceTimeRecording\Models\Session
      * @group module
      */
     public function testStatusInputOutput() : void
@@ -72,7 +72,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\Session
+     * @covers \Modules\HumanResourceTimeRecording\Models\Session
      * @group module
      */
     public function testBusyBreakInputOutput() : void
@@ -116,7 +116,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\Session
+     * @covers \Modules\HumanResourceTimeRecording\Models\Session
      * @group module
      */
     public function testSessionElementInputOutput() : void
@@ -127,7 +127,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\Session
+     * @covers \Modules\HumanResourceTimeRecording\Models\Session
      * @group module
      */
     public function testSerialize() : void

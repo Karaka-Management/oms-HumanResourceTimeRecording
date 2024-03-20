@@ -34,7 +34,7 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
+     * @covers \Modules\HumanResourceTimeRecording\Models\SessionElement
      * @group module
      */
     public function testDefault() : void
@@ -46,7 +46,7 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
+     * @covers \Modules\HumanResourceTimeRecording\Models\SessionElement
      * @group module
      */
     public function testStatusInputOutput() : void
@@ -56,7 +56,7 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\SessionElement
+     * @covers \Modules\HumanResourceTimeRecording\Models\SessionElement
      * @group module
      */
     public function testSerialize() : void

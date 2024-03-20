@@ -26,7 +26,7 @@ use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 final class SessionMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @covers Modules\HumanResourceTimeRecording\Models\SessionMapper
+     * @covers \Modules\HumanResourceTimeRecording\Models\SessionMapper
      * @group module
      */
     public function testCRUD() : void

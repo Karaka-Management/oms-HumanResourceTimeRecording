@@ -86,6 +86,7 @@ final class BackendController extends Controller implements DashboardElementInte
             ->with('profile')
             ->with('profile/account')
             ->where('profile/account', $request->header->account)
+            ->limit(1)
             ->execute();
 
         /** @var \Modules\HumanResourceTimeRecording\Models\Session $lastOpenSession */

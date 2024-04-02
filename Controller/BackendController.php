@@ -58,7 +58,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->data['employees'] = EmployeeMapper::getAll()
             ->with('profile')
             ->with('profile/account')
-            ->execute();
+            ->executeGetArray();
 
         return $view;
     }
@@ -102,7 +102,7 @@ final class BackendController extends Controller implements DashboardElementInte
             ->where('employee', $employee->profile->account->id)
             ->where('start', $start, '<=')
             ->sort('start', OrderType::DESC)
-            ->execute();
+            ->executeGetArray();
 
         $view->data['sessions']    = $list;
         $view->data['lastSession'] = $lastOpenSession;

@@ -434,7 +434,7 @@ final class Application
     private function createDefaultPageView(HttpRequest $request, HttpResponse $response, TimerecordingView $pageView) : void
     {
         $pageView->setOrganizations(UnitMapper::getAll()->execute());
-        $pageView->profile = ProfileMapper::get()->where('account', $request->header->account)->execute();
+        $pageView->profile = ProfileMapper::get()->where('account', $request->header->account)->executeGetArray();
         $pageView->setData('nav', $this->getNavigation($request, $response));
 
         $pageView->setTemplate('/Web/Timerecording/index');

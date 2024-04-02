@@ -54,7 +54,7 @@ final class SessionElementTest extends \PHPUnit\Framework\TestCase
     public function testSerialize() : void
     {
         $this->element->session = new NullSession(2);
-        $this->element->status = ClockingStatus::END;
+        $this->element->status  = ClockingStatus::END;
 
         $serialized = $this->element->jsonSerialize();
         unset($serialized['datetime']);

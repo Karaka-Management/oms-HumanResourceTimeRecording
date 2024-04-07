@@ -91,7 +91,8 @@ final class ApiController extends Controller
         $element         = new SessionElement($session, $dt);
         $element->status = ClockingStatus::tryFromValue($request->getDataInt('status')) ?? ClockingStatus::START;
 
-        $session->addSessionElement($element);
+        $session->sessionElements[] = $element;
+        $session->recalculate();
 
         return $session;
     }
@@ -111,7 +112,9 @@ final class ApiController extends Controller
      */
     public function apiSessionElementCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
-        if (($request->getDataInt('status') ?? -1) === ClockingStatus::START) {
+        if (!$request->hasData('session') &&
+            ($request->getDataInt('status') ?? -1) === ClockingStatus::START
+        ) {
             $this->apiSessionCreate($request, $response);
 
             return;
@@ -146,9 +149,12 @@ final class ApiController extends Controller
 
         if ($element->status === ClockingStatus::END) {
             /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
-            $session = SessionMapper::get()->where('id', (int) $request->getData('session'))->execute();
+            $session = SessionMapper::get()
+                ->with('sessionElements')
+                ->where('id', (int) $request->getData('session'))
+                ->execute();
 
-            $session->addSessionElement($element);
+            $session->recalculate();
             SessionMapper::update()->execute($session);
         }
 

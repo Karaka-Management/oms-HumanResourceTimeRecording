@@ -222,9 +222,9 @@ echo $this->data['nav']->render(); ?>
                     <td><a href="<?= $url; ?>"><?= $session->start->format('H:i'); ?></a>
                     <td><a href="<?= $url; ?>"><?= (int) ($session->getBreak() / 3600); ?>h <?= ((int) ($session->getBreak() / 60) % 60); ?>m</a>
                     <td><a href="<?= $url; ?>"><?= $session->end?->format('H:i'); ?></a>
-                    <td><a href="<?= $url; ?>"><?= (int) ($session->getBusy() / 3600); ?>h <?= ((int) ($session->getBusy() / 60) % 60); ?>m</a>
+                    <td><a href="<?= $url; ?>"><?= (int) ($session->busy / 3600); ?>h <?= ((int) ($session->busy / 60) % 60); ?>m</a>
                 <?php
-                    $busy['week'] += $session->getBusy();
+                    $busy['week'] += $session->busy;
                     if ($session->start->getTimestamp() < $startWeek->getTimestamp()
                         || $count === $sessionCount
                 ) : ?>
@@ -238,7 +238,7 @@ echo $this->data['nav']->render(); ?>
                     endif;
                 ?>
                 <?php
-                    $busy['month'] += $session->getBusy();
+                    $busy['month'] += $session->busy;
                     if ($session->start->getTimestamp() < $startMonth->getTimestamp()
                         || $count === $sessionCount
                 ) : ?>

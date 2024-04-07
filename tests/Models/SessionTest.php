@@ -39,7 +39,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     public function testDefault() : void
     {
         self::assertEquals(0, $this->session->id);
-        self::assertEquals(0, $this->session->getBusy());
+        self::assertEquals(0, $this->session->busy);
         self::assertEquals(0, $this->session->getBreak());
         self::assertEquals([], $this->session->getSessionElements());
         self::assertEquals(ClockingType::OFFICE, $this->session->type);
@@ -104,7 +104,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         $this->session->addSessionElement($element);
 
         self::assertEquals(2 * 60 * 60, $this->session->getBreak());
-        self::assertEquals(7 * 60 * 60, $this->session->getBusy());
+        self::assertEquals(7 * 60 * 60, $this->session->busy);
     }
 
     #[\PHPUnit\Framework\Attributes\Group('module')]

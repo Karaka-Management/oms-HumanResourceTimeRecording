@@ -105,56 +105,35 @@ class Session implements \JsonSerializable
         $this->createdAt = new \DateTimeImmutable('now');
     }
 
-    /**
-     * Get busy time.
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getBusy() : int
+    public function recalculate() : void
     {
-        return $this->busy;
-    }
-
-    /**
-     * Add a session element to the session
-     *
-     * @param SessionElement $element Session element
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function addSessionElement(SessionElement $element) : void
-    {
-        if ($element->status === ClockingStatus::START) {
-            foreach ($this->sessionElements as $e) {
-                if ($e->status === ClockingStatus::START) {
-                    return;
-                }
-            }
-
-            $this->start = $element->datetime;
-        }
-
-        if ($element->status === ClockingStatus::END) {
-            if ($this->end !== null) {
-                return;
-            }
-
-            $this->end = $element->datetime;
-        }
-
-        $this->sessionElements[] = $element;
-
         \usort($this->sessionElements, [$this, 'compareSessionElementTimestamps']);
+
+        $start = null;
+        $end = null;
+
+        foreach ($this->sessionElements as $e) {
+            if ($e->status === ClockingStatus::START
+                && ($start === null || $start->getTimestamp() > $e->datetime->getTimestamp())
+            ) {
+                $start = $e->datetime;
+            } elseif ($e->status === ClockingStatus::END
+                && ($end === null || $end->getTimestamp() < $e->datetime->getTimestamp())
+            ) {
+                $end = $e->datetime;
+            }
+        }
+
+        $this->start = $start;
+        $this->end = $end;
 
         $busyTime  = 0;
         $lastStart = $this->start;
 
         foreach ($this->sessionElements as $e) {
             if ($e->status === ClockingStatus::START) {
+                $lastStart = $e->datetime;
+
                 continue;
             }
 

@@ -18,7 +18,7 @@
                 "pid": "/humanresource/timerecording",
                 "type": 3,
                 "subtype": 1,
-                "name": "Today",
+                "name": "Dashboard",
                 "uri": "{/base}/humanresource/timerecording/dashboard?{?}",
                 "target": "self",
                 "icon": null,

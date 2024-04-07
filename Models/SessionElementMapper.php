@@ -17,7 +17,7 @@ namespace Modules\HumanResourceTimeRecording\Models;
 use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
- * Mapper class.
+ * SessionElement mapper class.
  *
  * @package Modules\HumanResourceTimeRecording\Models
  * @license OMS License 2.0

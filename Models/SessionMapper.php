@@ -20,7 +20,7 @@ use phpOMS\DataStorage\Database\Query\Builder;
 use phpOMS\Stdlib\Base\SmartDateTime;
 
 /**
- * Mapper class.
+ * Session mapper class.
  *
  * @package Modules\HumanResourceTimeRecording\Models
  * @license OMS License 2.0
@@ -105,6 +105,8 @@ final class SessionMapper extends DataMapperFactory
      *
      * @return Session[]
      *
+     * @performance This is way too slow
+     *
      * @since 1.0.0
      */
     public static function getLastSessionsFromAllEmployees() : array
@@ -121,7 +123,7 @@ final class SessionMapper extends DataMapperFactory
             ->andOn(self::TABLE . '_d1.hr_timerecording_session_start', '=', 'tm.maxDate');
 
         return self::getAll()
-            ->execute($query);
+            ->executeGetArray($query);
     }
 
     /**

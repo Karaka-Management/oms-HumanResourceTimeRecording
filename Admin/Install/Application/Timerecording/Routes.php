@@ -5,7 +5,7 @@ return [
         0 => [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
             'verb'       => 1,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => 'HumanResourceTimeRecording',
                 'type'   => 2,
@@ -17,7 +17,7 @@ return [
         0 => [
             'dest'       => '\Modules\HumanResourceTimeRecording\Controller\TimerecordingController:viewDashboard',
             'verb'       => 1,
-            'active' => true,
+            'active'     => true,
             'permission' => [
                 'module' => 'HumanResourceTimeRecording',
                 'type'   => 2,

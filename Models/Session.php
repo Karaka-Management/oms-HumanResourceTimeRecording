@@ -110,7 +110,7 @@ class Session implements \JsonSerializable
         \usort($this->sessionElements, [$this, 'compareSessionElementTimestamps']);
 
         $start = null;
-        $end = null;
+        $end   = null;
 
         foreach ($this->sessionElements as $e) {
             if ($e->status === ClockingStatus::START
@@ -125,7 +125,7 @@ class Session implements \JsonSerializable
         }
 
         $this->start = $start;
-        $this->end = $end;
+        $this->end   = $end;
 
         $busyTime  = 0;
         $lastStart = $this->start;

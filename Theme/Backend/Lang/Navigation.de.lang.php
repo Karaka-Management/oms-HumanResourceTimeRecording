@@ -17,5 +17,5 @@ return ['Navigation' => [
     'List'          => 'Liste',
     'Stats'         => 'Statistiken',
     'TimeRecording' => 'Zeitaufnahme',
-    'Dashboard'         => 'Dashboard',
+    'Dashboard'     => 'Dashboard',
 ]];

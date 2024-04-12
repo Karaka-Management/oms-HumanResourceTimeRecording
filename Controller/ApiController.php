@@ -147,6 +147,8 @@ final class ApiController extends Controller
             return;
         }
 
+        $this->createModel($request->header->account, $element, SessionElementMapper::class, 'element', $request->getOrigin());
+
         if ($element->status === ClockingStatus::END) {
             /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
             $session = SessionMapper::get()
@@ -158,7 +160,6 @@ final class ApiController extends Controller
             SessionMapper::update()->execute($session);
         }
 
-        $this->createModel($request->header->account, $element, SessionElementMapper::class, 'element', $request->getOrigin());
         $this->createStandardCreateResponse($request, $response, $element);
     }
 

@@ -124,7 +124,7 @@ class Session implements \JsonSerializable
             }
         }
 
-        $this->start = $start;
+        $this->start = $start ?? $this->start;
         $this->end   = $end;
 
         $busyTime  = 0;

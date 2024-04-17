@@ -150,18 +150,6 @@ class Session implements \JsonSerializable
     }
 
     /**
-     * Get all session elements
-     *
-     * @return SessionElement[]
-     *
-     * @since 1.0.0
-     */
-    public function getSessionElements() : array
-    {
-        return $this->sessionElements;
-    }
-
-    /**
      * Compare session elements
      *
      * @param SessionElement $a First session element

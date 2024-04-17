@@ -41,7 +41,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $this->session->id);
         self::assertEquals(0, $this->session->busy);
         self::assertEquals(0, $this->session->getBreak());
-        self::assertEquals([], $this->session->getSessionElements());
+        self::assertEquals([], $this->session->sessionElements);
         self::assertEquals(ClockingType::OFFICE, $this->session->type);
         self::assertEquals(ClockingStatus::START, $this->session->getStatus());
         self::assertEquals((new \DateTime('now'))->format('Y-m-d'), $this->session->start->format('Y-m-d'));
@@ -105,14 +105,6 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(2 * 60 * 60, $this->session->getBreak());
         self::assertEquals(7 * 60 * 60, $this->session->busy);
-    }
-
-    #[\PHPUnit\Framework\Attributes\Group('module')]
-    public function testSessionElementInputOutput() : void
-    {
-        $element = new SessionElement(null, new \DateTime('now'));
-        $this->session->addSessionElement($element);
-        self::assertCount(1, $this->session->getSessionElements());
     }
 
     #[\PHPUnit\Framework\Attributes\Group('module')]

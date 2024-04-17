@@ -14,28 +14,34 @@ declare(strict_types=1);
 
 /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
 $session  = $this->data['session'];
-$elements = $session->getSessionElements();
+$elements = $session->sessionElements;
 
 echo $this->data['nav']->render(); ?>
-
 <div class="row">
     <div class="col-xs-12">
-        <div class="box wf-100">
+        <section class="portlet">
+            <div class="portlet-head"><?= $session->start->format('Y-m-d'); ?></div>
             <table id="sessionList" class="default sticky">
-                <caption><?= $session->start->format('Y-m-d'); ?><i class="g-icon end-xs download btn">download</i></caption>
                 <thead>
                 <tr>
                     <td><?= $this->getHtml('Status'); ?>
                     <td class="wf-100"><?= $this->getHtml('Time'); ?>
                     <td class="wf-100"><?= $this->getHtml('Date'); ?>
                 <tbody>
-                <?php foreach ($elements as $element) : ?>
+                <?php
+                $c = 0;
+                foreach ($elements as $element) :
+                    ++$c;
+                ?>
                 <tr>
-                    <td><?= $this->getHtml('CS' . $element->getStatus()); ?>
+                    <td><?= $this->getHtml('CS' . $element->status); ?>
                     <td><?= $element->datetime->format('H:i:s'); ?>
                     <td><?= $element->datetime->format('Y-m-d'); ?>
                 <?php endforeach; ?>
+                <?php if ($c === 0) : ?>
+                <tr><td colspan="3" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
+                <?php endif; ?>
             </table>
-        </div>
+        </section>
     </div>
 </div>

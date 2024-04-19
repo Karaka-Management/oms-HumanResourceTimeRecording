@@ -153,7 +153,7 @@ final class ApiController extends Controller
             /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
             $session = SessionMapper::get()
                 ->with('sessionElements')
-                ->where('id', (int) $request->getData('session'))
+                ->where('id', $element->session->id)
                 ->execute();
 
             $session->recalculate();

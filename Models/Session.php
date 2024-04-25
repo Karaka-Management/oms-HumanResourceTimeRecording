@@ -105,6 +105,13 @@ class Session implements \JsonSerializable
         $this->createdAt = new \DateTimeImmutable('now');
     }
 
+    /**
+     * Recalculate the session data after changing its elements
+     *
+     * @return void
+     *
+     * @since 1.0.0
+     */
     public function recalculate() : void
     {
         \usort($this->sessionElements, [$this, 'compareSessionElementTimestamps']);

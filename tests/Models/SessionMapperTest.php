@@ -34,7 +34,7 @@ final class SessionMapperTest extends \PHPUnit\Framework\TestCase
         $dt              = new \DateTime(\date('Y-m-d', \strtotime('now')) . ' 7:55:34');
         $element         = new SessionElement($session, $dt);
         $element->status = ClockingStatus::START;
-        $session->addSessionElement($element);
+        $session->sessionElements[] = $element;
 
         $id = SessionMapper::create()->execute($session);
         self::assertGreaterThan(0, $session->id);

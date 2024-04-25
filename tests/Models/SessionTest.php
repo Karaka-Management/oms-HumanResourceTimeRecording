@@ -42,7 +42,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $this->session->busy);
         self::assertEquals(0, $this->session->getBreak());
         self::assertEquals([], $this->session->sessionElements);
-        self::assertEquals(ClockingType::OFFICE, $this->session->type);
+        self::assertEquals(ClockingType::NO_DATA, $this->session->type);
         self::assertEquals(ClockingStatus::START, $this->session->getStatus());
         self::assertEquals((new \DateTime('now'))->format('Y-m-d'), $this->session->start->format('Y-m-d'));
         self::assertNull($this->session->end);

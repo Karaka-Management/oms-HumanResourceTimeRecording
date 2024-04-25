@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Controller;
 
+use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\NullAccount;
+use Modules\HumanResourceManagement\Models\EmployeeMapper;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\HumanResourceTimeRecording\Models\ClockingType;
 use Modules\HumanResourceTimeRecording\Models\PermissionCategory;
@@ -57,6 +59,18 @@ final class ApiController extends Controller
             PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_FOREIGN
         )) {
             $response->header->status = RequestStatusCode::R_403;
+            $this->createInvalidCreateResponse($request, $response, []);
+
+            return;
+        }
+
+        $account = EmployeeMapper::get()
+            ->with('profile')
+            ->where('profile/account', $request->getDataInt('account') ?? $request->header->account)
+            ->execute();
+
+        if ($account->id === 0) {
+            $response->header->status = RequestStatusCode::R_400;
             $this->createInvalidCreateResponse($request, $response, []);
 
             return;

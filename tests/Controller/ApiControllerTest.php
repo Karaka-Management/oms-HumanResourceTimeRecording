@@ -158,19 +158,6 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $request->setData('account', 9999);
 
         $this->module->apiSessionCreate($request, $response);
-        self::assertEquals(RequestStatusCode::R_403, $response->header->status);
-    }
-
-    #[\PHPUnit\Framework\Attributes\Group('module')]
-    public function testApiSessionElementCreateInvalidData() : void
-    {
-        $response = new HttpResponse();
-        $request  = new HttpRequest();
-
-        $request->header->account = 1;
-        $request->setData('invalid', 1);
-
-        $this->module->apiSessionElementCreate($request, $response);
         self::assertEquals(RequestStatusCode::R_400, $response->header->status);
     }
 

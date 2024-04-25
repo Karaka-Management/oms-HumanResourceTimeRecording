@@ -137,19 +137,19 @@ class Session implements \JsonSerializable
         $busyTime  = 0;
         $lastStart = $this->start;
 
+        $state = 0;
+
         foreach ($this->sessionElements as $e) {
-            if ($e->status === ClockingStatus::START) {
+            if ($state === 0
+                && ($e->status === ClockingStatus::START || $e->status === ClockingStatus::CONTINUE)
+            ) {
                 $lastStart = $e->datetime;
-
-                continue;
-            }
-
-            if ($e->status === ClockingStatus::PAUSE || $e->status === ClockingStatus::END) {
+                $state     = 1;
+            } elseif ($state === 1
+                && ($e->status === ClockingStatus::PAUSE || $e->status === ClockingStatus::END)
+            ) {
                 $busyTime += $e->datetime->getTimestamp() - $lastStart->getTimestamp();
-            }
-
-            if ($e->status === ClockingStatus::CONTINUE) {
-                $lastStart = $e->datetime;
+                $state     = 0;
             }
         }
 

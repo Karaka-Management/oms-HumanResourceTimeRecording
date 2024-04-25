@@ -51,10 +51,10 @@ class SessionElement implements \JsonSerializable
     /**
      * Session id this element belongs to
      *
-     * @var int|Session
+     * @var Session
      * @since 1.0.0
      */
-    public int|Session $session;
+    public Session $session;
 
     public \DateTimeImmutable $createdAt;
 

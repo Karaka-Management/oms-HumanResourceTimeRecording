@@ -153,7 +153,7 @@ class Session implements \JsonSerializable
             }
         }
 
-        $this->busy = $busyTime;
+        $this->busy = (int) $busyTime;
     }
 
     /**

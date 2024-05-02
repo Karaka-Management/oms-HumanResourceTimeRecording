@@ -33,6 +33,12 @@ use phpOMS\Views\View;
  * @link    https://jingga.app
  * @since   1.0.0
  * @codeCoverageIgnore
+ *
+ * @feature View for vacation, sickness, overtime, vacation etc per employee/department for stat analysis
+ *      https://github.com/Karaka-Management/oms-HumanResourceTimeRecording/issues/5
+ *
+ * @feature Export of clocking times (hr)
+ *      https://github.com/Karaka-Management/oms-HumanResourceTimeRecording/issues/6
  */
 final class BackendController extends Controller implements DashboardElementInterface
 {
@@ -156,6 +162,10 @@ final class BackendController extends Controller implements DashboardElementInte
      * @param array            $data     Generic data
      *
      * @return RenderableInterface
+     *
+     * @todo Clocking overview/analysis for managers
+     *      Only show employees in own department
+     *      https://github.com/Karaka-Management/oms-HumanResourceTimeRecording/issues/10
      *
      * @since 1.0.0
      * @codeCoverageIgnore

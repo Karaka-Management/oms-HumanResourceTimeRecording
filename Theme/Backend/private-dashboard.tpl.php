@@ -72,7 +72,7 @@ echo $this->data['nav']->render(); ?>
                             <input type="submit" id="iclockingButton" name="clockingButton" value="<?= $this->getHtml('Submit', '0', '0'); ?>" data-action='[
                                     {
                                         "key": 1, "listener": "click", "action": [
-                                            {"key": 1, "type": "dom.reload", "delay": 3000}
+                                            {"key": 1, "type": "redirect", "uri": "{%}", "delay": 3000}
                                         ]
                                     }
                                 ]'>

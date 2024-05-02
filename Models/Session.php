@@ -24,6 +24,10 @@ use Modules\Admin\Models\NullAccount;
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
+ *
+ * @feature Add custom clocking subelements for task logging
+ *      also assign to account = customer + custom type = projects
+ *      https://github.com/Karaka-Management/oms-HumanResourceTimeRecording/issues/17
  */
 class Session implements \JsonSerializable
 {

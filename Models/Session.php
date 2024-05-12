@@ -69,7 +69,7 @@ class Session implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    public int $type = ClockingType::NO_DATA;
+    public ClockingType $type;
 
     /**
      * Session elements.
@@ -107,6 +107,7 @@ class Session implements \JsonSerializable
         $this->start     = new \DateTime('now');
         $this->employee  = $employee ?? new NullAccount();
         $this->createdAt = new \DateTimeImmutable('now');
+        $this->type      = new NullClockingType();
     }
 
     /**

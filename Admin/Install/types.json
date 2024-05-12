@@ -1,0 +1,121 @@
+[
+    {
+		"name": "office",
+		"is_work": true,
+		"l11n": {
+			"en": "Office",
+			"de": "Büro"
+		}
+	},
+    {
+		"name": "home",
+        "is_work": true,
+		"l11n": {
+			"en": "Home",
+			"de": "Zuhause"
+		}
+	},
+    {
+		"name": "remote",
+        "is_work": true,
+		"l11n": {
+			"en": "Remote",
+			"de": "Mobil"
+		}
+	},
+    {
+		"name": "vacation",
+        "is_work": false,
+		"l11n": {
+			"en": "Vacation",
+			"de": "Urlaub"
+		}
+	},
+    {
+		"name": "sick",
+		"l11n": {
+			"en": "Sick",
+			"de": "Krank"
+		}
+	},
+    {
+		"name": "travelling",
+        "is_work": true,
+		"l11n": {
+			"en": "Travelling",
+			"de": "Dienstreise"
+		}
+	},
+    {
+		"name": "paid_leave",
+        "is_work": false,
+		"l11n": {
+			"en": "Paid leave",
+			"de": "Bezahlte Abwesenheit"
+		}
+	},
+    {
+		"name": "unpaid_leave",
+        "is_work": false,
+		"l11n": {
+			"en": "Unpaid leave",
+			"de": "Unbezahlte Abwesenheit"
+		}
+	},
+    {
+		"name": "maternity_leave",
+        "is_work": false,
+		"l11n": {
+			"en": "Maternity leave",
+			"de": "Mutterschutzurlaub"
+		}
+	},
+    {
+		"name": "parental_leave",
+        "is_work": false,
+		"l11n": {
+			"en": "Parental leave",
+			"de": "Elternzeit"
+		}
+	},
+    {
+		"name": "dr_visit",
+        "is_work": false,
+		"l11n": {
+			"en": "Dr visit",
+			"de": "Arztbesuch"
+		}
+	},
+    {
+		"name": "education",
+        "is_work": true,
+		"l11n": {
+			"en": "Education",
+			"de": "Fortbildung"
+		}
+	},
+    {
+		"name": "training",
+        "is_work": true,
+		"l11n": {
+			"en": "Training",
+			"de": "Training"
+		}
+	},
+    {
+		"name": "holiday",
+        "is_work": true,
+		"l11n": {
+			"en": "Holiday",
+			"de": "Feiertag"
+		}
+	},
+    {
+		"name": "no_data",
+        "is_work": false,
+		"l11n": {
+			"en": "No data",
+			"de": "Keine Daten"
+		}
+	}
+]

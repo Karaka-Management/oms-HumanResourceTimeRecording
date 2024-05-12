@@ -1,4 +1,73 @@
 {
+    "hr_timerecording_type": {
+        "name": "hr_timerecording_type",
+        "fields": {
+            "hr_timerecording_type_id": {
+                "name": "hr_timerecording_type_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+            "hr_timerecording_type_name": {
+                "name": "hr_timerecording_type_name",
+                "type": "VARCHAR(50)",
+                "null": false
+            },
+            "hr_timerecording_type_custom_future": {
+                "name": "hr_timerecording_type_custom_future",
+                "type": "TINYINT(1)",
+                "null": false
+            },
+            "hr_timerecording_type_custom_past": {
+                "name": "hr_timerecording_type_custom_past",
+                "type": "TINYINT(1)",
+                "null": false
+            },
+            "hr_timerecording_type_correction": {
+                "name": "hr_timerecording_type_correction",
+                "type": "TINYINT(1)",
+                "null": false
+            },
+            "hr_timerecording_type_work": {
+                "name": "hr_timerecording_type_work",
+                "type": "TINYINT(1)",
+                "null": false
+            }
+        }
+    },
+    "hr_timerecording_type_l11n": {
+        "name": "hr_timerecording_type_l11n",
+        "fields": {
+            "hr_timerecording_type_l11n_id": {
+                "name": "hr_timerecording_type_l11n_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+            "hr_timerecording_type_l11n_title": {
+                "name": "hr_timerecording_type_l11n_title",
+                "type": "VARCHAR(255)",
+                "null": false
+            },
+            "hr_timerecording_type_l11n_type": {
+                "name": "hr_timerecording_type_l11n_type",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "hr_timerecording_type",
+                "foreignKey": "hr_timerecording_type_id"
+            },
+            "hr_timerecording_type_l11n_language": {
+                "name": "hr_timerecording_type_l11n_language",
+                "type": "VARCHAR(2)",
+                "default": null,
+                "null": true,
+                "foreignTable": "language",
+                "foreignKey": "language_639_1"
+            }
+        }
+    },
     "hr_timerecording_session": {
         "name": "hr_timerecording_session",
         "fields": {
@@ -11,8 +80,10 @@
             },
             "hr_timerecording_session_type": {
                 "name": "hr_timerecording_session_type",
-                "type": "TINYINT",
-                "null": false
+                "type": "INT",
+                "null": false,
+                "foreignTable": "hr_timerecording_type",
+                "foreignKey": "hr_timerecording_type_id"
             },
             "hr_timerecording_session_start": {
                 "name": "hr_timerecording_session_start",

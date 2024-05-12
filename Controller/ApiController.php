@@ -19,6 +19,7 @@ use Modules\Admin\Models\NullAccount;
 use Modules\HumanResourceManagement\Models\EmployeeMapper;
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\HumanResourceTimeRecording\Models\ClockingType;
+use Modules\HumanResourceTimeRecording\Models\NullClockingType;
 use Modules\HumanResourceTimeRecording\Models\PermissionCategory;
 use Modules\HumanResourceTimeRecording\Models\Session;
 use Modules\HumanResourceTimeRecording\Models\SessionElement;
@@ -55,7 +56,9 @@ final class ApiController extends Controller
      */
     public function apiSessionCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
-        if (!$this->app->accountManager->get($request->header->account)->hasPermission(
+        if ($request->hasData('account')
+            && $request->getDataInt('account') !== $request->header->account
+            && !$this->app->accountManager->get($request->header->account)->hasPermission(
             PermissionType::CREATE, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::SESSION_FOREIGN
         )) {
             $response->header->status = RequestStatusCode::R_403;
@@ -95,10 +98,11 @@ final class ApiController extends Controller
         $account = $request->getDataInt('account') ?? $request->header->account;
 
         $session       = new Session(new NullAccount($account));
-        $session->type = ClockingType::tryFromValue($request->getDataInt('type')) ?? ClockingType::OFFICE;
+        $session->type = new NullClockingType((int) $request->getDataInt('type'));
 
-        // a custom datetime can only be set if the user is allowed to create a session for a foreign account or if the session is a vacation
-        $dt = $request->hasData('account') || $session->type === ClockingType::VACATION
+        // @security check if custom datetime is allowed to be set
+
+        $dt = $request->hasData('account')
             ? ($request->getDataDateTime('datetime') ?? new \DateTime('now'))
             : new \DateTime('now');
 
@@ -208,8 +212,7 @@ final class ApiController extends Controller
             return null;
         }
 
-        // a custom datetime can only be set if the user is allowed to create a session for a foreign account or if the session is a vacation
-        $dt = $request->hasData('account') || $session->type === ClockingType::VACATION
+        $dt = $request->hasData('account')
             ? ($request->getDataDateTime('datetime') ?? new \DateTime('now'))
             : new \DateTime('now');
 

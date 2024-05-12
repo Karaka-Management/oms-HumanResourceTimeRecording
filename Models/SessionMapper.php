@@ -77,6 +77,19 @@ final class SessionMapper extends DataMapperFactory
     ];
 
     /**
+     * Has one relation.
+     *
+     * @var array<string, array{mapper:class-string, external:string, by?:string, column?:string, conditional?:bool}>
+     * @since 1.0.0
+     */
+    public const OWNS_ONE = [
+        'type' => [
+            'mapper'   => ClockingTypeMapper::class,
+            'external' => 'hr_timerecording_session_type',
+        ],
+    ];
+
+    /**
      * Primary table.
      *
      * @var string

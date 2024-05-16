@@ -4,7 +4,7 @@
  *
  * PHP Version 8.2
  *
- * @package   Modules\HumanResourceTimerecording\Models
+ * @package   Modules\HumanResourceTimeRecording\Models
  * @copyright Dennis Eichhorn
  * @license   OMS License 2.0
  * @version   1.0.0
@@ -12,7 +12,7 @@
  */
 declare(strict_types=1);
 
-namespace Modules\HumanResourceTimerecording\Models;
+namespace Modules\HumanResourceTimeRecording\Models;
 
 use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 use phpOMS\Localization\BaseStringL11n;
@@ -20,7 +20,7 @@ use phpOMS\Localization\BaseStringL11n;
 /**
  * Clocking type l11n mapper class.
  *
- * @package Modules\HumanResourceTimerecording\Models
+ * @package Modules\HumanResourceTimeRecording\Models
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0

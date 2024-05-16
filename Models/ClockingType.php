@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\HumanResourceTimeRecording\Models;
 
-use Modules\Media\Models\Collection;
 use phpOMS\Localization\BaseStringL11n;
 use phpOMS\Localization\ISO639x1Enum;
 

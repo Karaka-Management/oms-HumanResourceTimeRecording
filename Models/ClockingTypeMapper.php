@@ -36,12 +36,12 @@ final class ClockingTypeMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'hr_timerecording_type_id'        => ['name' => 'hr_timerecording_type_id',        'type' => 'int',    'internal' => 'id'],
-        'hr_timerecording_type_name'      => ['name' => 'hr_timerecording_type_name',      'type' => 'string', 'internal' => 'name'],
-        'hr_timerecording_type_custom_future'      => ['name' => 'hr_timerecording_type_custom_future',      'type' => 'bool', 'internal' => 'customFutureTimeAllowed'],
-        'hr_timerecording_type_custom_past'      => ['name' => 'hr_timerecording_type_custom_past',      'type' => 'bool', 'internal' => 'customPastTimeAllowed'],
-        'hr_timerecording_type_correction'      => ['name' => 'hr_timerecording_type_correction',      'type' => 'bool', 'internal' => 'correctionAllowed'],
-        'hr_timerecording_type_work'      => ['name' => 'hr_timerecording_type_work',      'type' => 'bool', 'internal' => 'isWork'],
+        'hr_timerecording_type_id'            => ['name' => 'hr_timerecording_type_id',        'type' => 'int',    'internal' => 'id'],
+        'hr_timerecording_type_name'          => ['name' => 'hr_timerecording_type_name',      'type' => 'string', 'internal' => 'name'],
+        'hr_timerecording_type_custom_future' => ['name' => 'hr_timerecording_type_custom_future',      'type' => 'bool', 'internal' => 'customFutureTimeAllowed'],
+        'hr_timerecording_type_custom_past'   => ['name' => 'hr_timerecording_type_custom_past',      'type' => 'bool', 'internal' => 'customPastTimeAllowed'],
+        'hr_timerecording_type_correction'    => ['name' => 'hr_timerecording_type_correction',      'type' => 'bool', 'internal' => 'correctionAllowed'],
+        'hr_timerecording_type_work'          => ['name' => 'hr_timerecording_type_work',      'type' => 'bool', 'internal' => 'isWork'],
     ];
 
     /**

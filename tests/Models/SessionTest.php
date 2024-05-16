@@ -51,16 +51,16 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testStatusInputOutput() : void
     {
-        $element         = new SessionElement(null, new \DateTime('2021-10-05'));
-        $element->status = ClockingStatus::START;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05'));
+        $element->status                  = ClockingStatus::START;
         $this->session->sessionElements[] = $element;
 
-        $element         = new SessionElement(null, new \DateTime('2021-10-06'));
-        $element->status = ClockingStatus::PAUSE;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-06'));
+        $element->status                  = ClockingStatus::PAUSE;
         $this->session->sessionElements[] = $element;
 
-        $element         = new SessionElement(null, new \DateTime('2021-10-07'));
-        $element->status = ClockingStatus::CONTINUE;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-07'));
+        $element->status                  = ClockingStatus::CONTINUE;
         $this->session->sessionElements[] = $element;
 
         $this->session->recalculate();
@@ -71,38 +71,38 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testBusyBreakInputOutput() : void
     {
-        $element         = new SessionElement(null, new \DateTime('2021-10-05 02:00:00'));
-        $element->status = ClockingStatus::START;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05 02:00:00'));
+        $element->status                  = ClockingStatus::START;
         $this->session->sessionElements[] = $element;
 
         // this is ignored because the session is already started
-        $element         = new SessionElement(null, new \DateTime('2021-10-05 03:00:00'));
-        $element->status = ClockingStatus::START;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05 03:00:00'));
+        $element->status                  = ClockingStatus::START;
         $this->session->sessionElements[] = $element;
 
-        $element         = new SessionElement(null, new \DateTime('2021-10-05 04:00:00'));
-        $element->status = ClockingStatus::PAUSE;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05 04:00:00'));
+        $element->status                  = ClockingStatus::PAUSE;
         $this->session->sessionElements[] = $element;
 
-        $element         = new SessionElement(null, new \DateTime('2021-10-05 04:30:00'));
-        $element->status = ClockingStatus::CONTINUE;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05 04:30:00'));
+        $element->status                  = ClockingStatus::CONTINUE;
         $this->session->sessionElements[] = $element;
 
-        $element         = new SessionElement(null, new \DateTime('2021-10-05 07:00:00'));
-        $element->status = ClockingStatus::PAUSE;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05 07:00:00'));
+        $element->status                  = ClockingStatus::PAUSE;
         $this->session->sessionElements[] = $element;
 
-        $element         = new SessionElement(null, new \DateTime('2021-10-05 08:30:00'));
-        $element->status = ClockingStatus::CONTINUE;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05 08:30:00'));
+        $element->status                  = ClockingStatus::CONTINUE;
         $this->session->sessionElements[] = $element;
 
-        $element         = new SessionElement(null, new \DateTime('2021-10-05 11:00:00'));
-        $element->status = ClockingStatus::END;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05 11:00:00'));
+        $element->status                  = ClockingStatus::END;
         $this->session->sessionElements[] = $element;
 
         // this is ignored because the session is already stopped
-        $element         = new SessionElement(null, new \DateTime('2021-10-05 11:30:00'));
-        $element->status = ClockingStatus::END;
+        $element                          = new SessionElement(null, new \DateTime('2021-10-05 11:30:00'));
+        $element->status                  = ClockingStatus::END;
         $this->session->sessionElements[] = $element;
 
         $this->session->recalculate();

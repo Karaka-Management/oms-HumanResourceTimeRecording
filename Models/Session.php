@@ -66,7 +66,7 @@ class Session implements \JsonSerializable
     /**
      * Session type.
      *
-     * @var int
+     * @var ClockingType
      * @since 1.0.0
      */
     public ClockingType $type;
@@ -154,7 +154,7 @@ class Session implements \JsonSerializable
                 && ($e->status === ClockingStatus::PAUSE || $e->status === ClockingStatus::END)
             ) {
                 $busyTime += $e->datetime->getTimestamp() - $lastStart->getTimestamp();
-                $state     = 0;
+                $state = 0;
             }
         }
 

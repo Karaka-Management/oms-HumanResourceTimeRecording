@@ -72,11 +72,11 @@ final class ApiClockingTypeController extends Controller
      */
     private function createClockingTypeFromRequest(RequestAbstract $request) : ClockingType
     {
-        $clockingType = new ClockingType($request->getDataString('name') ?? '');
-        $clockingType->isWork = $request->getDataBool('is_work') ?? false;
+        $clockingType                          = new ClockingType($request->getDataString('name') ?? '');
+        $clockingType->isWork                  = $request->getDataBool('is_work') ?? false;
         $clockingType->customFutureTimeAllowed = $request->getDataBool('custom_future_time_allowed') ?? false;
-        $clockingType->customPastTimeAllowed = $request->getDataBool('custom_past_time_allowed') ?? false;
-        $clockingType->correctionAllowed = $request->getDataBool('correction_allowed') ?? false;
+        $clockingType->customPastTimeAllowed   = $request->getDataBool('custom_past_time_allowed') ?? false;
+        $clockingType->correctionAllowed       = $request->getDataBool('correction_allowed') ?? false;
         $clockingType->setL11n(
             $request->getDataString('title') ?? '',
             ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? ISO639x1Enum::_EN
@@ -207,7 +207,7 @@ final class ApiClockingTypeController extends Controller
      * Method to update ClockingType from request.
      *
      * @param RequestAbstract $request Request
-     * @param ClockingType        $new     Model to modify
+     * @param ClockingType    $new     Model to modify
      *
      * @return ClockingType
      *

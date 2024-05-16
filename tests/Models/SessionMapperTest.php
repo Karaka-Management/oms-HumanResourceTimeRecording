@@ -31,9 +31,9 @@ final class SessionMapperTest extends \PHPUnit\Framework\TestCase
     {
         $session = new Session(new NullAccount(1));
 
-        $dt              = new \DateTime(\date('Y-m-d', \strtotime('now')) . ' 7:55:34');
-        $element         = new SessionElement($session, $dt);
-        $element->status = ClockingStatus::START;
+        $dt                         = new \DateTime(\date('Y-m-d', \strtotime('now')) . ' 7:55:34');
+        $element                    = new SessionElement($session, $dt);
+        $element->status            = ClockingStatus::START;
         $session->sessionElements[] = $element;
 
         $id = SessionMapper::create()->execute($session);

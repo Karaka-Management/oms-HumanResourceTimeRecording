@@ -16,6 +16,7 @@ namespace Modules\HumanResourceTimeRecording\tests\Models;
 
 use Modules\HumanResourceTimeRecording\Models\ClockingStatus;
 use Modules\HumanResourceTimeRecording\Models\ClockingType;
+use Modules\HumanResourceTimeRecording\Models\NullClockingType;
 use Modules\HumanResourceTimeRecording\Models\Session;
 use Modules\HumanResourceTimeRecording\Models\SessionElement;
 
@@ -114,7 +115,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
     #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testSerialize() : void
     {
-        $this->session->type = ClockingType::VACATION;
+        $this->session->type = new NullClockingType();
 
         $serialized = $this->session->jsonSerialize();
         unset($serialized['start']);
@@ -125,7 +126,7 @@ final class SessionTest extends \PHPUnit\Framework\TestCase
                 'id'       => 0,
                 'end'      => null,
                 'busy'     => 0,
-                'type'     => ClockingType::VACATION,
+                'type'     => new NullClockingType(),
                 'elements' => [],
             ],
             $serialized

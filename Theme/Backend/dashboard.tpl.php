@@ -43,7 +43,7 @@ echo $this->data['nav']->render(); ?>
                 ?>
                 <tr>
                     <td><?= $session?->start->format('Y-m-d  H:i:s') ?? $date->format('Y-m-d H:i:s'); ?>
-                    <td><span class="tag"><?= $this->getHtml('CT' . ($session?->type ?? ClockingType::NO_DATA)); ?></span>
+                    <td><span class="tag"><?= $this->getHtml(':CT' . ($session?->type ?? ClockingType::NO_DATA)); ?></span>
                     <td><a class="content" href="<?= $employeeUrl; ?>">
                         <?= $this->printHtml($employee->profile->account->name1); ?>,
                         <?= $this->printHtml($employee->profile->account->name2); ?>

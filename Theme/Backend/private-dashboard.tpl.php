@@ -52,20 +52,20 @@ echo $this->data['nav']->render(); ?>
                         <tr><td><label for="iType"><?= $this->getHtml('Type'); ?></label>
                         <tr><td>
                             <select id="iType" name="type">
-                                <option value="<?= ClockingType::OFFICE; ?>"<?= $type === ClockingType::OFFICE ? ' selected': ''; ?>><?= $this->getHtml('CT1'); ?>
-                                <option value="<?= ClockingType::REMOTE; ?>"<?= $type === ClockingType::REMOTE ? ' selected': ''; ?>><?= $this->getHtml('CT3'); ?>
-                                <option value="<?= ClockingType::HOME; ?>"<?= $type === ClockingType::HOME ? ' selected': ''; ?>><?= $this->getHtml('CT2'); ?>
-                                <option value="<?= ClockingType::VACATION; ?>"<?= $type === ClockingType::VACATION ? ' selected': ''; ?>><?= $this->getHtml('CT4'); ?>
-                                <option value="<?= ClockingType::SICK; ?>"<?= $type === ClockingType::SICK ? ' selected': ''; ?>><?= $this->getHtml('CT5'); ?>
-                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"<?= $type === ClockingType::ON_THE_MOVE ? ' selected': ''; ?>><?= $this->getHtml('CT6'); ?>
+                                <option value="<?= ClockingType::OFFICE; ?>"<?= $type === ClockingType::OFFICE ? ' selected': ''; ?>><?= $this->getHtml(':CT1'); ?>
+                                <option value="<?= ClockingType::REMOTE; ?>"<?= $type === ClockingType::REMOTE ? ' selected': ''; ?>><?= $this->getHtml(':CT3'); ?>
+                                <option value="<?= ClockingType::HOME; ?>"<?= $type === ClockingType::HOME ? ' selected': ''; ?>><?= $this->getHtml(':CT2'); ?>
+                                <option value="<?= ClockingType::VACATION; ?>"<?= $type === ClockingType::VACATION ? ' selected': ''; ?>><?= $this->getHtml(':CT4'); ?>
+                                <option value="<?= ClockingType::SICK; ?>"<?= $type === ClockingType::SICK ? ' selected': ''; ?>><?= $this->getHtml(':CT5'); ?>
+                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"<?= $type === ClockingType::ON_THE_MOVE ? ' selected': ''; ?>><?= $this->getHtml(':CT6'); ?>
                             </select>
-                        <tr><td><label for="iStatus"><?= $this->getHtml('Status'); ?></label>
+                        <tr><td><label for="iStatus"><?= $this->getHtml(':Status'); ?></label>
                         <tr><td>
                             <select id="iStatus" name="status">
-                                <option value="<?= ClockingStatus::START; ?>"<?= $status === ClockingStatus::END ? ' selected' : ''; ?>><?= $this->getHtml('CS1'); ?>
-                                <option value="<?= ClockingStatus::PAUSE; ?>"<?= $status === ClockingStatus::START ? ' selected' : ''; ?>><?= $this->getHtml('CS2'); ?>
-                                <option value="<?= ClockingStatus::CONTINUE; ?>"<?= $status === ClockingStatus::PAUSE ? ' selected' : ''; ?>><?= $this->getHtml('CS3'); ?>
-                                <option value="<?= ClockingStatus::END; ?>"<?= $status === ClockingStatus::CONTINUE ? ' selected' : ''; ?>><?= $this->getHtml('CS4'); ?>
+                                <option value="<?= ClockingStatus::START; ?>"<?= $status === ClockingStatus::END ? ' selected' : ''; ?>><?= $this->getHtml(':CS1'); ?>
+                                <option value="<?= ClockingStatus::PAUSE; ?>"<?= $status === ClockingStatus::START ? ' selected' : ''; ?>><?= $this->getHtml(':CS2'); ?>
+                                <option value="<?= ClockingStatus::CONTINUE; ?>"<?= $status === ClockingStatus::PAUSE ? ' selected' : ''; ?>><?= $this->getHtml(':CS3'); ?>
+                                <option value="<?= ClockingStatus::END; ?>"<?= $status === ClockingStatus::CONTINUE ? ' selected' : ''; ?>><?= $this->getHtml(':CS4'); ?>
                             </select>
                         <tr><td>
                             <input type="hidden" name="session" value="<?= $lastOpenSession !== null ? $lastOpenSession->id : ''; ?>">

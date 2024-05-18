@@ -28,20 +28,20 @@ echo $this->data['nav']->render(); ?>
                         <tr><td><label for="iType"><?= $this->getHtml('Type'); ?></label>
                         <tr><td>
                             <select id="iType" name="Type">
-                                <option value="<?= ClockingType::OFFICE; ?>"><?= $this->getHtml('CT0'); ?>
-                                <option value="<?= ClockingType::REMOTE; ?>"><?= $this->getHtml('CT1'); ?>
-                                <option value="<?= ClockingType::HOME; ?>"><?= $this->getHtml('CT2'); ?>
-                                <option value="<?= ClockingType::VACATION; ?>"><?= $this->getHtml('CT3'); ?>
-                                <option value="<?= ClockingType::SICK; ?>"><?= $this->getHtml('CT4'); ?>
-                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"><?= $this->getHtml('CT5'); ?>
+                                <option value="<?= ClockingType::OFFICE; ?>"><?= $this->getHtml(':CT0'); ?>
+                                <option value="<?= ClockingType::REMOTE; ?>"><?= $this->getHtml(':CT1'); ?>
+                                <option value="<?= ClockingType::HOME; ?>"><?= $this->getHtml(':CT2'); ?>
+                                <option value="<?= ClockingType::VACATION; ?>"><?= $this->getHtml(':CT3'); ?>
+                                <option value="<?= ClockingType::SICK; ?>"><?= $this->getHtml(':CT4'); ?>
+                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"><?= $this->getHtml(':CT5'); ?>
                             </select>
                         <tr><td><label for="iStatus"><?= $this->getHtml('Status'); ?></label>
                         <tr><td>
                             <select id="iStatus" name="Status">
-                                <option value="<?= ClockingStatus::START; ?>"><?= $this->getHtml('CS0'); ?>
-                                <option value="<?= ClockingStatus::PAUSE; ?>"><?= $this->getHtml('CS1'); ?>
-                                <option value="<?= ClockingStatus::CONTINUE; ?>"><?= $this->getHtml('CS2'); ?>
-                                <option value="<?= ClockingStatus::END; ?>"><?= $this->getHtml('CS3'); ?>
+                                <option value="<?= ClockingStatus::START; ?>"><?= $this->getHtml(':CS0'); ?>
+                                <option value="<?= ClockingStatus::PAUSE; ?>"><?= $this->getHtml(':CS1'); ?>
+                                <option value="<?= ClockingStatus::CONTINUE; ?>"><?= $this->getHtml(':CS2'); ?>
+                                <option value="<?= ClockingStatus::END; ?>"><?= $this->getHtml(':CS3'); ?>
                             </select>
                         <tr><td>
                             <input type="submit" id="iclockingButton" name="clockingButton" value="<?= $this->getHtml('Submit', '0', '0'); ?>">

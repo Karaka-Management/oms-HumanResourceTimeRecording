@@ -94,7 +94,7 @@ echo $this->data['nav']->render(); ?>
                 <tbody>
                 <?php foreach ($sessions as $session) : ?>
                 <tr>
-                    <td><?= $session->getStart()->format('Y-m-d'); ?> - <?= $this->getHtml('D' . $session->getStart()->format('w')); ?>
+                    <td><?= $session->getStart()->format('Y-m-d'); ?> - <?= $this->getHtml(':D' . $session->getStart()->format('w')); ?>
                     <td><span class="tag">Status Here</span>
                     <td><?= $session->getStart()->format('H:i'); ?>
                     <td><?= (int) ($session->getBreak() / 3600); ?>h <?= ((int) ($session->getBreak() / 60) % 60); ?>m

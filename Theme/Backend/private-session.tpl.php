@@ -34,7 +34,7 @@ echo $this->data['nav']->render(); ?>
                     ++$c;
                 ?>
                 <tr>
-                    <td><?= $this->getHtml('CS' . $element->status); ?>
+                    <td><?= $this->getHtml(':CS' . $element->status); ?>
                     <td><?= $element->datetime->format('H:i:s'); ?>
                     <td><?= $element->datetime->format('Y-m-d'); ?>
                 <?php endforeach; ?>

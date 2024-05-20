@@ -7,7 +7,7 @@
  *
  * @package   Modules\HumanResourceTimeRecording
  * @copyright Dennis Eichhorn
- * @license   OMS License 2.0
+ * @license   OMS License 2.2
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -28,7 +28,7 @@ use phpOMS\Message\ResponseAbstract;
  * HumanResourceTimeRecording class.
  *
  * @package Modules\HumanResourceTimeRecording
- * @license OMS License 2.0
+ * @license OMS License 2.2
  * @link    https://jingga.app
  * @since   1.0.0
  */

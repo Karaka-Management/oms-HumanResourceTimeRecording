@@ -85,7 +85,7 @@ final class Installer extends InstallerAbstract
             $request->header->account = 1;
             $request->setData('name', $type['name'] ?? '');
             $request->setData('is_work', $type['is_work'] ?? false);
-            $request->setData('title', \reset($type['l11n']));
+            $request->setData('content', \reset($type['l11n']));
             $request->setData('language', \array_keys($type['l11n'])[0] ?? 'en');
 
             $module->apiClockingTypeCreate($request, $response);
@@ -112,9 +112,9 @@ final class Installer extends InstallerAbstract
                 $request  = new HttpRequest();
 
                 $request->header->account = 1;
-                $request->setData('title', $l11n);
+                $request->setData('content', $l11n);
                 $request->setData('language', $language);
-                $request->setData('type', $billType['id']);
+                $request->setData('ref', $billType['id']);
 
                 $module->apiClockingTypeL11nCreate($request, $response);
             }

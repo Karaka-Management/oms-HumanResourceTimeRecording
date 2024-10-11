@@ -78,7 +78,7 @@ final class ApiClockingTypeController extends Controller
         $clockingType->customPastTimeAllowed   = $request->getDataBool('custom_past_time_allowed') ?? false;
         $clockingType->correctionAllowed       = $request->getDataBool('correction_allowed') ?? false;
         $clockingType->setL11n(
-            $request->getDataString('title') ?? '',
+            $request->getDataString('content') ?? '',
             ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? ISO639x1Enum::_EN
         );
 
@@ -97,7 +97,7 @@ final class ApiClockingTypeController extends Controller
     private function validateClockingTypeCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['title'] = !$request->hasData('title'))
+        if (($val['content'] = !$request->hasData('content'))
             || ($val['name'] = !$request->hasData('name'))
         ) {
             return $val;
@@ -145,9 +145,9 @@ final class ApiClockingTypeController extends Controller
     private function createClockingTypeL11nFromRequest(RequestAbstract $request) : BaseStringL11n
     {
         $clockingTypeL11n           = new BaseStringL11n();
-        $clockingTypeL11n->ref      = $request->getDataInt('type') ?? 0;
+        $clockingTypeL11n->ref      = $request->getDataInt('ref') ?? 0;
         $clockingTypeL11n->language = ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? $request->header->l11n->language;
-        $clockingTypeL11n->content  = $request->getDataString('title') ?? '';
+        $clockingTypeL11n->content  = $request->getDataString('content') ?? '';
 
         return $clockingTypeL11n;
     }
@@ -164,8 +164,8 @@ final class ApiClockingTypeController extends Controller
     private function validateClockingTypeL11nCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['title'] = !$request->hasData('title'))
-            || ($val['type'] = !$request->hasData('type'))
+        if (($val['content'] = !$request->hasData('content'))
+            || ($val['ref'] = !$request->hasData('ref'))
         ) {
             return $val;
         }
@@ -330,9 +330,9 @@ final class ApiClockingTypeController extends Controller
      */
     public function updateClockingTypeL11nFromRequest(RequestAbstract $request, BaseStringL11n $new) : BaseStringL11n
     {
-        $new->ref      = $request->getDataInt('type') ?? $new->ref;
+        $new->ref      = $request->getDataInt('ref') ?? $new->ref;
         $new->language = ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? $new->language;
-        $new->content  = $request->getDataString('title') ?? $new->content;
+        $new->content  = $request->getDataString('content') ?? $new->content;
 
         return $new;
     }

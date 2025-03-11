@@ -16,6 +16,7 @@ namespace Modules\HumanResourceTimeRecording\Controller;
 
 use Modules\Dashboard\Models\DashboardElementInterface;
 use Modules\HumanResourceManagement\Models\EmployeeMapper;
+use Modules\HumanResourceTimeRecording\Models\ClockingTypeMapper;
 use Modules\HumanResourceTimeRecording\Models\NullSession;
 use Modules\HumanResourceTimeRecording\Models\SessionMapper;
 use phpOMS\Contract\RenderableInterface;
@@ -60,6 +61,11 @@ final class BackendController extends Controller implements DashboardElementInte
         }
 
         $view->data['sessions'] = $sessions;
+
+        $view->data['session_types'] = ClockingTypeMapper::getAll()
+            ->with('l11n')
+            ->where('l11n/language', $response->header->l11n->language)
+            ->executeGetArray();
 
         $view->data['employees'] = EmployeeMapper::getAll()
             ->with('profile')

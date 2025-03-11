@@ -17,6 +17,7 @@ namespace Modules\HumanResourceTimeRecording\Models;
 use Modules\Admin\Models\AccountMapper;
 use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 use phpOMS\DataStorage\Database\Query\Builder;
+use phpOMS\DataStorage\Database\Query\ColumnName;
 use phpOMS\Stdlib\Base\SmartDateTime;
 
 /**
@@ -124,6 +125,7 @@ final class SessionMapper extends DataMapperFactory
      */
     public static function getLastSessionsFromAllEmployees() : array
     {
+        /*
         $join = new Builder(self::$db);
         $join->select(self::TABLE . '.hr_timerecording_session_employee')
             ->selectAs('MAX(hr_timerecording_session_start)', 'maxDate')
@@ -134,6 +136,16 @@ final class SessionMapper extends DataMapperFactory
         $query->leftJoin($join, 'tm')
             ->on(self::TABLE . '_d1.hr_timerecording_session_employee', '=', 'tm.hr_timerecording_session_employee')
             ->andOn(self::TABLE . '_d1.hr_timerecording_session_start', '=', 'tm.maxDate');
+        */
+
+        // @bug How to handle multiple start values in the same day
+        $subquery = new Builder(self::$db);
+        $subquery->select('MAX(t2.hr_timerecording_session_start)')
+            ->fromAs(self::TABLE, 't2')
+            ->where('t2.hr_timerecording_session_employee', '=', new ColumnName(self::TABLE . '_d1.hr_timerecording_session_employee'));
+
+        $query = self::getQuery();
+        $query->where(self::TABLE . '_d1.hr_timerecording_session_start', '=', $subquery);
 
         return self::getAll()
             ->executeGetArray($query);

@@ -104,6 +104,11 @@ final class BackendController extends Controller implements DashboardElementInte
         /** @var \Modules\HumanResourceTimeRecording\Models\Session $lastOpenSession */
         $lastOpenSession = SessionMapper::getMostPlausibleOpenSessionForEmployee($employee->profile->account->id);
 
+        $view->data['session_types'] = ClockingTypeMapper::getAll()
+            ->with('l11n')
+            ->where('l11n/language', $response->header->l11n->language)
+            ->executeGetArray();
+
         $start = new SmartDateTime('now');
         $start = $start->getEndOfDay();
         $limit = $start->getEndOfMonth();
@@ -142,7 +147,7 @@ final class BackendController extends Controller implements DashboardElementInte
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1006303001, $request, $response);
 
         /** @var \Modules\HumanResourceTimeRecording\Models\Session $session */
-        $session = SessionMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $session = SessionMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
 
         /** @var \Modules\HumanResourceManagement\Models\Employee $employee */
         $employee = EmployeeMapper::get()

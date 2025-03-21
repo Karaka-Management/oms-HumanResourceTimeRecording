@@ -24,8 +24,10 @@ $sessionCount = \count($sessions);
 /** @var \Modules\HumanResourceTimeRecording\Models\Session $lastOpenSession */
 $lastOpenSession = $this->data['lastSession'];
 
-$type   = $lastOpenSession !== null ? $lastOpenSession->type : ClockingType::OFFICE;
+$current_type   = $lastOpenSession !== null ? $lastOpenSession->type : null;
 $status = $lastOpenSession !== null ? $lastOpenSession->getStatus() : ClockingStatus::END;
+
+$types = $this->data['session_types'] ?? [];
 
 /** @var \phpOMS\Stdlib\Base\SmartDateTime $startWeek */
 $startWeek = new SmartDateTime('now');
@@ -52,14 +54,11 @@ echo $this->data['nav']->render(); ?>
                         <tr><td><label for="iType"><?= $this->getHtml('Type'); ?></label>
                         <tr><td>
                             <select id="iType" name="type">
-                                <option value="<?= ClockingType::OFFICE; ?>"<?= $type === ClockingType::OFFICE ? ' selected': ''; ?>><?= $this->getHtml(':CT1'); ?>
-                                <option value="<?= ClockingType::REMOTE; ?>"<?= $type === ClockingType::REMOTE ? ' selected': ''; ?>><?= $this->getHtml(':CT3'); ?>
-                                <option value="<?= ClockingType::HOME; ?>"<?= $type === ClockingType::HOME ? ' selected': ''; ?>><?= $this->getHtml(':CT2'); ?>
-                                <option value="<?= ClockingType::VACATION; ?>"<?= $type === ClockingType::VACATION ? ' selected': ''; ?>><?= $this->getHtml(':CT4'); ?>
-                                <option value="<?= ClockingType::SICK; ?>"<?= $type === ClockingType::SICK ? ' selected': ''; ?>><?= $this->getHtml(':CT5'); ?>
-                                <option value="<?= ClockingType::ON_THE_MOVE; ?>"<?= $type === ClockingType::ON_THE_MOVE ? ' selected': ''; ?>><?= $this->getHtml(':CT6'); ?>
+                                <?php foreach ($types as $type) : ?>
+                                    <option value="<?= $type->id; ?>"<?= $current_type === $type->id ? ' selected': ''; ?>><?= $this->printHtml($type->getL11n() ?? ''); ?>
+                                <?php endforeach; ?>
                             </select>
-                        <tr><td><label for="iStatus"><?= $this->getHtml(':Status'); ?></label>
+                        <tr><td><label for="iStatus"><?= $this->getHtml('Status'); ?></label>
                         <tr><td>
                             <select id="iStatus" name="status">
                                 <option value="<?= ClockingStatus::START; ?>"<?= $status === ClockingStatus::END ? ' selected' : ''; ?>><?= $this->getHtml(':CS1'); ?>

@@ -196,7 +196,7 @@ final class ApiClockingTypeController extends Controller
         }
 
         /** @var ClockingType $old */
-        $old = ClockingTypeMapper::get()->where('id', (int) $request->getData('id'));
+        $old = ClockingTypeMapper::get()->where('id', $request->getDataInt('id') ?? 0);
         $new = $this->updateClockingTypeFromRequest($request, clone $old);
 
         $this->updateModel($request->header->account, $old, $new, ClockingTypeMapper::class, 'clocking_type', $request->getOrigin());
@@ -264,7 +264,7 @@ final class ApiClockingTypeController extends Controller
         }
 
         /** @var \Modules\HumanResourceTimeRecording\Models\ClockingType $clockingType */
-        $clockingType = ClockingTypeMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $clockingType = ClockingTypeMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
         $this->deleteModel($request->header->account, $clockingType, ClockingTypeMapper::class, 'clocking_type', $request->getOrigin());
         $this->createStandardDeleteResponse($request, $response, $clockingType);
     }
@@ -311,7 +311,7 @@ final class ApiClockingTypeController extends Controller
         }
 
         /** @var BaseStringL11n $old */
-        $old = ClockingTypeL11nMapper::get()->where('id', (int) $request->getData('id'));
+        $old = ClockingTypeL11nMapper::get()->where('id', $request->getDataInt('id') ?? 0);
         $new = $this->updateClockingTypeL11nFromRequest($request, clone $old);
 
         $this->updateModel($request->header->account, $old, $new, ClockingTypeL11nMapper::class, 'clocking_type_l11n', $request->getOrigin());
@@ -379,7 +379,7 @@ final class ApiClockingTypeController extends Controller
         }
 
         /** @var BaseStringL11n $clockingTypeL11n */
-        $clockingTypeL11n = ClockingTypeL11nMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $clockingTypeL11n = ClockingTypeL11nMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
         $this->deleteModel($request->header->account, $clockingTypeL11n, ClockingTypeL11nMapper::class, 'clocking_type_l11n', $request->getOrigin());
         $this->createStandardDeleteResponse($request, $response, $clockingTypeL11n);
     }
